@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			#printFrame {
+				display: none;
+				/* 隐藏iframe */
+				width: 0;
+				/* 初始宽度设置为0，以避免页面布局变化 */
+				height: 0;
+				/* 初始高度设置为0 */
+			}
+
+			#alltable {
+				display: none;
+			}
+
+			/* 打印样式 */
+			@media print {
+				body * {
+					visibility: hidden;
+					/* 隐藏页面上所有内容 */
+				}
+
+				#printArea,
+				#printArea * {
+					visibility: visible;
+					/* 仅显示要打印的div及其内容 */
+					position: static;
+					/* 重置位置属性，避免打印问题 */
+					page-break-after: auto;
+					/* 控制分页 */
+				}
+
+				@page {
+					margin: 0mm;
+					/* 设置页边距为0 */
+					size: auto;
+					/* 自动适应内容大小 */
+				}
+			}
+		</style>
+		<title>排期</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+		<script>
+			//倒计时软件用
+			function calculateSecondsDifference(date1String, date2String) {
+				const date1 = new Date(date1String);
+				const date2 = new Date(date2String);
+				const diffInMilliseconds = Math.abs(date1 - date2);
+				const diffInSeconds = Math.ceil(diffInMilliseconds / 1000);
+				return diffInSeconds;
+			}
+			const date1 = "";
+			const date2 = "1950-01-01T00:00:00";
+			//const secondsDifference = calculateSecondsDifference(date1, date2);
+			//解析
+			//var movies = [];
+			var movies = []; //从excel中获取的电影信息
+			var indicesToDelete = [];//默认需要删除的场次为空
+
+			function extractField() {
+				document.getElementById('alltable').style.display = 'block';
+				yincang();//隐藏保洁早晚班div
+				//console.log("提取")
+				//清除表格记录
+				let NeedCheck = []; //需要精确时间的电影名
+				//console.log(movies);
+				document.getElementById('tableContainer').innerHTML = '';
+				// 获取输入框中的JSON字符串
+				var jsonInput = document.getElementById('json-input').value;
+				document.getElementById('start').value = jsonInput;
+				// 尝试解析JSON字符串
+				try {
+					var jsonData = JSON.parse(jsonInput);
+					//console.log(jsonData.data.arr_date_plan);//全部场次
+					//删除虚拟场次
+					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
+					//console.log('删除了 ' + indicesToDelete + '场');
+					// 从后往前删除元素
+					indicesToDelete.sort((a, b) => b - a).forEach(index => {
+					    jsonData.data.arr_date_plan.splice(index, 1);
+					});
+					indicesToDelete = [];//删除后清空删除记录，防止多删
+					//console.log(JSON.stringify(jsonData.data.arr_date_plan, null, 2));
+					//console.log(jsonData.data.arr_date_plan)//去除后的场次
+					document.getElementById('json-input').value = '{"data":{"arr_date_plan":' + JSON.stringify(jsonData.data.arr_date_plan, null, 0) + '}}';
+					//console.log(document.getElementById('json-input').value);
+					//console.log(JSON.stringify(jsonData.data.arr_date_plan, null, 0))
+					var table = document.createElement('table');
+					table.style.borderCollapse = 'collapse';
+					table.style.fontSize = 'smaller';
+					table.id = 'tableContainer_div';
+					//table.style.width = '100%';
+
+					// 创建表头
+					var thead = document.createElement('thead');
+					var headerRow = document.createElement('tr');
+					['开始', '结束', '电影', '影厅','X'].forEach(function(text) {
+						var th = document.createElement('th');
+						th.textContent = text;
+						th.style.border = '1px solid black';
+						th.style.padding = '2px';
+						headerRow.appendChild(th);
+					});
+					thead.appendChild(headerRow);
+					table.appendChild(thead);
+
+					// 创建表格体
+					var tbody = document.createElement('tbody');
+					var Plan_yes = 0;//审核通过(释放)
+					var Plan_no = 0;//未审核(暂停)
+					var sale_status_sale = 0;//正常售卖
+					var sale_status_stop = 0;//暂停场次
+					for (var i = 0; i < jsonData.data.arr_date_plan.length; i++) {
+						var rowData = jsonData.data.arr_date_plan[i];
+						//console.log(jsonData.data.arr_date_plan[i].approve_status);
+						if (jsonData.data.arr_date_plan[i].approve_status == 'APPROVED') {
+							Plan_yes++;//统计释放场次数量
+						} else {
+							Plan_no++;//统计未释放场次数量
+						}
+						if (jsonData.data.arr_date_plan[i].sale_status == 'SALE') {
+							sale_status_sale++;
+						} else{
+							sale_status_stop++;
+						}
+						//console.log(rowData)
+						var row = document.createElement('tr');
+
+						var starttimeCell = document.createElement('td');
+						var starttime = rowData.show_time_start;
+						starttimeCell.textContent = starttime;
+						starttimeCell.style.border = '1px solid black';
+						starttimeCell.style.padding = '4px';
+						starttimeCell.style.textAlign = 'center';
+						row.appendChild(starttimeCell);
+
+						var endtimeCell = document.createElement('td');
+						var endtime = rowData.show_time_end;
+						endtimeCell.textContent = endtime;
+						endtimeCell.style.border = '1px solid black';
+						endtimeCell.style.padding = '4px';
+						endtimeCell.style.textAlign = 'center';
+						row.appendChild(endtimeCell);
+
+
+						var nameCell = document.createElement('td');
+						//result0:普通立体=普通
+						const th0 = '普通立体'
+						const tihuan0 = '普通';
+						const result0 = replaceSpecifiedString(rowData.display_name, th0, tihuan0)
+						//result1:去掉（普通/国语）
+						const th1 = '（普通/国语）'
+						const tihuan1 = '';
+						const result1 = replaceSpecifiedString(result0, th1, tihuan1)
+						//result2:（普通/日语）=(日语)
+						const th2 = '（普通/日语）'
+						const tihuan2 = '（日语）🌏';
+						const result2 = replaceSpecifiedString(result1, th2, tihuan2)
+						//result3:（普通/英语）=(英语)
+						const th3 = '（普通/英语）'
+						const tihuan3 = '（英语）🌏';
+						const result3 = replaceSpecifiedString(result2, th3, tihuan3)
+						//result4:（普通/印度语）=(印度语)
+						const th4 = '（普通/印度语）'
+						const tihuan4 = '（印度语）🌏';
+						const result4 = replaceSpecifiedString(result3, th4, tihuan4)
+						//result5:（普通/印尼语）=(印尼语)
+						const th5 = '（普通/印尼语）'
+						const tihuan5 = '（印尼语）🌏';
+						const result5 = replaceSpecifiedString(result4, th5, tihuan5)
+						//result6:（普通/法语）=(法语)
+						const th6 = '（普通/法语）'
+						const tihuan6 = '（法语）🌏';
+						const result6 = replaceSpecifiedString(result5, th6, tihuan6)
+						//result7:（普通/意大利语）=(意大利语)
+						const th7 = '（普通/意大利语）'
+						const tihuan7 = '（意大利语）🌏';
+						const result7 = replaceSpecifiedString(result6, th7, tihuan7)
+						//result8:（普通/韩语）=(韩语)
+						const th8 = '（普通/韩语）'
+						const tihuan8 = '（韩语）🌏';
+						const result8 = replaceSpecifiedString(result7, th8, tihuan8)
+						//result9:（普通/俄语）=(俄语)
+						const th9 = '（普通/俄语）'
+						const tihuan9 = '（俄语）🌏';
+						const result9 = replaceSpecifiedString(result8, th9, tihuan9)
+						//result10:（普通/其他）=(其他)
+						const th10 = '（普通/其他）'
+						const tihuan10 = '（其他）🌏';
+						const result10 = replaceSpecifiedString(result9, th10, tihuan10)
+						//result11:（数字3D）=(3D)
+						const th11 = '（数字3D）'
+						const tihuan11 = ' 3D👓';
+						const result11 = replaceSpecifiedString(result10, th11, tihuan11)
+						//result11:（数字3D）=(3D)
+						const th12 = '（数字）'
+						const tihuan12 = '';
+						const result12 = replaceSpecifiedString(result11, th12, tihuan12)
+						const result = result12;
+						nameCell.textContent = result;
+						nameCell.style.border = '1px solid black';
+						nameCell.style.padding = '4px';
+						nameCell.style.textAlign = 'left';
+						row.appendChild(nameCell);
+
+						var hallNameCell = document.createElement('td');
+						hallNameCell.textContent = rowData.hall_name.slice(0, 1);
+						hallNameCell.style.border = '1px solid black';
+						hallNameCell.style.padding = '4px';
+						hallNameCell.style.textAlign = 'center';
+						row.appendChild(hallNameCell);
+						
+						var deleteMovie = document.createElement('td');
+						const checkbox = document.createElement('input');
+						checkbox.type = 'checkbox';
+						checkbox.value = i; // 设置值为行号（从0开始）
+						deleteMovie.appendChild(checkbox);
+						row.appendChild(deleteMovie);
+
+						tbody.appendChild(row);
+					}
+					
+					
+					table.appendChild(tbody);
+					//console.log('释放场次:'+Plan_yes);
+					//console.log('未释放场次:'+Plan_no);
+					// 将表格添加到网页中的指定位置
+					document.getElementById('tableContainer').appendChild(table);
+					//console.log("当前日期电影数量为:" + jsonData.data.arr_date_plan.length);
+					var all = "";
+					var wucha_all = "";
+					var wucha_start = "";
+					var wucha_end = "";
+					let wucha_1h_tishi = [];//开灯时间未精确，1小时后一直弹出提示要更新
+					let moviesData = [];
+					//定义播音大师数组
+					let TaskID = [],
+						TaskTopic = [],
+						TaskContent = [],
+						BegDate = [],
+						BegTime = [],
+						EndDate = [],
+						EndTime = [];
+					var Interval = 6;
+					WeekFlag1 = 1, WeekFlag2 = 1, WeekFlag3 = 1, WeekFlag4 = 1, WeekFlag5 = 1, WeekFlag6 = 1, WeekFlag7 = 1,
+						DingFlag = 1, VSID = 3, BMID = 0, BCTimes = 0, BCFlag = 0, Timeout = 0, TaskLevel = 1, StopFlag = 0;
+					var BYDS_BuBian_all = "\t" + Interval + "\t" + WeekFlag1 + "\t" + WeekFlag2 + "\t" + WeekFlag3 + "\t" +
+						WeekFlag4 + "\t" + WeekFlag5 + "\t" + WeekFlag6 + "\t" + WeekFlag7 + "\t" + DingFlag + "\t" + VSID +
+						"\t" + BMID + "\t" + BCTimes + "\t" + BCFlag + "\t" + Timeout + "\t" + TaskLevel + "\t" + StopFlag;
+					var BYDS_all = "";
+					var Suijishu = Math.floor(Math.random() * 10000) + 1;
+					for (var i = 0; i < jsonData.data.arr_date_plan.length; i++) {
+						var name = jsonData.data.arr_date_plan[i].display_name; //电影名+语言+3D
+						var name_min = jsonData.data.arr_date_plan[i].movie_name; //电影名
+						
+						//替换掉电影名中可能出问题的字符
+						name_min = replaceSpecifiedString(name_min,'（数字）','');
+						name_min = replaceSpecifiedString(name_min,'（舞台纪录电影）','');
+						
+						var date = jsonData.data.arr_date_plan[i].plan_date; //2023-01-01
+						var time = jsonData.data.arr_date_plan[i].show_time_start; //2023-01-01T00:00:00
+						var time_end = jsonData.data.arr_date_plan[i].show_time_end; //2023-01-01T00:00:00
+						var time_min = time.slice(11, 16); //00:00
+						var dis_version = jsonData.data.arr_date_plan[i].dis_version; //普通?普通立体?
+						var hall_name = jsonData.data.arr_date_plan[i].hall_name;
+						var djs_tishi_light_on = "";
+						var djs_tishi_dongzuo = "";
+						//计算播音大师提醒时间，应该比电影开始时间提前10分钟提醒，6分钟后再次提醒
+						//let BYtime = "2023-01-01T00:01:00";  
+
+						// 将时间字符串转换为Date对象  
+						let BYdate = new Date(time);
+
+						// 从当前分钟数中减去10分钟  
+						BYdate.setMinutes(BYdate.getMinutes() - 10);
+
+						// 获取格式化后的时间部分  
+						let BYyear = BYdate.getFullYear();
+						let BYmonth = (BYdate.getMonth() + 1).toString().padStart(2, '0'); // 月份从0开始，加1后格式化  
+						let BYday = BYdate.getDate().toString().padStart(2, '0');
+						let BYhours = BYdate.getHours().toString().padStart(2, '0');
+						let BYminutes = BYdate.getMinutes().toString().padStart(2, '0');
+						let BYseconds = BYdate.getSeconds().toString().padStart(2, '0');
+
+						// 拼接成目标格式的字符串  
+						let newBYTime = `${BYyear}-${BYmonth}-${BYday}T${BYhours}:${BYminutes}:${BYseconds}`;
+
+						//console.log(newBYTime); // 输出类似 "2023-01-01T00:51:00"，这取决于本地时区
+
+						//去掉播音里的（数字3D）
+						name_min = replaceSpecifiedString(name_min, "（数字3D）", "")
+						//标记3D电影
+						if (dis_version == "普通") {
+							dis_version = replaceSpecifiedString(dis_version, "普通", "")
+							//console.log(dis_version);
+						} else if (dis_version == "普通立体") {
+							dis_version = replaceSpecifiedString(dis_version, "普通立体", "3D")
+							//console.log(dis_version);
+						}
+						//增加倒计时的1厅动作提示
+						if (hall_name.slice(0, 1) == "1") {
+							djs_tishi_dongzuo = "||开始||██████████换动作██████████";
+						} else {
+							djs_tishi_dongzuo = "||开始"
+						}
+						//djs_tishi_dongzuo = replaceSpecifiedString(hall_name.slice(0,1),"1","开始【换动作】");
+						//替换播音大师多音字，计算实际亮灯时间
+						const secondsDifference_start = calculateSecondsDifference(time, date2);
+						var secondsDifference_end = calculateSecondsDifference(time_end, date2);
+						var secondsDifference_end_current = '';
+						const result = processMovieString(name_min);
+						//console.log(result);
+						if (result == null || result.lightOnTime == undefined || result.posterTime == undefined) {
+							name_min_new = name_min; //播音大师无多音字需要修改
+							secondsDifference_end_current = secondsDifference_end;
+							djs_tishi_light_on = "结束||请更新准确时间"
+							NeedCheck.push(name_min);
+						} else {
+							if (result.nickname == undefined) {
+								name_min_new = name_min; //播音大师无多音字需要修改
+								secondsDifference_end_current = parseInt(secondsDifference_start) + parseInt(result
+									.timeDifference) - 60;
+								djs_tishi_light_on = "||①分后亮灯"
+							} else {
+								name_min_new = result.nickname; //替换多音字
+								secondsDifference_end_current = parseInt(secondsDifference_start) + parseInt(result
+									.timeDifference) - 60;
+								djs_tishi_light_on = "||①分后亮灯"
+								//console.log(secondsDifference_end_current)
+							}
+						}
+						//播音大师数组依次赋值
+						TaskID[i] = Suijishu + i;
+						TaskTopic[i] = name_min;
+						//TaskContent[i] = "\=\"欢迎光临亚星小龙激光影城 \"&CHAR(10)&\"" + hall_name.slice(0,1) + "号厅" + time_min + "的" + dis_version + "电影《" + name_min +"》现在开始检票进场 \"&CHAR(10)&\"" + hall_name.slice(0,1) + "号厅" + time_min + "的电影《" + name_min +"》现在开始检票进场 \"&CHAR(10)&\"本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快\"";
+						TaskContent[i] = "欢迎光临亚星小龙激光影城 " + hall_name.slice(0, 1) + "号厅" + time_min + "的" + dis_version + "电影 《" +
+							name_min_new + "》 现在开始检票进场 " + hall_name.slice(0, 1) + "号厅" + time_min + "的" + dis_version + "电影 《" +
+							name_min_new + "》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快";
+						BegDate[i] = time.slice(0, 10);
+						BegTime[i] = newBYTime.slice(0, 10) + " " + newBYTime.slice(11, 21);;
+						EndDate[i] = time_end.slice(0, 10);
+						EndTime[i] = time.slice(0, 10) + " " + time.slice(11, 21);
+						BYDS_all = BYDS_all + TaskID[i] + "\t" + TaskTopic[i] + "\t" + TaskContent[i] + "\t" + BegDate[i] +
+							"\t" + BegTime[i] + "\t" + EndDate[i] + "\t" + EndTime[i] + BYDS_BuBian_all + "\n";
+						document.getElementById('byds').innerHTML = BYDS_all;
+						//console.log(BYDS_all);
+						//大屏幕的数组
+						let onebyone = {
+							display_name: name_min, // 假设电影名是Movie 1, Movie 2, ...
+							show_time_start: time // 假设开场时间是每隔两小时一场，从10:00开始
+						}
+						moviesData.push(onebyone);
+
+						all = all + jsonData.data.arr_date_plan[i].hall_name + "  " + jsonData.data.arr_date_plan[i]
+							.show_time_start.slice(11, 16) + "  " + jsonData.data.arr_date_plan[i].display_name + "\n"; //前台票
+
+						wucha_start = wucha_start + secondsDifference_start + "-1    10110054 010    " + hall_name.slice(0, 1) +
+							name_min.slice(0, 3) + dis_version + djs_tishi_dongzuo +
+							"                                                                                                                                                                                                                                                                                                       " +
+							"\n";
+						wucha_end = wucha_end + secondsDifference_end_current + "-1    10110054 010    " + hall_name.slice(0,
+							1) + name_min.slice(0, 3) + dis_version + djs_tishi_light_on +
+							"                                                                                                                                                                                                                                                                                                      " +
+							"\n";
+						if (djs_tishi_light_on === '结束||请更新准确时间') {
+							//如果存在没有精确开灯时间的场次，倒计时软件会在电影开始1小时后每分钟提示一次
+								for (let x = 0; x < 10; x++) {
+									var math_secondsDifference_start = Number(secondsDifference_start);//将字符串转换为数字
+									math_secondsDifference_start = math_secondsDifference_start + 3600 + 60 * x;//第一次提示在1小时后，依次递加1分钟，提醒十次
+									djs_tishi_dongzuo = '||更新亮灯时间 结束时需手动开灯||若TMS未更新请询问经理或放映';
+									wucha_start = wucha_start + math_secondsDifference_start + "-1    10110054 010    " + hall_name.slice(0, 1) + "厅 "+
+										name_min.slice(0, 3) + dis_version + djs_tishi_dongzuo +
+										"                                                                                                                                                                                                                                                                                                       " +
+										"\n";
+								}
+							}
+						//console.log(wucha_1h_tishi);
+						wucha_all = wucha_end + wucha_start;//倒计时需要的最终数据
+
+					}
+					//console.log(wucha_all);
+					console.log(all); //出票结果界面
+					NeedCheck = removeDuplicates(NeedCheck); //简化提醒的名称，去掉重复项
+					const NeedCheck_result = arrayToStringWithNewLine(NeedCheck);
+					document.getElementById('checktime').innerHTML = NeedCheck_result;
+					//console.log(NeedCheck);//需要精确时间的电影名
+					// 处理数据并打印结果
+					const processedData = processMoviesData(moviesData);
+					//console.log(processedData);
+					const arrayOfArrays = processedData;
+					// 使用 sort() 方法和自定义比较函数对内部数组按长度从长到短进行排序
+					arrayOfArrays.sort((a, b) => b.length - a.length);
+					//console.log(arrayOfArrays);
+					const firstItemsJoined = arrayOfArrays.map(innerArray => innerArray[0]).join(':\n') + ":";
+					//去掉（数字3D）
+					const targetSubstring = '（数字3D）';
+					const tihuancheng = '';
+					const outputString = replaceSpecifiedString(firstItemsJoined, targetSubstring, tihuancheng);
+					//console.log(firstItemsJoined); // 大屏幕电影名界面
+					//console.log(outputString); // 大屏幕电影名界面，没有数字3D
+					var alltimes = "";
+					// 遍历数组并输出每个内部数组剩余的元素，每个数组输出后换行
+					arrayOfArrays.forEach(innerArray => {
+						// 移除第一个元素后，将剩余的元素连接成字符串
+						const remainingItemsJoined = innerArray.slice(1).join(' ');
+						alltimes = alltimes + remainingItemsJoined + "\n"
+						// 每个数组的输出将在新的一行上
+					});
+					//console.log(alltimes); //大屏幕时间界面
+					// 将票版输出到输入框，复制并清空
+					//document.getElementById('json-input').value = all;
+					//document.getElementById('json-input').select();
+					//document.execCommand('copy');
+					//document.getElementById('json-input').value = "";
+					document.getElementById('piao').innerHTML = all;
+					document.getElementById('djs').innerHTML = wucha_all;
+					document.getElementById('movie_name').innerHTML = outputString;
+					document.getElementById('movie_time').innerHTML = alltimes;
+					//alert("成功");
+					if (sale_status_stop == 0) {
+						var sale_status_sale_message = '';
+					} else{
+						var sale_status_sale_message = ' ⌛暂停场次:' + sale_status_stop;
+					}
+					if (Plan_no == 0) {
+						document.getElementById('extractField_sucess').innerHTML = '😁 📅' + jsonData.data.arr_date_plan[0].plan_date + ' 🎬总场次:' + jsonData.data.arr_date_plan.length;
+							
+					} else{
+						document.getElementById('extractField_sucess').innerHTML = '😁 📅' + jsonData.data.arr_date_plan[0].plan_date + ' 🎬总场次:' + jsonData.data.arr_date_plan.length + ' 🔒未释放场次:' + Plan_no;
+						alert("未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
+						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
+						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
+						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
+						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
+						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
+						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
+						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
+						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n"
+						)
+					}
+					
+				} catch (error) {
+					// 如果JSON解析失败，输出错误信息
+					console.error('无效的JSON数据:', error);
+					document.getElementById('json-input').value = "";
+					alert("复制错误，请重新复制")
+				}
+				//setTimeout(sortTableByStartTime, 200);
+				//sortTableByStartTime()
+			}
+		</script>
+		<script>
+			//开始生成大屏幕数据
+			function processMoviesData(movies) {
+				// 先按电影名，再按开场时间排序
+				movies.sort((a, b) => {
+					if (a.display_name < b.display_name) return -1;
+					if (a.display_name > b.display_name) return 1;
+					return new Date(a.show_time_start) - new Date(b.show_time_start);
+				});
+
+				// 使用reduce函数按电影名分组并收集开场时间
+				const groupedByMovie = movies.reduce((acc, movie) => {
+					if (!acc[movie.display_name]) {
+						acc[movie.display_name] = [];
+					}
+					//acc[movie.display_name].push(movie.show_time_start);
+					acc[movie.display_name].push(movie.show_time_start.slice(11, 16));
+					return acc;
+				}, {});
+
+				// 转换为所需的输出格式
+				const output = Object.entries(groupedByMovie).map(([movieName, showTimes]) => {
+					return [movieName, ...showTimes];
+				});
+
+				return output;
+			}
+
+			function replaceSpecifiedString(inputString, targetSubstring, tihuancheng) {
+				// 对目标子字符串中的特殊字符进行转义，以便在正则表达式中使用
+				const escapedTarget = targetSubstring.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+				// 创建正则表达式，使用'g'标志进行全局匹配
+				const regex = new RegExp(escapedTarget, 'g');
+
+				// 替换所有匹配到的子字符串为空
+				const result = inputString.replace(regex, tihuancheng);
+
+				return result;
+			}
+
+			function copymovie_name() {
+				try {
+					document.getElementById('movie_name').select();
+					document.execCommand('copy');
+					document.getElementById('copymovie_name_sucess').innerHTML = '😁';
+					//console.log("成功1")
+					//alert("复制成功")
+				} catch (error) {
+					aconsole.error('复制失败', error);
+				}
+			}
+
+			function copymovie_time() {
+				try {
+					document.getElementById('movie_time').select();
+					document.execCommand('copy');
+					document.getElementById('copymovie_time_sucess').innerHTML = '😁';
+					//console.log("成功2")
+					//alert("复制成功")
+				} catch (error) {
+					console.error('复制失败', error);
+				}
+
+			}
+
+			function copypiao() {
+				try {
+					document.getElementById('piao').select();
+					document.execCommand('copy');
+					document.getElementById('cpoypiao_sucess').innerHTML = '😁';
+					//console.log("成功2")
+					//alert("复制成功")
+				} catch (error) {
+					console.error('复制失败', error);
+				}
+			}
+
+			function copydjs() {
+				try {
+					document.getElementById('djs').select();
+					document.execCommand('copy');
+					document.getElementById('copy_djs_sucess').innerHTML = '😁';
+					//console.log("成功2")
+					//alert("复制成功")
+				} catch (error) {
+					console.error('复制失败', error);
+				}
+			}
+
+			function copybyds() {
+				try {
+					document.getElementById('byds').select();
+					document.execCommand('copy');
+					document.getElementById('copy_byds_sucess').innerHTML = '😁';
+					//console.log("成功2")
+					//alert("复制成功")
+				} catch (error) {
+					console.error('复制失败', error);
+				}
+			}
+			//前台：按照电影名排序
+			function QTname() {
+				// 假设你已经有了一个表格元素，其id为"myTable"
+				const table = document.getElementById('tableContainer').getElementsByTagName("table")[0];
+
+				// 获取表格中的所有行（除了表头）
+				const rows = Array.from(table.rows).slice(1); // 排除第一行，通常是表头
+
+				// 提取某一列（例如，第二列）的数据并进行排序
+				// 这里我们假设排序的列包含文本数据，并使用字符串的localeCompare进行排序
+				const columnData = rows.map(row => row.cells[2].textContent); // 获取第三列的数据
+				const sortedIndices = columnData.map((_, index) => index).sort((a, b) => columnData[a].localeCompare(columnData[
+					b])); // 获取排序后的索引
+
+				// 根据排序后的索引重新排列行
+				const sortedRows = sortedIndices.map(index => rows[index]);
+
+				// 清空表格体，然后重新添加排序后的行
+				const tbody = table.tBodies[0]; // 获取表格体元素
+				while (tbody.firstChild) {
+					tbody.removeChild(tbody.firstChild); // 清空表格体
+				}
+				sortedRows.forEach(row => tbody.appendChild(row)); // 添加排序后的行
+			}
+
+			function sortTableByStartTime() {
+				extractField();
+				xianshi_button_deleteMovie();
+				var table, rows, switching, i, x, y, shouldSwitch;
+				table = document.getElementById("tableContainer").getElementsByTagName("table")[0];
+				switching = true;
+				while (switching) {
+					switching = false;
+					rows = table.getElementsByTagName("tr");
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[0].innerHTML;
+						y = rows[i + 1].getElementsByTagName("td")[0].innerHTML;
+						if (x.toLowerCase() > y.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+				var tbody = table.querySelector('tbody');
+
+				// 遍历tbody中的每一行
+				var rows = tbody.querySelectorAll('tr');
+				rows.forEach(function(row) {
+					// 获取当前行的第一列和第二列元素
+					var firstCell = row.querySelector('td:nth-child(1)');
+					var secondCell = row.querySelector('td:nth-child(2)');
+
+					// 确保这两个单元格存在
+					if (firstCell && secondCell) {
+						// 获取第一列和第二列的内容
+						var firstContent = firstCell.textContent || firstCell.innerText;
+						var secondContent = secondCell.textContent || secondCell.innerText;
+
+						// 如果内容长度大于11，则删除前11个字符
+						if (firstContent.length > 11) {
+							firstCell.textContent = firstContent.slice(11, 16);
+						}
+						if (secondContent.length > 11) {
+							secondCell.textContent = secondContent.slice(11, 16);
+						}
+					}
+				});
+				console.log('开始时间排序');
+			}
+
+			function sortTableByEndTime() {
+				extractField();
+				yincang_deleteMovie()
+				var table, rows, switching, i, x, y, shouldSwitch;
+				table = document.getElementById("tableContainer").getElementsByTagName("table")[0];
+				switching = true;
+				while (switching) {
+					switching = false;
+					rows = table.getElementsByTagName("tr");
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[1].innerHTML;
+						y = rows[i + 1].getElementsByTagName("td")[1].innerHTML;
+						if (x.toLowerCase() > y.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+				var tbody = table.querySelector('tbody');
+
+				// 遍历tbody中的每一行
+				var rows = tbody.querySelectorAll('tr');
+				rows.forEach(function(row) {
+					// 获取当前行的第一列,第二列,第三列元素
+					var firstCell = row.querySelector('td:nth-child(1)');
+					var secondCell = row.querySelector('td:nth-child(2)');
+					var thirdCell = row.querySelector('td:nth-child(3)');
+					// 确保这两个单元格存在
+					if (firstCell && secondCell && thirdCell) {
+						// 获取第一列,第二列,第三列的内容
+						var firstContent = firstCell.textContent || firstCell.innerText;
+						var secondContent = secondCell.textContent || secondCell.innerText;
+						var thiredContent = thirdCell.textContent || thirdCell.innerText;
+						var stringsToReplace = ['（日语）', '（英语）', '（其他）','（印度语）', '（印尼语）', '（法语）', '（意大利语）', '（韩语）', '（俄语）', '🌏',
+							'3D👓', ' '
+						];
+						var originalString = thiredContent;
+						//console.log(originalString);
+						thiredContent = replaceMatchesWithEmptyString(originalString, stringsToReplace);
+						//console.log(thiredContent);
+						// 如果内容长度大于11，则删除前11个字符
+						if (firstContent.length > 11) {
+							firstCell.textContent = firstContent.slice(11, 16);
+						}
+						if (secondContent.length > 11) {
+							secondCell.textContent = secondContent.slice(11, 16);
+						}
+						//防止电影名过长，只显示前九个字
+						thirdCell.textContent = thiredContent.slice(0, 9);
+					}
+				});
+				splitTable();
+				xianshi();
+				console.log('结束时间排序');
+			}
+
+			function sortTableByMovie() {
+				yincang_deleteMovie()
+				extractField();
+				var table, rows, switching, i, x, y, shouldSwitch;
+				table = document.getElementById("tableContainer").getElementsByTagName("table")[0];
+				switching = true;
+				while (switching) {
+					switching = false;
+					rows = table.getElementsByTagName("tr");
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[2].innerHTML;
+						y = rows[i + 1].getElementsByTagName("td")[2].innerHTML;
+						if (x.toLowerCase() > y.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+				var tbody = table.querySelector('tbody');
+
+				// 遍历tbody中的每一行
+				var rows = tbody.querySelectorAll('tr');
+				rows.forEach(function(row) {
+					// 获取当前行的第一列和第二列元素
+					var firstCell = row.querySelector('td:nth-child(1)');
+					var secondCell = row.querySelector('td:nth-child(2)');
+
+					// 确保这两个单元格存在
+					if (firstCell && secondCell) {
+						// 获取第一列和第二列的内容
+						var firstContent = firstCell.textContent || firstCell.innerText;
+						var secondContent = secondCell.textContent || secondCell.innerText;
+
+						// 如果内容长度大于11，则删除前11个字符
+						if (firstContent.length > 11) {
+							firstCell.textContent = firstContent.slice(11, 16);
+						}
+						if (secondContent.length > 11) {
+							secondCell.textContent = secondContent.slice(11, 16);
+						}
+					}
+				});
+				console.log('电影名排序');
+				deleteCheckbox();
+			}
+
+			function sortTableByCellName() {
+				yincang_deleteMovie()
+				extractField();
+				var table, rows, switching, i, x, y, shouldSwitch;
+				table = document.getElementById("tableContainer").getElementsByTagName("table")[0];
+				switching = true;
+				while (switching) {
+					switching = false;
+					rows = table.getElementsByTagName("tr");
+					for (i = 1; i < (rows.length - 1); i++) {
+						shouldSwitch = false;
+						x = rows[i].getElementsByTagName("td")[3].innerHTML;
+						y = rows[i + 1].getElementsByTagName("td")[3].innerHTML;
+						if (x.toLowerCase() > y.toLowerCase()) {
+							shouldSwitch = true;
+							break;
+						}
+					}
+					if (shouldSwitch) {
+						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+						switching = true;
+					}
+				}
+				var tbody = table.querySelector('tbody');
+
+				// 遍历tbody中的每一行
+				var rows = tbody.querySelectorAll('tr');
+				rows.forEach(function(row) {
+					// 获取当前行的第一列和第二列元素
+					var firstCell = row.querySelector('td:nth-child(1)');
+					var secondCell = row.querySelector('td:nth-child(2)');
+
+					// 确保这两个单元格存在
+					if (firstCell && secondCell) {
+						// 获取第一列和第二列的内容
+						var firstContent = firstCell.textContent || firstCell.innerText;
+						var secondContent = secondCell.textContent || secondCell.innerText;
+
+						// 如果内容长度大于11，则删除前11个字符
+						if (firstContent.length > 11) {
+							firstCell.textContent = firstContent.slice(11, 16);
+						}
+						if (secondContent.length > 11) {
+							secondCell.textContent = secondContent.slice(11, 16);
+						}
+					}
+				});
+				console.log('厅名排序');
+				deleteCheckbox();
+			}
+
+			function jianhua_time() {
+				// 获取表格元素
+				var table = document.querySelector('#tableContainer table');
+				// 获取表格的tbody元素
+				var tbody = table.querySelector('tbody');
+
+				// 遍历tbody中的每一行
+				var rows = tbody.querySelectorAll('tr');
+				rows.forEach(function(row) {
+					// 获取当前行的第一列和第二列元素
+					var firstCell = row.querySelector('td:nth-child(1)');
+					var secondCell = row.querySelector('td:nth-child(2)');
+
+					// 确保这两个单元格存在
+					if (firstCell && secondCell) {
+						// 获取第一列和第二列的内容
+						var firstContent = firstCell.textContent || firstCell.innerText;
+						var secondContent = secondCell.textContent || secondCell.innerText;
+
+						// 如果内容长度大于11，则删除前11个字符
+						if (firstContent.length > 11) {
+							firstCell.textContent = firstContent.slice(11, 16);
+						}
+						if (secondContent.length > 11) {
+							secondCell.textContent = secondContent.slice(11, 16);
+						}
+					}
+				});
+			}
+			// 电影信息数组
+			/*const movies = [{
+					name: "飞驰人生2",
+					nickname: "飞2",
+					lightOnTime: "02:01:00",
+					posterTime: "00:04:25"
+				},{
+					name: "飞驰人生2",
+					nickname: "飞2",
+					lightOnTime: "02:01:00",
+					posterTime: "00:04:25"
+				},
+				// 可以继续添加其他电影信息
+			];*/
+			//console.log(movies);
+			// 计算时间差的函数
+			function calculateTimeDifference(lightOnTime, posterTime) {
+				const lightOnDate = new Date(`1970-01-01T${lightOnTime}Z`);
+				const posterDate = new Date(`1970-01-01T${posterTime}Z`);
+				return Math.round((lightOnDate - posterDate) / 1000); // 返回秒数
+			}
+
+			// 处理字符串与电影名匹配，并返回昵称和时间差的函数
+			function processMovieString(inputString) {
+				for (const movie of movies) {
+					//console.log(movies);
+					if (movie.name === inputString) {
+						const timeDifference = calculateTimeDifference(movie.lightOnTime, movie.posterTime);
+						return {
+							name:movie.name,
+							nickname: movie.nickname,
+							timeDifference,
+							lightOnTime:movie.lightOnTime,
+							posterTime:movie.posterTime
+						};
+					}
+					//console.log(movie.name + "----" + movie.lightOnTime)
+				}
+				// 如果没有找到匹配的电影，可以返回null或其他值
+				return null;
+			}
+
+			function readFile() {
+				const fileInput = document.getElementById('excel-file');
+				const file = fileInput.files[0];
+
+				if (!file) {
+					console.log("未选择文件");
+					return;
+				}
+
+				const reader = new FileReader();
+				reader.onload = function(e) {
+					const data = new Uint8Array(e.target.result);
+					const workbook = XLSX.read(data, {
+						type: 'array'
+					});
+
+					// 假设第一个工作表包含所需数据
+					const worksheetName = workbook.SheetNames[0];
+					const worksheet = workbook.Sheets[worksheetName];
+
+					// 将工作表转换为JSON对象数组
+					var jsonData_excel = XLSX.utils.sheet_to_json(worksheet, {
+						header: 1
+					}); // header: 1 表示第一行是标题行
+
+					// 打印读取到的内容
+					//
+					jsonData_excel = jsonData_excel.map(function(subArray) {
+						// 转换子数组为对象
+						return {
+							name: subArray[0], // 假设第一个元素是name
+							nickname: subArray[1], // 假设第二个元素是nickname
+							lightOnTime: subArray[2], // 假设第三个元素是lightOnTime
+							posterTime: subArray[3] // 假设第四个元素是posterTime
+						};
+					});
+					//console.log(jsonData_excel);
+					//console.log(movies);
+					movies = jsonData_excel;
+					//console.log(movies);
+
+				};
+				reader.readAsArrayBuffer(file);
+				document.getElementById('readFile_sucess').innerHTML = "😁👉"
+			}
+			/*function useExcelData(data_excel) {
+			    // 在这里处理你的数据
+				movies = data_excel;
+			    console.log(movies); // 例如，你可以将数据打印到控制台，或者进行其他操作
+			    // 你可以进一步处理数据，或者将其传递给其他函数/方法  
+			    // ...  
+			}*/
+			function printDiv() {
+				var printArea = document.getElementById('tableContainer');
+				var printFrame = document.getElementById('printFrame');
+				var printWindow = printFrame.contentWindow || printFrame.contentDocument.document;
+
+				// 设置iframe的宽高以匹配打印div的宽高
+				printFrame.style.width = printArea.offsetWidth + 'px';
+				printFrame.style.height = printArea.offsetHeight + 'px';
+
+				// 将div的内容写入iframe的document中
+				printWindow.document.open();
+				printWindow.document.write(
+					'<html><head><title>打印内容</title><style>' +
+					/* 在这里复制打印样式 */
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
+				);
+				deleteCheckbox();
+				printWindow.document.close();
+
+				// 打印iframe的内容
+				printWindow.focus(); // 确保iframe获得焦点
+				printWindow.print();
+			}
+
+			function printDivZao() {
+				var printArea = document.getElementById('splitTables_1');
+				var printFrame = document.getElementById('printFrame');
+				var printWindow = printFrame.contentWindow || printFrame.contentDocument.document;
+
+				// 设置iframe的宽高以匹配打印div的宽高
+				printFrame.style.width = printArea.offsetWidth + 'px';
+				printFrame.style.height = printArea.offsetHeight + 'px';
+
+				// 将div的内容写入iframe的document中
+				printWindow.document.open();
+				printWindow.document.write(
+					'<html><head><title>打印内容</title><style>' +
+					/* 在这里复制打印样式 */
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
+				);
+				printWindow.document.close();
+				// 打印iframe的内容
+				printWindow.focus(); // 确保iframe获得焦点
+				printWindow.print();
+			}
+
+			function printDivWan() {
+				var printArea = document.getElementById('splitTables_2');
+				var printFrame = document.getElementById('printFrame');
+				var printWindow = printFrame.contentWindow || printFrame.contentDocument.document;
+
+				// 设置iframe的宽高以匹配打印div的宽高
+				printFrame.style.width = printArea.offsetWidth + 'px';
+				printFrame.style.height = printArea.offsetHeight + 'px';
+
+				// 将div的内容写入iframe的document中
+				printWindow.document.open();
+				printWindow.document.write(
+					'<html><head><title>打印内容</title><style>' +
+					/* 在这里复制打印样式 */
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
+				);
+				printWindow.document.close();
+				// 打印iframe的内容
+				printWindow.focus(); // 确保iframe获得焦点
+				printWindow.print();
+			}
+			//原始字符串，指定需要替换为空的字符串组成的数组
+			function replaceMatchesWithEmptyString(originalString, stringsToReplace) {
+				// 遍历字符串数组
+				stringsToReplace.forEach(function(str) {
+					// 使用正则表达式和全局搜索标志替换所有匹配项
+					var regex = new RegExp(str, 'g');
+					originalString = originalString.replace(regex, '');
+				});
+
+				// 返回替换后的字符串
+				return originalString;
+			}
+			//去掉数组中相同的数据
+			function removeDuplicates(array) {
+				return Array.from(new Set(array));
+			}
+
+			function arrayToStringWithNewLine(array) {
+				// 使用map方法将数组中的每个元素转换为字符串  
+				const stringArray = array.map(item => String(item));
+				// 使用join方法将所有字符串连接成一个长字符串，元素之间用换行符连接
+				const result = stringArray.join('\n');
+				return result;
+			}
+			//拆分表格
+			function splitTable() {
+				// 获取原始表格
+				var originalTable = document.getElementById('tableContainer_div');
+				deleteCheckbox();
+				var rows = Array.from(originalTable.tBodies[0].rows);
+				// 创建新表格的容器
+				var splitTablesContainer_1 = document.getElementById('splitTables_1');
+				var splitTablesContainer_2 = document.getElementById('splitTables_2');
+				splitTablesContainer_1.innerHTML = ''; // 清空容器内容
+				splitTablesContainer_2.innerHTML = ''; // 清空容器内容
+				// 创建两个新表格
+				var table1 = document.createElement('table');
+				var table2 = document.createElement('table');
+				table1.style.borderCollapse = 'collapse';
+				table1.style.fontSize = 'smaller';
+				table1.id = 'tableContainer_div1';
+				table2.style.borderCollapse = 'collapse';
+				table2.style.fontSize = 'smaller';
+				table2.id = 'tableContainer_div2';
+				// 检查是否存在表头，如果不存在则创建它
+				var thead;
+				if (originalTable.tHead) {
+					thead = originalTable.tHead.cloneNode(true); // 克隆表头
+				} else {
+					thead = document.createElement('thead');
+					var firstRow = originalTable.tBodies[0].rows[0].cloneNode(true);
+					thead.appendChild(firstRow);
+				}
+
+				// 为两个新表格添加表头
+				table1.appendChild(thead.cloneNode(true));
+				table2.appendChild(thead.cloneNode(true));
+
+				// 拆分表格行并添加到新表格中
+				rows.forEach(row => {
+					var endTime = row.cells[1].textContent;
+					var isBetween5And1630 = endTime >= '05:00' && endTime < '16:30';
+					var newRow = row.cloneNode(true); // 克隆行
+					if (isBetween5And1630) {
+						// 确保table1有tbody
+						if (!table1.tBodies.length) {
+							var tbody = document.createElement('tbody');
+							table1.appendChild(tbody);
+						}
+						table1.tBodies[0].appendChild(newRow); // 添加到第二个表格
+					} else {
+						// 确保table2有tbody
+						if (!table2.tBodies.length) {
+							var tbody = document.createElement('tbody');
+							table2.appendChild(tbody);
+						}
+						table2.tBodies[0].appendChild(newRow); // 添加到第一个表格
+					}
+				});
+
+				// 将新表格添加到容器中
+				splitTablesContainer_1.appendChild(table1);
+				//splitTablesContainer.appendChild(document.createElement('br')); // 添加换行
+				splitTablesContainer_2.appendChild(table2);
+			}
+
+			function yincang() {
+				var zaoban = document.getElementById('zao');
+				var wanban = document.getElementById('wan');
+				zaoban.style.display = 'none';
+				wanban.style.display = 'none';
+			}
+
+			function xianshi() {
+				var zaoban = document.getElementById('zao');
+				var wanban = document.getElementById('wan');
+				zaoban.style.display = 'inline-table';
+				wanban.style.display = 'inline-table';
+			}
+			
+			function xianshi_button_deleteMovie() {
+				var xianshi_button_deleteMovie = document.getElementById('button_deleteMovie');
+				xianshi_button_deleteMovie.style.display = '';
+			}
+			
+			// 删除不需要的虚拟场次，处理多选框选中状态的函数
+			function deleteFalseMovie() {
+				
+				// 初始化存储选中值的数组
+				//const selectedValues = [];
+				
+				// 获取表格中的所有多选框  
+				const checkboxes = document.querySelectorAll('#tableContainer_div tbody input[type="checkbox"]');
+				//console.log(checkboxes);
+				// 清空数组（如果需要保留之前的状态，则移除这行代码）  
+				//indicesToDelete.length = 0;
+			
+				// 遍历所有多选框，检查其选中状态  
+				checkboxes.forEach(checkbox => {
+					if (checkbox.checked) {
+						indicesToDelete.push(checkbox.value);
+					}
+				});
+				sortTableByStartTime()
+			}
+			
+			//删除打印时会出现的多选框
+			function deleteCheckbox() {
+				// 获取表格元素  
+				const table = document.getElementById('tableContainer_div');
+				const tbody = table.tBodies[0]; // 获取第一个tbody元素  
+				const thead = table.tHead; // 获取表头  
+			
+				// 删除表头中的最后一列  
+				const headerRow = thead.rows[0];
+				headerRow.deleteCell(-1); // -1表示删除最后一列  
+			
+				// 删除每一行数据中的最后一列  
+				for (let i = 0; i < tbody.rows.length; i++) {
+					tbody.rows[i].deleteCell(-1);
+				}
+			}
+			function start(){
+				document.getElementById('json-input').value = document.getElementById('start').value;
+				sortTableByStartTime();
+				
+			}
+			function yincang_deleteMovie(){
+				var button_deleteMovie = document.getElementById('button_deleteMovie');
+				button_deleteMovie.style.display = 'none';
+			}
+		</script>
+	</head>
+	<body>
+
+		<h1>排片信息提取</h1>
+		<textarea id="start" cols="60" rows="10" style="display: none;"></textarea>
+		<button id="copyButton">粘贴</button>
+		<button onclick="extractField()">解析</button>
+		<div style="display: inline" id="extractField_sucess"></div>
+		<br>
+		<textarea id="json-input" rows="3" cols="60" placeholder="慧影云排期界面<F12>,复制之后直接右键粘贴或点击上方按钮"></textarea>
+		<br><br>
+		<div style="display: inline-table">
+			<button onclick="copypiao()">【复制】票</button>
+			<div style="display: inline" id="cpoypiao_sucess"></div>
+			<br>
+			<textarea id="piao" rows="8" cols="60"></textarea>
+		</div>
+		<div style="display: inline-table;width: min-content;">
+			<input type="file" id="excel-file" accept=".xlsx, .xls" style="width: 40%;">
+			<button onclick="readFile()">确定</button>
+			<div style="display: inline" id="readFile_sucess"></div>
+			<button onclick="extractField()">解析</button>
+			<button onclick="copydjs()" style="float: right;">【复制】倒计时</button>
+			<div style="display: inline;float: right;" id="copy_djs_sucess"></div>
+			<br>
+			<textarea id="djs" rows="8" cols="60"></textarea>
+		</div>
+		<div style="display: inline-table;width: min-content;">
+			<span style="display: inline-table; height: 23px; color: red;">🛠🛠需要精确时间的电影🛠🛠</span>
+			<textarea id="checktime" rows="8" cols="40" style="color: red;"></textarea>
+		</div>
+
+		<br><br>
+		<div style="display: inline-table">
+			<button onclick="copymovie_name()">【复制】大屏幕:电影名</button>
+			<div style="display: inline" id="copymovie_name_sucess"></div>
+			<br>
+			<textarea id="movie_name" rows="8" cols="60"></textarea>
+		</div>
+		<div style="display: inline-table;width: min-content;">
+			<button style="float: right;" onclick="copybyds()">【复制】播音大师</button>
+			<div style="display: inline;float: right;" id="copy_byds_sucess"></div>
+			<br>
+			<textarea id="byds" rows="8" cols="60"></textarea>
+		</div>
+		<br><br>
+		<button onclick="copymovie_time()">【复制】大屏幕:时间</button>
+		<div style="display: inline" id="copymovie_time_sucess"></div>
+		<br>
+		<textarea id="movie_time" rows="8" cols="60"></textarea>
+		<br><br>
+		<div style="width: fit-content;" id="alltable">
+			<div>
+				<button onclick="sortTableByStartTime()">刷新</button>
+				<button onclick="sortTableByMovie()">前台</button>
+				<button onclick="sortTableByEndTime()">保洁</button>
+				<button onclick="sortTableByCellName()">影厅</button>
+				<button onclick="start()">重置</button>
+			</div>
+			<br>
+
+			<div style="display: inline-table;text-align: center;">
+				<button onclick="printDiv()">打印当前表格(全天)</button>
+				<button onclick="deleteFalseMovie()" style="float:right;" id="button_deleteMovie">删除选中场次</button>
+				<div id="tableContainer"></div>
+			</div>
+			<div style="display: inline-table;padding-left: 50px;"></div>
+			<div style="display: inline-table;text-align: center;" id="zao">
+				<button onclick="printDivZao()">打印早班</button>
+				<div id="splitTables_1"></div>
+			</div>
+			<div style="display: inline-table;padding-left: 50px;"></div>
+			<div style="display: inline-table;text-align: center;" id="wan">
+				<button onclick="printDivWan()">打印晚班</button>
+				<div id="splitTables_2"></div>
+			</div>
+		</div>
+		<iframe id="printFrame" src="about:blank"></iframe>
+		<script>
+			// 当页面加载完成时，自动聚焦到文本区域
+			document.getElementById('json-input').focus();
+			document.getElementById('copyButton').addEventListener('click', function() {
+					// 尝试从剪贴板获取文本
+					navigator.clipboard.readText()
+						.then(text => {
+							// 如果成功获取到文本，将其复制到输入框
+							document.getElementById('json-input').value = text;
+							//extractField();
+						})
+						.catch(err => {
+							// 如果获取剪贴板内容失败，打印错误消息
+							console.error('Error reading clipboard:', err);
+							alert('无法从剪贴板复制内容。');
+						});
+
+				}
+
+			);
+		</script>
+
+	</body>
+</html>
