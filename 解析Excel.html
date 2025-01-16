@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>读取Excel表格内容</title>
+	</head>
+	<body>
+		<input type="file" id="excel-file" accept=".xlsx, .xls">
+		<button onclick="readFile()">读取Excel</button>
+		<br />
+		<textarea name="" id="xxx" cols="50" rows="50"></textarea>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+		<script>
+			function readFile() {
+				const fileInput = document.getElementById('excel-file');
+				const file = fileInput.files[0];
+			
+				if (!file) {
+					console.log("未选择文件");
+					return;
+				}
+			
+				const reader = new FileReader();
+				reader.onload = function(e) {
+					const data = new Uint8Array(e.target.result);
+					const workbook = XLSX.read(data, {
+						type: 'array'
+					});
+			
+					// 假设第一个工作表包含所需数据
+					const worksheetName = workbook.SheetNames[0];
+					const worksheet = workbook.Sheets[worksheetName];
+			
+					// 将工作表转换为JSON对象数组
+					var jsonData_excel = XLSX.utils.sheet_to_json(worksheet, {
+						header: 1
+					}); // header: 1 表示第一行是标题行
+			
+					// 打印读取到的内容
+					//
+					jsonData_excel = jsonData_excel.map(function(subArray) {
+						// 转换子数组为对象
+						return {
+							name: subArray[0], // 假设第一个元素是name
+							nickname: subArray[1], // 假设第二个元素是nickname
+							lightOnTime: subArray[2], // 假设第三个元素是lightOnTime
+							posterTime: subArray[3] // 假设第四个元素是posterTime
+						};
+					});
+					//console.log(jsonData_excel);
+					//console.log(movies);
+					movies = JSON.stringify(jsonData_excel, null, 2);
+					document.getElementById('xxx').innerHTML = movies;
+					
+				};
+				reader.readAsArrayBuffer(file);
+			}
+		</script>
+	</body>
+</html>

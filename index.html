@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="time.js"></script>
 		<style>
 			#printFrame {
 				display: none;
@@ -57,10 +58,8 @@
 			const date2 = "1950-01-01T00:00:00";
 			//const secondsDifference = calculateSecondsDifference(date1, date2);
 			//解析
-			//var movies = [];
-			var movies = []; //从excel中获取的电影信息
+			let movies = readytime[0];//加载已经存在的电影信息,开灯时间,多音字等等
 			var indicesToDelete = [];//默认需要删除的场次为空
-
 			function extractField() {
 				document.getElementById('alltable').style.display = 'block';
 				yincang();//隐藏保洁早晚班div
@@ -383,7 +382,7 @@
 
 					}
 					//console.log(wucha_all);
-					console.log(all); //出票结果界面
+					//console.log(all); //出票结果界面
 					NeedCheck = removeDuplicates(NeedCheck); //简化提醒的名称，去掉重复项
 					const NeedCheck_result = arrayToStringWithNewLine(NeedCheck);
 					document.getElementById('checktime').innerHTML = NeedCheck_result;
@@ -902,7 +901,7 @@
 					//console.log(jsonData_excel);
 					//console.log(movies);
 					movies = jsonData_excel;
-					//console.log(movies);
+					console.log(movies);
 
 				};
 				reader.readAsArrayBuffer(file);
@@ -1217,6 +1216,7 @@
 				<div id="splitTables_2"></div>
 			</div>
 		</div>
+		<textarea id="output"></textarea>
 		<iframe id="printFrame" src="about:blank"></iframe>
 		<script>
 			// 当页面加载完成时，自动聚焦到文本区域
