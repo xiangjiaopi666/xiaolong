@@ -59,10 +59,10 @@
 			const date2 = "1950-01-01T00:00:00";
 			//const secondsDifference = calculateSecondsDifference(date1, date2);
 			//解析
-			let movies = [];//加载已经存在的电影信息,开灯时间,多音字等等
-			function getMovies_timejson(movies_timejson){
+			let movies = [];//Excel表中获取的json格式的影片信息
+			function getMovies_timejson(movies_timejson){//获取预设的json格式影片信息
 				movies = movies_timejson;
-				console.log(movies);
+				//console.log(movies);
 			}
 			var indicesToDelete = [];//默认需要删除的场次为空
 			function extractField() {
