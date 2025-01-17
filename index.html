@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script src="time.js"></script>
 		<style>
 			#printFrame {
 				display: none;
@@ -46,6 +45,7 @@
 		<title>排期</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 		<script>
+			
 			//倒计时软件用
 			function calculateSecondsDifference(date1String, date2String) {
 				const date1 = new Date(date1String);
@@ -58,7 +58,11 @@
 			const date2 = "1950-01-01T00:00:00";
 			//const secondsDifference = calculateSecondsDifference(date1, date2);
 			//解析
-			let movies = readytime[0];//加载已经存在的电影信息,开灯时间,多音字等等
+			let movies = [];//加载已经存在的电影信息,开灯时间,多音字等等
+			function getMovies_timejson(movies_timejson){
+				movies = movies_timejson;
+				console.log(movies);
+			}
 			var indicesToDelete = [];//默认需要删除的场次为空
 			function extractField() {
 				document.getElementById('alltable').style.display = 'block';
@@ -1138,6 +1142,22 @@
 				var button_deleteMovie = document.getElementById('button_deleteMovie');
 				button_deleteMovie.style.display = 'none';
 			}
+			
+			// 定义一个函数来读取 JSON 文件
+			window.onload = async function fetchMovies() {
+				try {
+					const response = await fetch('time.json'); // 读取同路径下的 time.json 文件
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					const data = await response.json(); // 将响应解析为 JSON
+					// 将 JSON 数据赋给 movies_timejson 变量，并调用 function2
+					const movies_timejson = data;
+					getMovies_timejson(movies_timejson);
+				} catch (error) {
+					console.error('There was a problem with the fetch operation:', error);
+				}
+			}
 		</script>
 	</head>
 	<body>
@@ -1216,7 +1236,6 @@
 				<div id="splitTables_2"></div>
 			</div>
 		</div>
-		<textarea id="output"></textarea>
 		<iframe id="printFrame" src="about:blank"></iframe>
 		<script>
 			// 当页面加载完成时，自动聚焦到文本区域

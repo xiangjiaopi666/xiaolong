@@ -1,5 +1,3 @@
-window.readytime = new Array;
-readytime[0] =
 [
   {
     "name": "电影名",
@@ -1007,6 +1005,5 @@ readytime[0] =
     "name": "恶行之外",
     "lightOnTime": "01:21:10",
     "posterTime": "00:01:31"
-  },
-  {}
+  }
 ]
