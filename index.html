@@ -677,12 +677,13 @@
 						var originalString = thiredContent;
 						//console.log(originalString);
 						thiredContent = replaceMatchesWithEmptyString(originalString, stringsToReplace);
-						//console.log(thiredContent);
+						
 						const result_thiredContent = processMovieString(thiredContent);
-						if(result_thiredContent == null){
+						//console.log(result_thiredContent);
+						if(result_thiredContent.lightOnTime == undefined || result_thiredContent.posterTime == undefined){
 							console.log("未查询到 "+ thiredContent +" 具体结束时间")
 							thiredContent = "█" + thiredContent;
-						} else {
+						} else if (result_thiredContent.lightOnTime!==undefined ||result_thiredContent.posterTime!==undefined){
 							// 初始本地时间字符串（ISO 8601 格式，无时区信息）
 							const initialTimeString = firstContent;
 							
@@ -692,7 +693,6 @@
 							// 增加、减少的本地时间字符串
 							const timeToAddString = result_thiredContent.lightOnTime;//增加时间
 							const timeToSubtractString = result_thiredContent.posterTime;//减少时间
-							
 							// 解析并增加、减少时间
 							const [hoursToAdd_lightOnTime, minutesToAdd_lightOnTime, secondsToAdd_lightOnTime] = timeToAddString.split(':').map(Number);//亮灯时间
 							const millisecondsToAdd = (hoursToAdd_lightOnTime * 3600000) + (minutesToAdd_lightOnTime * 60000) + (secondsToAdd_lightOnTime * 1000);//增加   格式化亮灯时间
