@@ -46,7 +46,6 @@
 		<title>排期</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 		<script>
-			
 			//倒计时软件用
 			function calculateSecondsDifference(date1String, date2String) {
 				const date1 = new Date(date1String);
@@ -59,15 +58,15 @@
 			const date2 = "1950-01-01T00:00:00";
 			//const secondsDifference = calculateSecondsDifference(date1, date2);
 			//解析
-			let movies = [];//Excel表中获取的json格式的影片信息
-			function getMovies_timejson(movies_timejson){//获取预设的json格式影片信息
+			let movies = []; //Excel表中获取的json格式的影片信息
+			function getMovies_timejson(movies_timejson) { //获取预设的json格式影片信息
 				movies = movies_timejson;
 				//console.log(movies);
 			}
-			var indicesToDelete = [];//默认需要删除的场次为空
+			var indicesToDelete = []; //默认需要删除的场次为空
 			function extractField() {
 				document.getElementById('alltable').style.display = 'block';
-				yincang();//隐藏保洁早晚班div
+				yincang(); //隐藏保洁早晚班div
 				//console.log("提取")
 				//清除表格记录
 				let NeedCheck = []; //需要精确时间的电影名
@@ -85,12 +84,13 @@
 					//console.log('删除了 ' + indicesToDelete + '场');
 					// 从后往前删除元素
 					indicesToDelete.sort((a, b) => b - a).forEach(index => {
-					    jsonData.data.arr_date_plan.splice(index, 1);
+						jsonData.data.arr_date_plan.splice(index, 1);
 					});
-					indicesToDelete = [];//删除后清空删除记录，防止多删
+					indicesToDelete = []; //删除后清空删除记录，防止多删
 					//console.log(JSON.stringify(jsonData.data.arr_date_plan, null, 2));
 					//console.log(jsonData.data.arr_date_plan)//去除后的场次
-					document.getElementById('json-input').value = '{"data":{"arr_date_plan":' + JSON.stringify(jsonData.data.arr_date_plan, null, 0) + '}}';
+					document.getElementById('json-input').value = '{"data":{"arr_date_plan":' + JSON.stringify(jsonData.data
+						.arr_date_plan, null, 0) + '}}';
 					//console.log(document.getElementById('json-input').value);
 					//console.log(JSON.stringify(jsonData.data.arr_date_plan, null, 0))
 					var table = document.createElement('table');
@@ -102,7 +102,7 @@
 					// 创建表头
 					var thead = document.createElement('thead');
 					var headerRow = document.createElement('tr');
-					['开始', '结束', '电影', '影厅','X'].forEach(function(text) {
+					['开始', '结束', '电影', '影厅', 'X'].forEach(function(text) {
 						var th = document.createElement('th');
 						th.textContent = text;
 						th.style.border = '1px solid black';
@@ -114,21 +114,21 @@
 
 					// 创建表格体
 					var tbody = document.createElement('tbody');
-					var Plan_yes = 0;//审核通过(释放)
-					var Plan_no = 0;//未审核(暂停)
-					var sale_status_sale = 0;//正常售卖
-					var sale_status_stop = 0;//暂停场次
+					var Plan_yes = 0; //审核通过(释放)
+					var Plan_no = 0; //未审核(暂停)
+					var sale_status_sale = 0; //正常售卖
+					var sale_status_stop = 0; //暂停场次
 					for (var i = 0; i < jsonData.data.arr_date_plan.length; i++) {
 						var rowData = jsonData.data.arr_date_plan[i];
 						//console.log(jsonData.data.arr_date_plan[i].approve_status);
 						if (jsonData.data.arr_date_plan[i].approve_status == 'APPROVED') {
-							Plan_yes++;//统计释放场次数量
+							Plan_yes++; //统计释放场次数量
 						} else {
-							Plan_no++;//统计未释放场次数量
+							Plan_no++; //统计未释放场次数量
 						}
 						if (jsonData.data.arr_date_plan[i].sale_status == 'SALE') {
 							sale_status_sale++;
-						} else{
+						} else {
 							sale_status_stop++;
 						}
 						//console.log(rowData)
@@ -217,7 +217,7 @@
 						hallNameCell.style.padding = '4px';
 						hallNameCell.style.textAlign = 'center';
 						row.appendChild(hallNameCell);
-						
+
 						var deleteMovie = document.createElement('td');
 						const checkbox = document.createElement('input');
 						checkbox.type = 'checkbox';
@@ -227,8 +227,8 @@
 
 						tbody.appendChild(row);
 					}
-					
-					
+
+
 					table.appendChild(tbody);
 					//console.log('释放场次:'+Plan_yes);
 					//console.log('未释放场次:'+Plan_no);
@@ -239,7 +239,7 @@
 					var wucha_all = "";
 					var wucha_start = "";
 					var wucha_end = "";
-					let wucha_1h_tishi = [];//开灯时间未精确，1小时后一直弹出提示要更新
+					let wucha_1h_tishi = []; //开灯时间未精确，1小时后一直弹出提示要更新
 					let moviesData = [];
 					//定义播音大师数组
 					let TaskID = [],
@@ -260,11 +260,11 @@
 					for (var i = 0; i < jsonData.data.arr_date_plan.length; i++) {
 						var name = jsonData.data.arr_date_plan[i].display_name; //电影名+语言+3D
 						var name_min = jsonData.data.arr_date_plan[i].movie_name; //电影名
-						
+
 						//替换掉电影名中可能出问题的字符
-						name_min = replaceSpecifiedString(name_min,'（数字）','');
-						name_min = replaceSpecifiedString(name_min,'（舞台纪录电影）','');
-						
+						name_min = replaceSpecifiedString(name_min, '（数字）', '');
+						name_min = replaceSpecifiedString(name_min, '（舞台纪录电影）', '');
+
 						var date = jsonData.data.arr_date_plan[i].plan_date; //2023-01-01
 						var time = jsonData.data.arr_date_plan[i].show_time_start; //2023-01-01T00:00:00
 						var time_end = jsonData.data.arr_date_plan[i].show_time_end; //2023-01-01T00:00:00
@@ -318,23 +318,24 @@
 						var secondsDifference_end_current = '';
 						const result = processMovieString(name_min);
 						//console.log(result);
-						if (result == null){//开灯时间表一点信息没有
+						if (result == null) { //开灯时间表一点信息没有
 							name_min_new = name_min; //播音大师无多音字需要修改
 							secondsDifference_end_current = secondsDifference_end;
 							djs_tishi_light_on = "结束||请更新准确时间"
-							NeedCheck.push(name_min);//将需要精确时间的电影名给对应数组，方便输出提示
+							NeedCheck.push(name_min); //将需要精确时间的电影名给对应数组，方便输出提示
 							//console.log(name_min_new + "  无任何信息");
 						} else {
-							if (result.nickname == undefined){//如果昵称为空，则不需要替换
+							if (result.nickname == undefined) { //如果昵称为空，则不需要替换
 								name_min_new = name_min;
 							} else {
-								name_min_new=result.nickname;
+								name_min_new = result.nickname;
 							}
-							if (result.lightOnTime == undefined || result.posterTime ==undefined){//如果两个时间不全
+							if (result.lightOnTime == undefined || result.posterTime == undefined || result.lightOnTime == '' ||
+								result.posterTime == '') { //如果两个时间不全
 								secondsDifference_end_current = secondsDifference_end;
 								djs_tishi_light_on = "结束||请更新准确时间";
 								NeedCheck.push(name_min);
-							} else {//如果信息全部存在
+							} else { //如果信息全部存在
 								secondsDifference_end_current = parseInt(secondsDifference_start) + parseInt(result
 									.timeDifference) - 60;
 								djs_tishi_light_on = "||①分后亮灯";
@@ -392,23 +393,25 @@
 							"                                                                                                                                                                                                                                                                                                       " +
 							"\n";
 						wucha_end = wucha_end + secondsDifference_end_current + "-1    10110054 010    " + hall_name.slice(0,
-							1) + name_min.slice(0, 3) + dis_version + djs_tishi_light_on +
+								1) + name_min.slice(0, 3) + dis_version + djs_tishi_light_on +
 							"                                                                                                                                                                                                                                                                                                      " +
 							"\n";
 						if (djs_tishi_light_on === '结束||请更新准确时间') {
 							//如果存在没有精确开灯时间的场次，倒计时软件会在电影开始1小时后每分钟提示一次
-								for (let x = 0; x < 10; x++) {
-									var math_secondsDifference_start = Number(secondsDifference_start);//将字符串转换为数字
-									math_secondsDifference_start = math_secondsDifference_start + 3600 + 60 * x;//第一次提示在1小时后，依次递加1分钟，提醒十次
-									djs_tishi_dongzuo = '||更新亮灯时间 结束时需手动开灯||若TMS未更新请询问经理或放映';
-									wucha_start = wucha_start + math_secondsDifference_start + "-1    10110054 010    " + hall_name.slice(0, 1) + "厅 "+
-										name_min.slice(0, 3) + dis_version + djs_tishi_dongzuo +
-										"                                                                                                                                                                                                                                                                                                       " +
-										"\n";
-								}
+							for (let x = 0; x < 10; x++) {
+								var math_secondsDifference_start = Number(secondsDifference_start); //将字符串转换为数字
+								math_secondsDifference_start = math_secondsDifference_start + 3600 + 60 *
+									x; //第一次提示在1小时后，依次递加1分钟，提醒十次
+								djs_tishi_dongzuo = '||更新亮灯时间 结束时需手动开灯||若TMS未更新请询问经理或放映';
+								wucha_start = wucha_start + math_secondsDifference_start + "-1    10110054 010    " + hall_name
+									.slice(0, 1) + "厅 " +
+									name_min.slice(0, 3) + dis_version + djs_tishi_dongzuo +
+									"                                                                                                                                                                                                                                                                                                       " +
+									"\n";
 							}
+						}
 						//console.log(wucha_1h_tishi);
-						wucha_all = wucha_end + wucha_start;//倒计时需要的最终数据
+						wucha_all = wucha_end + wucha_start; //倒计时需要的最终数据
 
 					}
 					//console.log(wucha_all);
@@ -452,26 +455,28 @@
 					//alert("成功");
 					if (sale_status_stop == 0) {
 						var sale_status_sale_message = '';
-					} else{
+					} else {
 						var sale_status_sale_message = ' ⌛暂停场次:' + sale_status_stop;
 					}
 					if (Plan_no == 0) {
-						document.getElementById('extractField_sucess').innerHTML = '😁 📅' + jsonData.data.arr_date_plan[0].plan_date + ' 🎬总场次:' + jsonData.data.arr_date_plan.length;
-							
-					} else{
-						document.getElementById('extractField_sucess').innerHTML = '😁 📅' + jsonData.data.arr_date_plan[0].plan_date + ' 🎬总场次:' + jsonData.data.arr_date_plan.length + ' 🔒未释放场次:' + Plan_no;
-						alert("未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
-						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
-						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
-						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
-						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
-						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
-						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
-						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n" + 
-						"未释放场次:" + Plan_no +"，请提醒经理释放，刷新页面后重新复制F12的内容\n"
+						document.getElementById('extractField_sucess').innerHTML = '😁 📅' + jsonData.data.arr_date_plan[0]
+							.plan_date + ' 🎬总场次:' + jsonData.data.arr_date_plan.length;
+
+					} else {
+						document.getElementById('extractField_sucess').innerHTML = '😁 📅' + jsonData.data.arr_date_plan[0]
+							.plan_date + ' 🎬总场次:' + jsonData.data.arr_date_plan.length + ' 🔒未释放场次:' + Plan_no;
+						alert("未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n" +
+							"未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n" +
+							"未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n" +
+							"未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n" +
+							"未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n" +
+							"未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n" +
+							"未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n" +
+							"未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n" +
+							"未释放场次:" + Plan_no + "，请提醒经理释放，刷新页面后重新复制F12的内容\n"
 						)
 					}
-					
+
 				} catch (error) {
 					// 如果JSON解析失败，输出错误信息
 					console.error('无效的JSON数据:', error);
@@ -658,7 +663,7 @@
 				console.log('开始时间排序');
 			}
 
-			function sortTableByEndTime() {//保洁表
+			function sortTableByEndTime() { //保洁表
 				extractField();
 				yincang_deleteMovie()
 				var table, rows, switching, i, x, y, shouldSwitch;
@@ -696,7 +701,8 @@
 						var firstContent = firstCell.textContent || firstCell.innerText;
 						var secondContent = secondCell.textContent || secondCell.innerText;
 						var thiredContent = thirdCell.textContent || thirdCell.innerText;
-						var stringsToReplace = ['（日语）', '（英语）', '（其他）','（印度语）', '（印尼语）', '（法语）', '（意大利语）', '（韩语）', '（俄语）', '🌏',
+						var stringsToReplace = ['（日语）', '（英语）', '（其他）', '（印度语）', '（印尼语）', '（法语）', '（意大利语）', '（韩语）',
+							'（俄语）', '🌏',
 							'3D👓', ' '
 						];
 						var originalString = thiredContent;
@@ -705,26 +711,36 @@
 						//console.log(thiredContent);
 						const result_thiredContent = processMovieString(thiredContent);
 						//console.log(result_thiredContent);
-						if(result_thiredContent == null || result_thiredContent.lightOnTime == undefined || result_thiredContent.posterTime == undefined){
-							//console.log("未查询到 "+ thiredContent +" 具体结束时间")
+						if (result_thiredContent == null || result_thiredContent.lightOnTime == undefined ||
+							result_thiredContent.posterTime == undefined || result_thiredContent.lightOnTime == '' ||
+							result_thiredContent.posterTime == '') {
+							console.log("未查询到 " + thiredContent + " 具体结束时间")
 							thiredContent = "█" + thiredContent;
-						} else if (result_thiredContent.lightOnTime!==undefined ||result_thiredContent.posterTime!==undefined){
+						} else if (result_thiredContent.lightOnTime !== undefined || result_thiredContent.posterTime !==
+							undefined) {
 							// 初始本地时间字符串（ISO 8601 格式，无时区信息）
 							const initialTimeString = firstContent;
-							
+
 							// 将时间字符串转换为 Date 对象
 							const initialDate = new Date(initialTimeString);
-							
+
 							// 增加、减少的本地时间字符串
-							const timeToAddString = result_thiredContent.lightOnTime;//增加时间
-							const timeToSubtractString = result_thiredContent.posterTime;//减少时间
+							const timeToAddString = result_thiredContent.lightOnTime; //增加时间
+							const timeToSubtractString = result_thiredContent.posterTime; //减少时间
 							// 解析并增加、减少时间
-							const [hoursToAdd_lightOnTime, minutesToAdd_lightOnTime, secondsToAdd_lightOnTime] = timeToAddString.split(':').map(Number);//亮灯时间
-							const millisecondsToAdd = (hoursToAdd_lightOnTime * 3600000) + (minutesToAdd_lightOnTime * 60000) + (secondsToAdd_lightOnTime * 1000);//增加   格式化亮灯时间
-							const [hoursToSubtract_posterTime, minutesToSubtract_posterTime, secondsToSubtract_posterTime] = timeToSubtractString.split(':').map(Number);//龙标时间
-							const millisecondsToSubtract = (hoursToSubtract_posterTime * 3600000) + (minutesToSubtract_posterTime * 60000) + (secondsToSubtract_posterTime * 1000);//减少  格式化龙标时间
-							initialDate.setTime(initialDate.getTime() + millisecondsToAdd - millisecondsToSubtract);//正确亮灯时间=开始时间+亮灯时间(包括广告)-龙标时间
-							
+							const [hoursToAdd_lightOnTime, minutesToAdd_lightOnTime, secondsToAdd_lightOnTime] =
+							timeToAddString.split(':').map(Number); //亮灯时间
+							const millisecondsToAdd = (hoursToAdd_lightOnTime * 3600000) + (minutesToAdd_lightOnTime *
+								60000) + (secondsToAdd_lightOnTime * 1000); //增加   格式化亮灯时间
+							const [hoursToSubtract_posterTime, minutesToSubtract_posterTime,
+								secondsToSubtract_posterTime
+							] = timeToSubtractString.split(':').map(Number); //龙标时间
+							const millisecondsToSubtract = (hoursToSubtract_posterTime * 3600000) + (
+								minutesToSubtract_posterTime * 60000) + (secondsToSubtract_posterTime *
+								1000); //减少  格式化龙标时间
+							initialDate.setTime(initialDate.getTime() + millisecondsToAdd -
+								millisecondsToSubtract); //正确亮灯时间=开始时间+亮灯时间(包括广告)-龙标时间
+
 							// 手动构建 ISO 8601 格式的输出字符串（无时区信息）
 							const year = initialDate.getFullYear();
 							const month = String(initialDate.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需要加1
@@ -899,7 +915,7 @@
 			];*/
 			//console.log(movies);
 			// 计算时间差的函数
-			function calculateTimeDifference(lightOnTime, posterTime) {//结束时间，龙标时间
+			function calculateTimeDifference(lightOnTime, posterTime) { //结束时间，龙标时间
 				const lightOnDate = new Date(`1970-01-01T${lightOnTime}Z`);
 				const posterDate = new Date(`1970-01-01T${posterTime}Z`);
 				return Math.round((lightOnDate - posterDate) / 1000); // 返回秒数
@@ -912,11 +928,11 @@
 					if (movie.name === inputString) {
 						const timeDifference = calculateTimeDifference(movie.lightOnTime, movie.posterTime);
 						return {
-							name:movie.name,
+							name: movie.name,
 							nickname: movie.nickname,
 							timeDifference,
-							lightOnTime:movie.lightOnTime,
-							posterTime:movie.posterTime
+							lightOnTime: movie.lightOnTime,
+							posterTime: movie.posterTime
 						};
 					}
 					//console.log(movie.name + "----" + movie.lightOnTime)
@@ -970,7 +986,7 @@
 				reader.readAsArrayBuffer(file);
 				document.getElementById('readFile_sucess').innerHTML = "😁👉"
 			}
-			
+
 			function printDiv() {
 				var printArea = document.getElementById('tableContainer');
 				var printFrame = document.getElementById('printFrame');
@@ -1143,24 +1159,24 @@
 				zaoban.style.display = 'inline-table';
 				wanban.style.display = 'inline-table';
 			}
-			
+
 			function xianshi_button_deleteMovie() {
 				var xianshi_button_deleteMovie = document.getElementById('button_deleteMovie');
 				xianshi_button_deleteMovie.style.display = '';
 			}
-			
+
 			// 删除不需要的虚拟场次，处理多选框选中状态的函数
 			function deleteFalseMovie() {
-				
+
 				// 初始化存储选中值的数组
 				//const selectedValues = [];
-				
+
 				// 获取表格中的所有多选框  
 				const checkboxes = document.querySelectorAll('#tableContainer_div tbody input[type="checkbox"]');
 				//console.log(checkboxes);
 				// 清空数组（如果需要保留之前的状态，则移除这行代码）  
 				//indicesToDelete.length = 0;
-			
+
 				// 遍历所有多选框，检查其选中状态  
 				checkboxes.forEach(checkbox => {
 					if (checkbox.checked) {
@@ -1169,33 +1185,35 @@
 				});
 				sortTableByStartTime()
 			}
-			
+
 			//删除打印时会出现的多选框
 			function deleteCheckbox() {
 				// 获取表格元素  
 				const table = document.getElementById('tableContainer_div');
 				const tbody = table.tBodies[0]; // 获取第一个tbody元素  
 				const thead = table.tHead; // 获取表头  
-			
+
 				// 删除表头中的最后一列  
 				const headerRow = thead.rows[0];
 				headerRow.deleteCell(-1); // -1表示删除最后一列  
-			
+
 				// 删除每一行数据中的最后一列  
 				for (let i = 0; i < tbody.rows.length; i++) {
 					tbody.rows[i].deleteCell(-1);
 				}
 			}
-			function start(){
+
+			function start() {
 				document.getElementById('json-input').value = document.getElementById('start').value;
 				sortTableByStartTime();
-				
+
 			}
-			function yincang_deleteMovie(){
+
+			function yincang_deleteMovie() {
 				var button_deleteMovie = document.getElementById('button_deleteMovie');
 				button_deleteMovie.style.display = 'none';
 			}
-			
+
 			// 定义一个函数来读取 JSON 文件
 			window.onload = async function fetchMovies() {
 				try {
