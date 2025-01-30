@@ -42,6 +42,39 @@
 					/* 自动适应内容大小 */
 				}
 			}
+
+			#biao {
+				position: fixed;
+				top: 10px;
+				right: 10px;
+				background-color: white;
+				z-index: 1000;
+				padding: 10px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				border-radius: 5px;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			th,
+			td {
+				padding: 8px;
+				text-align: center;
+			}
+
+			td:first-child {
+				max-width: 200px;
+				/* 设置最大宽度 */
+				white-space: nowrap;
+				/* 禁止换行 */
+				overflow: hidden;
+				/* 超出部分隐藏 */
+				text-overflow: ellipsis;
+				/* 使用省略号隐藏超出部分 */
+			}
 		</style>
 		<title>排期</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -63,6 +96,7 @@
 				movies = movies_timejson;
 				//console.log(movies);
 			}
+
 			var indicesToDelete = []; //默认需要删除的场次为空
 			function extractField() {
 				document.getElementById('alltable').style.display = 'block';
@@ -1225,6 +1259,33 @@
 					// 将 JSON 数据赋给 movies_timejson 变量，并调用 function2
 					const movies_timejson = data;
 					getMovies_timejson(movies_timejson);
+					const tableBody = document.getElementById("movie-table-body");
+
+					// 倒序并限制展示20个
+					const limitedMovies = movies.reverse().slice(0, 20);
+
+					limitedMovies.forEach(movie => {
+						const row = document.createElement("tr");
+
+						const nameCell = document.createElement("td");
+						nameCell.textContent = movie.name;
+						row.appendChild(nameCell);
+
+						// 显示nickname列，如果没有nickname则显示空字符串
+						const nicknameCell = document.createElement("td");
+						nicknameCell.textContent = movie.nickname || '';
+						row.appendChild(nicknameCell);
+
+						const lightOnTimeCell = document.createElement("td");
+						lightOnTimeCell.textContent = movie.lightOnTime;
+						row.appendChild(lightOnTimeCell);
+
+						const posterTimeCell = document.createElement("td");
+						posterTimeCell.textContent = movie.posterTime;
+						row.appendChild(posterTimeCell);
+
+						tableBody.appendChild(row);
+					});
 				} catch (error) {
 					console.error('There was a problem with the fetch operation:', error);
 				}
@@ -1232,102 +1293,123 @@
 		</script>
 	</head>
 	<body>
-
-		<h1>排片信息提取</h1>
-		<textarea id="start" cols="60" rows="10" style="display: none;"></textarea>
-		<button id="copyButton">粘贴</button>
-		<button onclick="extractField()">解析</button>
-		<div style="display: inline" id="extractField_sucess"></div>
-		<br>
-		<textarea id="json-input" rows="3" cols="60" placeholder="慧影云排期界面<F12>,复制之后直接右键粘贴或点击上方按钮"></textarea>
-		<br><br>
-		<div style="display: inline-table">
-			<button onclick="copypiao()">【复制】票</button>
-			<div style="display: inline" id="cpoypiao_sucess"></div>
-			<br>
-			<textarea id="piao" rows="8" cols="60"></textarea>
-		</div>
-		<div style="display: inline-table;width: min-content;">
-			<input type="file" id="excel-file" accept=".xlsx, .xls" style="width: 40%;">
-			<button onclick="readFile()">确定</button>
-			<div style="display: inline" id="readFile_sucess"></div>
+		<div>
+			<h1>排片信息提取</h1>
+			<textarea id="start" cols="60" rows="10" style="display: none;"></textarea>
+			<button id="copyButton">粘贴</button>
 			<button onclick="extractField()">解析</button>
-			<button onclick="copydjs()" style="float: right;">【复制】倒计时</button>
-			<div style="display: inline;float: right;" id="copy_djs_sucess"></div>
+			<div style="display: inline" id="extractField_sucess"></div>
 			<br>
-			<textarea id="djs" rows="8" cols="60"></textarea>
+			<textarea id="json-input" rows="3" cols="60" placeholder="慧影云排期界面<F12>,复制之后直接右键粘贴或点击上方按钮"></textarea>
+			<br><br>
+			<div style="display: inline-table">
+				<button onclick="copypiao()">【复制】票</button>
+				<div style="display: inline" id="cpoypiao_sucess"></div>
+				<br>
+				<textarea id="piao" rows="8" cols="60"></textarea>
+			</div>
+			<div style="display: inline-table;width: min-content;">
+				<input type="file" id="excel-file" accept=".xlsx, .xls" style="width: 40%;">
+				<button onclick="readFile()">确定</button>
+				<div style="display: inline" id="readFile_sucess"></div>
+				<button onclick="extractField()">解析</button>
+				<button onclick="copydjs()" style="float: right;">【复制】倒计时</button>
+				<div style="display: inline;float: right;" id="copy_djs_sucess"></div>
+				<br>
+				<textarea id="djs" rows="8" cols="60"></textarea>
+			</div>
+			<div style="display: inline-table;width: min-content;">
+				<span style="display: inline-table; height: 23px; color: red;">🛠🛠需要精确时间的电影🛠🛠</span>
+				<textarea id="checktime" rows="8" cols="40" style="color: red;"></textarea>
+			</div>
+
+			<br><br>
+			<div style="display: inline-table">
+				<button onclick="copymovie_name()">【复制】大屏幕:电影名</button>
+				<div style="display: inline" id="copymovie_name_sucess"></div>
+				<br>
+				<textarea id="movie_name" rows="8" cols="60"></textarea>
+			</div>
+			<div style="display: inline-table;width: min-content;">
+				<button style="float: right;" onclick="copybyds()">【复制】播音大师</button>
+				<div style="display: inline;float: right;" id="copy_byds_sucess"></div>
+				<br>
+				<textarea id="byds" rows="8" cols="60"></textarea>
+			</div>
+			<br><br>
+			<button onclick="copymovie_time()">【复制】大屏幕:时间</button>
+			<div style="display: inline" id="copymovie_time_sucess"></div>
+			<br>
+			<textarea id="movie_time" rows="8" cols="60"></textarea>
+			<br><br>
+			<div style="width: fit-content;" id="alltable">
+				<div>
+					<button onclick="sortTableByStartTime()">刷新</button>
+					<button onclick="sortTableByMovie()">前台</button>
+					<button onclick="sortTableByEndTime()">保洁</button>
+					<button onclick="sortTableByCellName()">影厅</button>
+					<button onclick="start()">重置</button>
+				</div>
+				<br>
+
+				<div style="display: inline-table;text-align: center;">
+					<button onclick="printDiv()">打印当前表格(全天)</button>
+					<button onclick="deleteFalseMovie()" style="float:right;" id="button_deleteMovie">删除选中场次</button>
+					<div id="tableContainer"></div>
+				</div>
+				<div style="display: inline-table;padding-left: 50px;"></div>
+				<div style="display: inline-table;text-align: center;" id="zao">
+					<button onclick="printDivZao()">打印早班</button>
+					<div id="splitTables_1"></div>
+				</div>
+				<div style="display: inline-table;padding-left: 50px;"></div>
+				<div style="display: inline-table;text-align: center;" id="wan">
+					<button onclick="printDivWan()">打印晚班</button>
+					<div id="splitTables_2"></div>
+				</div>
+			</div>
+			<iframe id="printFrame" src="about:blank"></iframe>
+			<script>
+				// 当页面加载完成时，自动聚焦到文本区域
+				document.getElementById('json-input').focus();
+				document.getElementById('copyButton').addEventListener('click', function() {
+						// 尝试从剪贴板获取文本
+						navigator.clipboard.readText()
+							.then(text => {
+								// 如果成功获取到文本，将其复制到输入框
+								document.getElementById('json-input').value = text;
+								//extractField();
+							})
+							.catch(err => {
+								// 如果获取剪贴板内容失败，打印错误消息
+								console.error('Error reading clipboard:', err);
+								alert('无法从剪贴板复制内容。');
+							});
+
+					}
+
+				);
+			</script>
 		</div>
-		<div style="display: inline-table;width: min-content;">
-			<span style="display: inline-table; height: 23px; color: red;">🛠🛠需要精确时间的电影🛠🛠</span>
-			<textarea id="checktime" rows="8" cols="40" style="color: red;"></textarea>
+		<div id="biao">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>电影名</th>
+						<th>电影昵称</th> <!-- 添加了电影昵称列 -->
+						<th>结束时间</th>
+						<th>龙标时间</th>
+					</tr>
+				</thead>
+				<tbody id="movie-table-body">
+					<!-- 动态内容会在这里插入 -->
+				</tbody>
+			</table>
 		</div>
 
-		<br><br>
-		<div style="display: inline-table">
-			<button onclick="copymovie_name()">【复制】大屏幕:电影名</button>
-			<div style="display: inline" id="copymovie_name_sucess"></div>
-			<br>
-			<textarea id="movie_name" rows="8" cols="60"></textarea>
-		</div>
-		<div style="display: inline-table;width: min-content;">
-			<button style="float: right;" onclick="copybyds()">【复制】播音大师</button>
-			<div style="display: inline;float: right;" id="copy_byds_sucess"></div>
-			<br>
-			<textarea id="byds" rows="8" cols="60"></textarea>
-		</div>
-		<br><br>
-		<button onclick="copymovie_time()">【复制】大屏幕:时间</button>
-		<div style="display: inline" id="copymovie_time_sucess"></div>
-		<br>
-		<textarea id="movie_time" rows="8" cols="60"></textarea>
-		<br><br>
-		<div style="width: fit-content;" id="alltable">
-			<div>
-				<button onclick="sortTableByStartTime()">刷新</button>
-				<button onclick="sortTableByMovie()">前台</button>
-				<button onclick="sortTableByEndTime()">保洁</button>
-				<button onclick="sortTableByCellName()">影厅</button>
-				<button onclick="start()">重置</button>
-			</div>
-			<br>
-
-			<div style="display: inline-table;text-align: center;">
-				<button onclick="printDiv()">打印当前表格(全天)</button>
-				<button onclick="deleteFalseMovie()" style="float:right;" id="button_deleteMovie">删除选中场次</button>
-				<div id="tableContainer"></div>
-			</div>
-			<div style="display: inline-table;padding-left: 50px;"></div>
-			<div style="display: inline-table;text-align: center;" id="zao">
-				<button onclick="printDivZao()">打印早班</button>
-				<div id="splitTables_1"></div>
-			</div>
-			<div style="display: inline-table;padding-left: 50px;"></div>
-			<div style="display: inline-table;text-align: center;" id="wan">
-				<button onclick="printDivWan()">打印晚班</button>
-				<div id="splitTables_2"></div>
-			</div>
-		</div>
-		<iframe id="printFrame" src="about:blank"></iframe>
 		<script>
-			// 当页面加载完成时，自动聚焦到文本区域
-			document.getElementById('json-input').focus();
-			document.getElementById('copyButton').addEventListener('click', function() {
-					// 尝试从剪贴板获取文本
-					navigator.clipboard.readText()
-						.then(text => {
-							// 如果成功获取到文本，将其复制到输入框
-							document.getElementById('json-input').value = text;
-							//extractField();
-						})
-						.catch(err => {
-							// 如果获取剪贴板内容失败，打印错误消息
-							console.error('Error reading clipboard:', err);
-							alert('无法从剪贴板复制内容。');
-						});
 
-				}
 
-			);
 		</script>
 
 	</body>
