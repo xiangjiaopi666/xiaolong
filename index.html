@@ -1309,10 +1309,12 @@
 				<textarea id="piao" rows="8" cols="60"></textarea>
 			</div>
 			<div style="display: inline-table;width: min-content;">
-				<input type="file" id="excel-file" accept=".xlsx, .xls" style="width: 40%;">
-				<button onclick="readFile()">确定</button>
-				<div style="display: inline" id="readFile_sucess"></div>
-				<button onclick="extractField()">解析</button>
+				<div id="jiucuo" style="display: contents;">
+					<input type="file" id="excel-file" accept=".xlsx, .xls" style="width: 40%;">
+					<button onclick="readFile()">确定</button>
+					<div style="display: inline" id="readFile_sucess"></div>
+					<button onclick="extractField()">解析</button>
+				</div>
 				<button onclick="copydjs()" style="float: right;">【复制】倒计时</button>
 				<div style="display: inline;float: right;" id="copy_djs_sucess"></div>
 				<br>
@@ -1406,11 +1408,34 @@
 				</tbody>
 			</table>
 		</div>
-
+		
 		<script>
+			//当没有需要增加信息的影片，隐藏读取文件按钮
+			document.addEventListener("DOMContentLoaded", function() {
+				let textarea = document.getElementById("checktime");
+				let jiucuoDiv = document.getElementById("jiucuo");
 
+				function toggleDisplay() {
+					if (textarea.value.trim() === "") {
+						jiucuoDiv.style.display = "none";
+					} else {
+						jiucuoDiv.style.display = "contents";
+					}
+				}
 
+				// 初始检查
+				toggleDisplay();
+
+				// 使用 MutationObserver 监听 value 变化
+				let observer = new MutationObserver(toggleDisplay);
+				observer.observe(textarea, {
+					attributes: true,
+					attributeFilter: ["value"]
+				});
+
+				// 兼容某些情况下赋值不会触发 MutationObserver
+				setInterval(toggleDisplay, 500);
+			});
 		</script>
-
 	</body>
 </html>
