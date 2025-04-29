@@ -1191,6 +1191,7 @@
   },
   {
     "name": "怒水西流",
+	"nickname": "怒水溪流",
     "lightOnTime": "01:30:55",
     "posterTime": "00:03:35"
   },
@@ -1283,5 +1284,55 @@
     "name": "荣耀",
     "lightOnTime": "01:33:37",
     "posterTime": "00:00:00"
+  },
+  {
+    "name": "人生开门红",
+    "lightOnTime": "01:49:07",
+    "posterTime": "00:02:09"
+  },
+  {
+    "name": "雷霆特攻队*",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "水饺皇后",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "大风杀",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "海底小纵队：海啸大危机",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "猎金·游戏",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "苍茫的天涯是我的爱",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "幽灵公主",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "开心超人之逆世营救",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "独一无二",
+    "lightOnTime": "",
+    "posterTime": ""
   }
 ]
