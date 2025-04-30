@@ -94,7 +94,7 @@
 			let movies = []; //Excel表中获取的json格式的影片信息
 			function getMovies_timejson(movies_timejson) { //获取预设的json格式影片信息
 				movies = movies_timejson;
-				console.log(movies);
+				//console.log(movies);
 			}
 
 			var indicesToDelete = []; //默认需要删除的场次为空
@@ -293,7 +293,7 @@
 					var Suijishu = Math.floor(Math.random() * 10000) + 1;
 					for (var i = 0; i < jsonData.data.arr_date_plan.length; i++) {
 						var name = jsonData.data.arr_date_plan[i].display_name; //电影名+语言+3D
-						var name_min = jsonData.data.arr_date_plan[i].movie_name; //电影名
+						var name_min = jsonData.data.arr_date_plan[i].movie_alias; //电影名
 
 						//替换掉电影名中可能出问题的字符
 						name_min = replaceSpecifiedString(name_min, '（数字）', '');
@@ -740,7 +740,7 @@
 							' 3D👓'
 						];
 						var originalString = thiredContent;
-						console.log(originalString);
+						//console.log(originalString);
 						thiredContent = replaceMatchesWithEmptyString(originalString, stringsToReplace);
 						//console.log(thiredContent);
 						const result_thiredContent = processMovieString(thiredContent);
