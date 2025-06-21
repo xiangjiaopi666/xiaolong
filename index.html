@@ -452,6 +452,7 @@
 					//console.log(all); //出票结果界面
 					NeedCheck = removeDuplicates(NeedCheck); //简化提醒的名称，去掉重复项
 					const NeedCheck_result = arrayToStringWithNewLine(NeedCheck);
+					//console.log(NeedCheck_result);
 					document.getElementById('checktime').innerHTML = NeedCheck_result;
 					//console.log(NeedCheck);//需要精确时间的电影名
 					// 处理数据并打印结果
@@ -1013,7 +1014,14 @@
 					});
 					//console.log(jsonData_excel);
 					//console.log(movies);
-					movies = jsonData_excel;
+					movies = [...jsonData_excel , ...movies];
+					// 去重：保留第一次出现的 name
+					const seen = new Set();
+					movies = movies.filter(item => {
+					  if (seen.has(item.name)) return false;
+					  seen.add(item.name);
+					  return true;
+					});
 					//console.log(movies);
 
 				};
