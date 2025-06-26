@@ -418,7 +418,7 @@
 							show_time_start: time // 假设开场时间是每隔两小时一场，从10:00开始
 						}
 						moviesData.push(onebyone);
-
+						var todayfirstdate = "当前获取的排期日期为：" + jsonData.data.arr_date_plan[0].plan_date + "\n";
 						all = all + jsonData.data.arr_date_plan[i].hall_name + "  " + jsonData.data.arr_date_plan[i]
 							.show_time_start.slice(11, 16) + "  " + jsonData.data.arr_date_plan[i].display_name + "\n"; //前台票
 
@@ -483,7 +483,7 @@
 					//document.getElementById('json-input').select();
 					//document.execCommand('copy');
 					//document.getElementById('json-input').value = "";
-					document.getElementById('piao').innerHTML = all;
+					document.getElementById('piao').innerHTML = todayfirstdate + all;
 					document.getElementById('djs').innerHTML = wucha_all;
 					document.getElementById('movie_name').innerHTML = outputString;
 					document.getElementById('movie_time').innerHTML = alltimes;
