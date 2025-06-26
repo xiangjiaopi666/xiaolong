@@ -275,6 +275,7 @@
 					var wucha_end = "";
 					let wucha_1h_tishi = []; //开灯时间未精确，1小时后一直弹出提示要更新
 					let moviesData = [];
+					var update_time = [];//场次创建时间
 					//定义播音大师数组
 					let TaskID = [],
 						TaskTopic = [],
@@ -294,7 +295,6 @@
 					for (var i = 0; i < jsonData.data.arr_date_plan.length; i++) {
 						var name = jsonData.data.arr_date_plan[i].display_name; //电影名+语言+3D
 						var name_min = jsonData.data.arr_date_plan[i].movie_alias; //电影名
-
 						//替换掉电影名中可能出问题的字符
 						name_min = replaceSpecifiedString(name_min, '（数字）', '');
 						name_min = replaceSpecifiedString(name_min, '（舞台纪录电影）', '');
@@ -397,6 +397,7 @@
 								//console.log(secondsDifference_end_current)
 							}
 						}*/
+						update_time[i] = jsonData.data.arr_date_plan[i].update_time;
 						//播音大师数组依次赋值
 						TaskID[i] = Suijishu + i;
 						TaskTopic[i] = name_min;
@@ -418,7 +419,7 @@
 							show_time_start: time // 假设开场时间是每隔两小时一场，从10:00开始
 						}
 						moviesData.push(onebyone);
-						var todayfirstdate = "当前获取的排期日期为：" + jsonData.data.arr_date_plan[0].plan_date + "\n";
+						
 						all = all + jsonData.data.arr_date_plan[i].hall_name + "  " + jsonData.data.arr_date_plan[i]
 							.show_time_start.slice(11, 16) + "  " + jsonData.data.arr_date_plan[i].display_name + "\n"; //前台票
 
@@ -448,7 +449,12 @@
 						wucha_all = wucha_end + wucha_start; //倒计时需要的最终数据
 
 					}
-					//console.log(wucha_all);
+					//console.log(update_time);
+					// 将字符串转为 Date 对象，并找到最大值
+					const latestTime = new Date(Math.max(...update_time.map(t => new Date(t.replace(" ", "T")))));
+					//console.log(latestTime);
+					
+					var todayfirstdate = "当前排期日期为：" + jsonData.data.arr_date_plan[0].plan_date + "\n" + "最后更新时间为：" + formatBeijingTime(latestTime) + "\n";
 					//console.log(all); //出票结果界面
 					NeedCheck = removeDuplicates(NeedCheck); //简化提醒的名称，去掉重复项
 					const NeedCheck_result = arrayToStringWithNewLine(NeedCheck);
@@ -523,6 +529,18 @@
 			}
 		</script>
 		<script>
+			// 转换为北京时间（UTC+8）
+			function formatBeijingTime(date) {
+			  const beijingOffsetMs = 8 * 60 * 60 * 1000;
+			  const bjDate = new Date(date.getTime() + beijingOffsetMs);
+			  const yyyy = bjDate.getUTCFullYear();
+			  const mm = String(bjDate.getUTCMonth() + 1).padStart(2, '0');
+			  const dd = String(bjDate.getUTCDate()).padStart(2, '0');
+			  const hh = String(bjDate.getUTCHours()).padStart(2, '0');
+			  const min = String(bjDate.getUTCMinutes()).padStart(2, '0');
+			  const ss = String(bjDate.getUTCSeconds()).padStart(2, '0');
+			  return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+			}
 			//开始生成大屏幕数据
 			function processMoviesData(movies) {
 				// 先按电影名，再按开场时间排序
