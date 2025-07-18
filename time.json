@@ -1569,8 +1569,8 @@
   },
   {
     "name": "花漾少女杀人事件",
-    "lightOnTime": "",
-    "posterTime": ""
+    "lightOnTime": "00:01:34",
+    "posterTime": "01:43:50"
   },
   {
     "name": "魔法蓝精灵",
@@ -1579,7 +1579,7 @@
   },
   {
     "name": "罗小黑战记2",
-    "lightOnTime": "",
+    "lightOnTime": "01:59:40",
     "posterTime": "00:03:30"
   },
   {
@@ -1591,5 +1591,15 @@
     "name": "你行！你上！",
     "lightOnTime": "02:24:00",
     "posterTime": "00:03:09"
+  },
+  {
+    "name": "喜羊羊与灰太狼之异国破晓",
+    "lightOnTime": "",
+    "posterTime": ""
+  },
+  {
+    "name": "南京照相馆",
+    "lightOnTime": "",
+    "posterTime": ""
   }
 ]
