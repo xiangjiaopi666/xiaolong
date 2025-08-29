@@ -112,7 +112,7 @@
 				// 尝试解析JSON字符串
 				try {
 					var jsonData = JSON.parse(jsonInput);
-					console.log(jsonData.data.arr_date_plan);//全部场次
+					console.log(jsonData.data.arr_date_plan); //全部场次
 					//删除虚拟场次
 					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
 					//console.log('删除了 ' + indicesToDelete + '场');
@@ -186,6 +186,7 @@
 
 
 						var nameCell = document.createElement('td');
+						/*
 						//result0:普通立体=普通
 						const th0 = '普通立体'
 						const tihuan0 = '普通';
@@ -247,6 +248,38 @@
 						const tihuan14 = '';
 						const result14 = replaceSpecifiedString(result13, th14, tihuan14)
 						const result = result14;
+						*/
+						const replaceMap = [
+							['普通立体', '普通'],
+							['（普通/国语）', ''],
+							['（普通 2D/国语）', ''],
+							['（普通/日语）', '（日语）🌏'],
+							['（普通 2D/日语）', '（日语）🌏'],
+							['（普通/英语）', '（英语）🌏'],
+							['（普通 2D/英语）', '（英语）🌏'],
+							['（普通/印度语）', '（印度语）🌏'],
+							['（普通 2D/印度语）', '（印度语）🌏'],
+							['（普通/印尼语）', '（印尼语）🌏'],
+							['（普通 2D/印尼语）', '（印尼语）🌏'],
+							['（普通/法语）', '（法语）🌏'],
+							['（普通 2D/法语）', '（法语）🌏'],
+							['（普通/意大利语）', '（意大利语）🌏'],
+							['（普通 2D/意大利语）', '（意大利语）🌏'],
+							['（普通/韩语）', '（韩语）🌏'],
+							['（普通 2D/韩语）', '（韩语）🌏'],
+							['（普通/俄语）', '（俄语）🌏'],
+							['（普通 2D/俄语）', '（俄语）🌏'],
+							['（普通/其他）', '（其他）🌏'],
+							['（普通 2D/其他）', '（其他）🌏'],
+							['（数字3D）', ' 3D👓'],
+							['（数字）', ''],
+						];
+
+						let result = rowData.display_name;
+						for (const [from, to] of replaceMap) {
+							result = replaceSpecifiedString(result, from, to);
+						}
+
 						nameCell.textContent = result;
 						nameCell.style.border = '1px solid black';
 						nameCell.style.padding = '4px';
@@ -283,7 +316,7 @@
 					var wucha_end = "";
 					let wucha_1h_tishi = []; //开灯时间未精确，1小时后一直弹出提示要更新
 					let moviesData = [];
-					var update_time = [];//场次创建时间
+					var update_time = []; //场次创建时间
 					//定义播音大师数组
 					let TaskID = [],
 						TaskTopic = [],
@@ -427,7 +460,7 @@
 							show_time_start: time // 假设开场时间是每隔两小时一场，从10:00开始
 						}
 						moviesData.push(onebyone);
-						
+
 						all = all + jsonData.data.arr_date_plan[i].hall_name + "  " + jsonData.data.arr_date_plan[i]
 							.show_time_start.slice(11, 16) + "  " + jsonData.data.arr_date_plan[i].display_name + "\n"; //前台票
 
@@ -461,8 +494,9 @@
 					// 将字符串转为 Date 对象，并找到最大值
 					const latestTime = new Date(Math.max(...update_time.map(t => new Date(t.replace(" ", "T")))));
 					//console.log(latestTime);
-					
-					var todayfirstdate = "当前排期日期为：" + jsonData.data.arr_date_plan[0].plan_date + "\n" + "最后更新时间为：" + formatBeijingTime(latestTime) + "\n";
+
+					var todayfirstdate = "当前排期日期为：" + jsonData.data.arr_date_plan[0].plan_date + "\n" + "最后更新时间为：" +
+						formatBeijingTime(latestTime) + "\n";
 					//console.log(all); //出票结果界面
 					NeedCheck = removeDuplicates(NeedCheck); //简化提醒的名称，去掉重复项
 					const NeedCheck_result = arrayToStringWithNewLine(NeedCheck);
@@ -539,15 +573,15 @@
 		<script>
 			// 转换为北京时间（UTC+8）
 			function formatBeijingTime(date) {
-			  const beijingOffsetMs = 8 * 60 * 60 * 1000;
-			  const bjDate = new Date(date.getTime() + beijingOffsetMs);
-			  const yyyy = bjDate.getUTCFullYear();
-			  const mm = String(bjDate.getUTCMonth() + 1).padStart(2, '0');
-			  const dd = String(bjDate.getUTCDate()).padStart(2, '0');
-			  const hh = String(bjDate.getUTCHours()).padStart(2, '0');
-			  const min = String(bjDate.getUTCMinutes()).padStart(2, '0');
-			  const ss = String(bjDate.getUTCSeconds()).padStart(2, '0');
-			  return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+				const beijingOffsetMs = 8 * 60 * 60 * 1000;
+				const bjDate = new Date(date.getTime() + beijingOffsetMs);
+				const yyyy = bjDate.getUTCFullYear();
+				const mm = String(bjDate.getUTCMonth() + 1).padStart(2, '0');
+				const dd = String(bjDate.getUTCDate()).padStart(2, '0');
+				const hh = String(bjDate.getUTCHours()).padStart(2, '0');
+				const min = String(bjDate.getUTCMinutes()).padStart(2, '0');
+				const ss = String(bjDate.getUTCSeconds()).padStart(2, '0');
+				return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
 			}
 			//开始生成大屏幕数据
 			function processMoviesData(movies) {
@@ -1040,13 +1074,13 @@
 					});
 					//console.log(jsonData_excel);
 					//console.log(movies);
-					movies = [...jsonData_excel , ...movies];
+					movies = [...jsonData_excel, ...movies];
 					// 去重：保留第一次出现的 name
 					const seen = new Set();
 					movies = movies.filter(item => {
-					  if (seen.has(item.name)) return false;
-					  seen.add(item.name);
-					  return true;
+						if (seen.has(item.name)) return false;
+						seen.add(item.name);
+						return true;
 					});
 					//console.log(movies);
 
@@ -1442,7 +1476,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<script>
 			//当没有需要增加信息的影片，隐藏读取文件按钮
 			document.addEventListener("DOMContentLoaded", function() {
