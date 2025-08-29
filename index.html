@@ -112,7 +112,7 @@
 				// 尝试解析JSON字符串
 				try {
 					var jsonData = JSON.parse(jsonInput);
-					//console.log(jsonData.data.arr_date_plan);//全部场次
+					console.log(jsonData.data.arr_date_plan);//全部场次
 					//删除虚拟场次
 					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
 					//console.log('删除了 ' + indicesToDelete + '场');
@@ -238,7 +238,15 @@
 						const th12 = '（数字）'
 						const tihuan12 = '';
 						const result12 = replaceSpecifiedString(result11, th12, tihuan12)
-						const result = result12;
+						//result12:去掉（普通 2D/国语）
+						const th13 = '（普通 2D/国语）'
+						const tihuan13 = '';
+						const result13 = replaceSpecifiedString(result12, th13, tihuan13)
+						//result13:去掉（普通 2D/英语）
+						const th14 = '（普通 2D/英语）'
+						const tihuan14 = '';
+						const result14 = replaceSpecifiedString(result13, th14, tihuan14)
+						const result = result14;
 						nameCell.textContent = result;
 						nameCell.style.border = '1px solid black';
 						nameCell.style.padding = '4px';
