@@ -112,7 +112,7 @@
 				// 尝试解析JSON字符串
 				try {
 					var jsonData = JSON.parse(jsonInput);
-					//console.log(jsonData.data.arr_date_plan); //全部场次
+					console.log(jsonData.data.arr_date_plan); //全部场次
 					//删除虚拟场次
 					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
 					//console.log('删除了 ' + indicesToDelete + '场');
@@ -272,7 +272,7 @@
 							['（普通/其他）', '（其他）🌏'],
 							['（普通 2D/其他）', '（其他）🌏'],
 							['（数字3D）', ' 3D👓'],
-							['（数字）', ''],
+							['（普通 3D/英语）', ' 3D👓'],
 						];
 
 						let result = rowData.display_name;
@@ -378,6 +378,12 @@
 							//console.log(dis_version);
 						} else if (dis_version == "普通立体") {
 							dis_version = replaceSpecifiedString(dis_version, "普通立体", "3D")
+							//console.log(dis_version);
+						} else if (dis_version == "普通 2D") {
+							dis_version = replaceSpecifiedString(dis_version, "普通 2D", "")
+							//console.log(dis_version);
+						} else if (dis_version == "普通 3D") {
+							dis_version = replaceSpecifiedString(dis_version, "普通 3D", "3D")
 							//console.log(dis_version);
 						}
 						//增加倒计时的1厅动作提示
