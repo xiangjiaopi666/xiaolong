@@ -666,8 +666,8 @@
   },
   {
     "name": "只此青绿",
-    "lightOnTime": "01:28:20",
-    "posterTime": "00:03:16"
+    "lightOnTime": "01:25:05",
+    "posterTime": "00:00:00"
   },
   {
     "name": "志愿军：存亡之战",
@@ -1738,5 +1738,10 @@
 	"nickname": "七三一",
     "lightOnTime": "",
     "posterTime": ""
+  },
+  {
+    "name": "天大的事",
+    "lightOnTime": "01:37:55",
+    "posterTime": "00:00:00"
   }
 ]
