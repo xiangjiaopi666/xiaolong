@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<title>电影任务统一修改</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				padding: 20px;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				margin-bottom: 10px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ccc;
+				padding: 8px;
+				text-align: center;
+			}
+
+			th {
+				background-color: #f0f0f0;
+			}
+
+			input {
+				width: 80px;
+				text-align: center;
+			}
+
+			.error-row {
+				background-color: #ffcccc;
+			}
+
+			#finalConfirm {
+				padding: 8px 15px;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>电影任务统一修改</h2>
+		<div id="movieTasks"></div>
+		<button id="finalConfirm">统一确认</button>
+
+		<script>
+			const tasks = [{
+					"TaskID": "6471",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 1号厅10:30的电影 《七三幺》 现在开始检票进场 1号厅10:30的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 10:20:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 10:30:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6472",
+					"TaskTopic": "南京照相馆",
+					"TaskContent": "欢迎光临亚星小龙激光影城 9号厅10:45的电影 《南京照相馆》 现在开始检票进场 9号厅10:45的电影 《南京照相馆》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 10:35:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 10:45:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6473",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 7号厅11:45的电影 《七三幺》 现在开始检票进场 7号厅11:45的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 11:35:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 11:45:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6474",
+					"TaskTopic": "捕风追影",
+					"TaskContent": "欢迎光临亚星小龙激光影城 8号厅12:00的电影 《捕风追影》 现在开始检票进场 8号厅12:00的电影 《捕风追影》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 11:50:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 12:00:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6475",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 1号厅12:45的电影 《七三幺》 现在开始检票进场 1号厅12:45的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 12:35:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 12:45:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6476",
+					"TaskTopic": "南京照相馆",
+					"TaskContent": "欢迎光临亚星小龙激光影城 9号厅13:15的电影 《南京照相馆》 现在开始检票进场 9号厅13:15的电影 《南京照相馆》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 13:05:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 13:15:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6477",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 5号厅13:30的电影 《七三幺》 现在开始检票进场 5号厅13:30的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 13:20:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 13:30:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6478",
+					"TaskTopic": "捕风追影",
+					"TaskContent": "欢迎光临亚星小龙激光影城 7号厅14:15的电影 《捕风追影》 现在开始检票进场 7号厅14:15的电影 《捕风追影》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 14:05:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 14:15:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6479",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 4号厅14:20的电影 《七三幺》 现在开始检票进场 4号厅14:20的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 14:10:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 14:20:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6480",
+					"TaskTopic": "窗外是蓝星",
+					"TaskContent": "欢迎光临亚星小龙激光影城 8号厅14:40的电影 《窗外是蓝星》 现在开始检票进场 8号厅14:40的电影 《窗外是蓝星》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 14:30:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 14:40:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6481",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 1号厅15:00的电影 《七三幺》 现在开始检票进场 1号厅15:00的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 14:50:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 15:00:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6482",
+					"TaskTopic": "死神来了：血脉诅咒",
+					"TaskContent": "欢迎光临亚星小龙激光影城 9号厅15:45的电影 《死神来了：血脉诅咒》 现在开始检票进场 9号厅15:45的电影 《死神来了：血脉诅咒》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 15:35:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 15:45:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6483",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 5号厅15:45的电影 《七三幺》 现在开始检票进场 5号厅15:45的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 15:35:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 15:45:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6484",
+					"TaskTopic": "窗外是蓝星",
+					"TaskContent": "欢迎光临亚星小龙激光影城 8号厅16:30的电影 《窗外是蓝星》 现在开始检票进场 8号厅16:30的电影 《窗外是蓝星》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 16:20:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 16:30:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6485",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 4号厅16:40的电影 《七三幺》 现在开始检票进场 4号厅16:40的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 16:30:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 16:40:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6486",
+					"TaskTopic": "浪浪山小妖怪",
+					"TaskContent": "欢迎光临亚星小龙激光影城 7号厅17:00的电影 《浪浪山小妖怪》 现在开始检票进场 7号厅17:00的电影 《浪浪山小妖怪》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 16:50:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 17:00:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6487",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 1号厅17:15的电影 《七三幺》 现在开始检票进场 1号厅17:15的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 17:05:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 17:15:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6488",
+					"TaskTopic": "捕风追影",
+					"TaskContent": "欢迎光临亚星小龙激光影城 9号厅17:45的电影 《捕风追影》 现在开始检票进场 9号厅17:45的电影 《捕风追影》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 17:35:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 17:45:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6489",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 5号厅18:00的电影 《七三幺》 现在开始检票进场 5号厅18:00的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 17:50:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 18:00:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6490",
+					"TaskTopic": "浪浪山小妖怪",
+					"TaskContent": "欢迎光临亚星小龙激光影城 8号厅18:30的电影 《浪浪山小妖怪》 现在开始检票进场 8号厅18:30的电影 《浪浪山小妖怪》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 18:20:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 18:30:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6491",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 4号厅19:00的电影 《七三幺》 现在开始检票进场 4号厅19:00的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 18:50:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 19:00:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6492",
+					"TaskTopic": "捕风追影",
+					"TaskContent": "欢迎光临亚星小龙激光影城 3号厅19:10的电影 《捕风追影》 现在开始检票进场 3号厅19:10的电影 《捕风追影》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 19:00:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 19:10:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6493",
+					"TaskTopic": "南京照相馆",
+					"TaskContent": "欢迎光临亚星小龙激光影城 7号厅19:20的电影 《南京照相馆》 现在开始检票进场 7号厅19:20的电影 《南京照相馆》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 19:10:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 19:20:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6494",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 1号厅19:30的电影 《七三幺》 现在开始检票进场 1号厅19:30的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 19:20:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 19:30:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6495",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 5号厅20:15的电影 《七三幺》 现在开始检票进场 5号厅20:15的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 20:05:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 20:15:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6496",
+					"TaskTopic": "捕风追影",
+					"TaskContent": "欢迎光临亚星小龙激光影城 9号厅20:20的电影 《捕风追影》 现在开始检票进场 9号厅20:20的电影 《捕风追影》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 20:10:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 20:20:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6497",
+					"TaskTopic": "南京照相馆",
+					"TaskContent": "欢迎光临亚星小龙激光影城 8号厅20:45的电影 《南京照相馆》 现在开始检票进场 8号厅20:45的电影 《南京照相馆》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 20:35:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 20:45:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6498",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 4号厅21:15的电影 《七三幺》 现在开始检票进场 4号厅21:15的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 21:05:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 21:15:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6499",
+					"TaskTopic": "731",
+					"TaskContent": "欢迎光临亚星小龙激光影城 1号厅21:45的电影 《七三幺》 现在开始检票进场 1号厅21:45的电影 《七三幺》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 21:35:00",
+					"EndDate": "2025-09-29",
+					"EndTime": "2025-09-29 21:45:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				},
+				{
+					"TaskID": "6500",
+					"TaskTopic": "捕风追影",
+					"TaskContent": "欢迎光临亚星小龙激光影城 7号厅21:50的电影 《捕风追影》 现在开始检票进场 7号厅21:50的电影 《捕风追影》 现在开始检票进场 本影城禁止吸烟，谢绝外带食品，谢谢您的配合，祝您观影愉快",
+					"BegDate": "2025-09-29",
+					"BegTime": "2025-09-29 21:40:00",
+					"EndDate": "2025-09-30",
+					"EndTime": "2025-09-29 21:50:00",
+					"Interval": "6",
+					"WeekFlag1": "1",
+					"WeekFlag2": "1",
+					"WeekFlag3": "1",
+					"WeekFlag4": "1",
+					"WeekFlag5": "1",
+					"WeekFlag6": "1",
+					"WeekFlag7": "1",
+					"DingFlag": "1",
+					"VSID": "3",
+					"BMID": "0",
+					"BCTimes": "0",
+					"BCFlag": "0",
+					"Timeout": "0",
+					"TaskLevel": "1",
+					"StopFlag": "0"
+				}
+			];
+
+			const container = document.getElementById("movieTasks");
+			const Tasktable = document.createElement("table");
+			Tasktable.innerHTML = `
+      <tr>
+        <th>电影名称</th>
+        <th>间隔（分钟）</th>
+        <th>Interval</th>
+      </tr>
+    `;
+
+			// 按电影名分组
+			const movieGroups = {};
+			tasks.forEach((task, index) => {
+				const end = new Date(task.EndTime);
+				const beg = new Date(task.BegTime);
+				const gap = Math.floor((end - beg) / 60000);
+				if (!movieGroups[task.TaskTopic]) {
+					movieGroups[task.TaskTopic] = {
+						rows: [],
+						gap,
+						interval: task.Interval
+					};
+				}
+				movieGroups[task.TaskTopic].rows.push({
+					index,
+					task
+				});
+			});
+
+			Object.keys(movieGroups).forEach(movie => {
+				const group = movieGroups[movie];
+				const tr = document.createElement("tr");
+				tr.dataset.movie = movie;
+				tr.innerHTML = `
+        <td>${movie}</td>
+        <td><input type="number" class="gapInput" min="1" value="${group.gap}" /></td>
+        <td><input type="number" class="intervalInput" min="1" value="${group.interval}" /></td>
+      `;
+				Tasktable.appendChild(tr);
+			});
+
+			container.appendChild(Tasktable);
+
+			function formatDateTime(date) {
+				const pad = n => n.toString().padStart(2, "0");
+				return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+			}
+
+			function formatDate(date) {
+				const pad = n => n.toString().padStart(2, "0");
+				return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
+			}
+
+			document.getElementById("finalConfirm").addEventListener("click", () => {
+				const rows = Tasktable.querySelectorAll("tr:not(:first-child)");
+				let hasError = false;
+				let results = [];
+
+				rows.forEach(row => {
+					const movie = row.dataset.movie;
+					const gap = parseInt(row.querySelector(".gapInput").value);
+					const interval = parseInt(row.querySelector(".intervalInput").value);
+					const group = movieGroups[movie];
+
+					if (interval > gap) {
+						row.classList.add("error-row");
+						hasError = true;
+						return;
+					} else {
+						row.classList.remove("error-row");
+					}
+
+					group.rows.forEach(({
+						index,
+						task: originalTask
+					}) => {
+						const task = {
+							...originalTask
+						};
+						const end = new Date(task.EndTime);
+						const newBeg = new Date(end.getTime() - gap * 60000);
+						task.BegTime = formatDateTime(newBeg);
+						task.BegDate = formatDate(newBeg);
+						task.Interval = interval;
+						results.push(task);
+					});
+				});
+
+				if (hasError) alert("有电影的 Interval 大于间隔，请检查红色高亮行。");
+
+				// 按 TaskID 升序排序
+				results.sort((a, b) => parseInt(a.TaskID) - parseInt(b.TaskID));
+
+				console.log("最终结果（按 TaskID 排序）：", results);
+			});
+		</script>
+	</body>
+</html>

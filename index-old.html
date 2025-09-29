@@ -76,20 +76,9 @@
 				/* 使用省略号隐藏超出部分 */
 			}
 		</style>
-		<style>
-		    /* 只作用于当前代码生成的表格 */
-		    #movieTasks { border-collapse: collapse; width: 882px; margin-bottom: 10px; }
-		    #movieTasks th, 
-		    #movieTasks td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-		    #movieTasks th { background-color: #f0f0f0; }
-		    #movieTasks input { width: 80px; text-align: center; }
-		    #movieTasks .error-row { background-color: #ffcccc; }
-		    #finalConfirm { padding: 8px 15px; font-size: 16px; }
-		  </style>
 		<title>排期</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 		<script>
-			
 			//倒计时软件用
 			function calculateSecondsDifference(date1String, date2String) {
 				const date1 = new Date(date1String);
@@ -112,8 +101,6 @@
 			function extractField() {
 				document.getElementById('alltable').style.display = 'block';
 				yincang(); //隐藏保洁早晚班div
-				//移除重复点击解析时产生的修改播音大师播音间隔表格
-				document.getElementById("movieTasks").innerHTML = "";
 				//console.log("提取")
 				//清除表格记录
 				let NeedCheck = []; //需要精确时间的电影名
@@ -125,7 +112,7 @@
 				// 尝试解析JSON字符串
 				try {
 					var jsonData = JSON.parse(jsonInput);
-					//console.log(jsonData.data.arr_date_plan); //全部场次
+					console.log(jsonData.data.arr_date_plan); //全部场次
 					//删除虚拟场次
 					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
 					//console.log('删除了 ' + indicesToDelete + '场');
@@ -345,8 +332,6 @@
 						WeekFlag4 + "\t" + WeekFlag5 + "\t" + WeekFlag6 + "\t" + WeekFlag7 + "\t" + DingFlag + "\t" + VSID +
 						"\t" + BMID + "\t" + BCTimes + "\t" + BCFlag + "\t" + Timeout + "\t" + TaskLevel + "\t" + StopFlag;
 					var BYDS_all = "";
-					var BYDS_all_json_all = "";
-					var BYDS_all_json = [];
 					var Suijishu = Math.floor(Math.random() * 10000) + 1;
 					for (var i = 0; i < jsonData.data.arr_date_plan.length; i++) {
 						var name = jsonData.data.arr_date_plan[i].display_name; //电影名+语言+3D
@@ -471,12 +456,10 @@
 						BegTime[i] = newBYTime.slice(0, 10) + " " + newBYTime.slice(11, 21);;
 						EndDate[i] = time_end.slice(0, 10);
 						EndTime[i] = time.slice(0, 10) + " " + time.slice(11, 21);
-						/*BYDS_all_json[i] = '{"TaskID":' + '"' + TaskID[i] + '","TaskTopic":"' + TaskTopic[i] +
-							'","TaskContent":"' + TaskContent[i] + '","BegDate":"' + BegDate[i] + '","BegTime":"' + BegTime[i] +
-							'","EndDate":"' + EndDate[i] + '","EndTime":"' + EndTime[i] + '}';*/
 						BYDS_all = BYDS_all + TaskID[i] + "\t" + TaskTopic[i] + "\t" + TaskContent[i] + "\t" + BegDate[i] +
 							"\t" + BegTime[i] + "\t" + EndDate[i] + "\t" + EndTime[i] + BYDS_BuBian_all + "\n";
 						document.getElementById('byds').innerHTML = BYDS_all;
+						//console.log(BYDS_all);
 						//大屏幕的数组
 						let onebyone = {
 							display_name: name_min, // 假设电影名是Movie 1, Movie 2, ...
@@ -548,193 +531,6 @@
 						alltimes = alltimes + remainingItemsJoined + "\n"
 						// 每个数组的输出将在新的一行上
 					});
-
-					//手动更改播音大师提前播音时间和播音间隔
-					document.getElementById("finalConfirm").style.display = "inline-flex";
-					// Extra 的字段名
-					const extraKeys = [
-						"Interval",
-						"WeekFlag1",
-						"WeekFlag2",
-						"WeekFlag3",
-						"WeekFlag4",
-						"WeekFlag5",
-						"WeekFlag6",
-						"WeekFlag7",
-						"DingFlag",
-						"VSID",
-						"BMID",
-						"BCTimes",
-						"BCFlag",
-						"Timeout",
-						"TaskLevel",
-						"StopFlag"
-					];
-
-					const parsed = BYDS_all
-						.trim()
-						.split("\n")
-						.map(line => {
-							const parts = line.split("\t");
-							const base = {
-								TaskID: parts[0],
-								TaskTopic: parts[1],
-								TaskContent: parts[2],
-								BegDate: parts[3],
-								BegTime: parts[4],
-								EndDate: parts[5],
-								EndTime: parts[6],
-							};
-
-							// 拆解 Extra 部分
-							const extraValues = parts.slice(7);
-							const extraObj = {};
-							extraKeys.forEach((key, i) => {
-								extraObj[key] = extraValues[i] || null;
-							});
-
-							return {
-								...base,
-								...extraObj
-							};
-						});
-
-					// 控制台输出可展开的 JSON
-					//console.log(parsed);
-					//console.log(JSON.stringify(parsed, null, 2));
-					const tasks = parsed;
-					const container = document.getElementById("movieTasks");
-							const Tasktable = document.createElement("table");
-							Tasktable.innerHTML = `
-					  <tr>
-					    <th>电影</th>
-					    <th>电影开始前__(分钟)播音</th>
-					    <th>播音间隔(分钟)</th>
-					  </tr>
-					`;
-					
-							// 按电影名分组
-							const movieGroups = {};
-							tasks.forEach((task, index) => {
-								const end = new Date(task.EndTime);
-								const beg = new Date(task.BegTime);
-								const gap = Math.floor((end - beg) / 60000);
-								if (!movieGroups[task.TaskTopic]) {
-									movieGroups[task.TaskTopic] = {
-										rows: [],
-										gap,
-										interval: task.Interval
-									};
-								}
-								movieGroups[task.TaskTopic].rows.push({
-									index,
-									task
-								});
-							});
-					
-							Object.keys(movieGroups).forEach(movie => {
-								const group = movieGroups[movie];
-								const tr = document.createElement("tr");
-								tr.dataset.movie = movie;
-								tr.innerHTML = `
-					    <td>${movie}</td>
-					    <td><input type="number" class="gapInput" min="1" value="${group.gap}" /></td>
-					    <td><input type="number" class="intervalInput" min="1" value="${group.interval}" /></td>
-					  `;
-								Tasktable.appendChild(tr);
-							});
-					
-							container.appendChild(Tasktable);
-					
-							function formatDateTime(date) {
-								const pad = n => n.toString().padStart(2, "0");
-								return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
-							}
-					
-							function formatDate(date) {
-								const pad = n => n.toString().padStart(2, "0");
-								return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
-							}
-					
-							document.getElementById("finalConfirm").addEventListener("click", () => {
-								const rows = Tasktable.querySelectorAll("tr:not(:first-child)");
-								let hasError = false;
-								let results = [];
-					
-								rows.forEach(row => {
-									const movie = row.dataset.movie;
-									const gap = parseInt(row.querySelector(".gapInput").value);
-									const interval = parseInt(row.querySelector(".intervalInput").value);
-									const group = movieGroups[movie];
-					
-									if (interval > gap) {
-										row.classList.add("error-row");
-										hasError = true;
-										return;
-									} else {
-										row.classList.remove("error-row");
-									}
-					
-									group.rows.forEach(({
-										index,
-										task: originalTask
-									}) => {
-										const task = {
-											...originalTask
-										};
-										const end = new Date(task.EndTime);
-										const newBeg = new Date(end.getTime() - gap * 60000);
-										task.BegTime = formatDateTime(newBeg);
-										task.BegDate = formatDate(newBeg);
-										task.Interval = interval;
-										results.push(task);
-									});
-								});
-					
-								if (hasError) alert("播音间隔不能大于提前播音时间，请检查红色高亮行。");
-					
-								// 按 TaskID 升序排序
-								results.sort((a, b) => parseInt(a.TaskID) - parseInt(b.TaskID));
-								//console.log(JSON.stringify(results, null, 2));
-								// 取第一个TaskID作为起始值
-								let baseId = parseInt(results[0].TaskID, 10);
-								
-								const lines = results.map((item, index) => {
-								  const newId = baseId + index; // 顺延
-								  const fields = [
-								    newId,
-								    item.TaskTopic,
-								    item.TaskContent,
-								    item.BegDate,
-								    item.BegTime,
-								    item.EndDate,
-								    item.EndTime,
-								    item.Interval,
-								    item.WeekFlag1,
-								    item.WeekFlag2,
-								    item.WeekFlag3,
-								    item.WeekFlag4,
-								    item.WeekFlag5,
-								    item.WeekFlag6,
-								    item.WeekFlag7,
-								    item.DingFlag,
-								    item.VSID,
-								    item.BMID,
-								    item.BCTimes,
-								    item.BCFlag,
-								    item.Timeout,
-								    item.TaskLevel,
-								    item.StopFlag
-								  ];
-								  return fields.join("\t");
-								});
-								
-								const resultStr = lines.join("\n");
-								console.log(resultStr);
-								//修改后的值填写在对应框里
-								document.getElementById('byds').innerHTML = resultStr;
-								document.getElementById('copy_byds_sucess').innerHTML = '👌已修改,请重新复制👌';
-							});
 					//console.log(alltimes); //大屏幕时间界面
 					// 将票版输出到输入框，复制并清空
 					//document.getElementById('json-input').value = all;
@@ -1616,9 +1412,6 @@
 				<br>
 				<textarea id="byds" rows="8" cols="60"></textarea>
 			</div>
-			<div><div id="movieTasks" style="display: inline-flex;"></div>
-			<button id="finalConfirm" style="display: none;">确认修改</button>
-			</div>
 			<br><br>
 			<button onclick="copymovie_time()">【复制】大屏幕:时间</button>
 			<div style="display: inline" id="copymovie_time_sucess"></div>
@@ -1718,6 +1511,5 @@
 				setInterval(toggleDisplay, 500);
 			});
 		</script>
-
 	</body>
 </html>
