@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<title>打印示例</title>
+	</head>
+	<body>
+
+		<button onclick="printDiv()">打印区域</button>
+
+		<div id="NO3" style="position: relative;height:84mm; width: 79mm; background-color: antiquewhite;">
+			<span id="hall" style="position: absolute; left: 10mm; top: 10mm; font-size: 12px;">大厅1</span>
+			<span id="hall2" style="position: absolute; left: 20mm; top: 20mm; font-size: 12px;">大厅2</span>
+			<span id="name" style="position: absolute; left: 20mm; top: 15mm; font-size: 12px;">张三</span>
+			<span id="date" style="position: absolute; left: 30mm; top: 45mm; font-size: 12px;">2025-10-22</span>
+			<span id="date2" style="position: absolute; left: 35mm; top: 50mm; font-size: 12px;">星期二</span>
+			<span id="time" style="position: absolute; left: 30mm; top: 25mm; font-size: 12px;">10:00</span>
+			<span id="time2" style="position: absolute; left: 30mm; top: 35mm; font-size: 12px;">11:00</span>
+			<div id="qrcode" style="position: absolute; left: 5mm; top: 50mm;">二维码</div>
+		</div>
+
+		<script>
+			function printDiv() {
+				// 获取要打印的内容
+				var content = document.getElementById("NO3").outerHTML;
+
+				// 打开一个新窗口（保持原页面不关闭）
+				var printWindow = window.open('', '_blank', 'width=800,height=600');
+
+				// 写入HTML
+				printWindow.document.open();
+				printWindow.document.write(`
+        <html>
+        <head>
+            <title>打印</title>
+            <style>
+                html, body { margin: 0; padding: 0; }
+                #NO3 {
+                    position: relative;
+                    height: 84mm;
+                    width: 79mm;
+                    background-color: antiquewhite;
+                }
+                #NO3 span, #NO3 div {
+                    position: absolute;
+                    font-size: 12px;
+                }
+                @media print {
+                    @page { size: auto; margin: 0; }
+                    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                }
+            </style>
+        </head>
+        <body>
+            ${content}
+        </body>
+        </html>
+    `);
+				printWindow.document.close();
+
+				// 等待内容渲染，再触发打印
+				printWindow.onload = function() {
+					printWindow.focus();
+					printWindow.print();
+					// 注意：这里不关闭新窗口，用户可以看到打印预览
+				}
+			}
+		</script>
+
+	</body>
+</html>

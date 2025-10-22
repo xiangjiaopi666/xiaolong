@@ -24,7 +24,7 @@
 					visibility: hidden;
 					/* 隐藏页面上所有内容 */
 				}
-				
+
 				#printArea,
 				#printArea * {
 					visibility: visible;
@@ -77,43 +77,19 @@
 			}
 		</style>
 		<style>
-			/* 只作用于当前代码生成的表格 */
-			#movieTasks {
-				border-collapse: collapse;
-				width: 882px;
-				margin-bottom: 10px;
-			}
-
-			#movieTasks th,
-			#movieTasks td {
-				border: 1px solid #ccc;
-				padding: 8px;
-				text-align: center;
-			}
-
-			#movieTasks th {
-				background-color: #f0f0f0;
-			}
-
-			#movieTasks input {
-				width: 80px;
-				text-align: center;
-			}
-
-			#movieTasks .error-row {
-				background-color: #ffcccc;
-			}
-
-			#finalConfirm {
-				padding: 8px 15px;
-				font-size: 16px;
-			}
-		</style>
+		    /* 只作用于当前代码生成的表格 */
+		    #movieTasks { border-collapse: collapse; width: 882px; margin-bottom: 10px; }
+		    #movieTasks th, 
+		    #movieTasks td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+		    #movieTasks th { background-color: #f0f0f0; }
+		    #movieTasks input { width: 80px; text-align: center; }
+		    #movieTasks .error-row { background-color: #ffcccc; }
+		    #finalConfirm { padding: 8px 15px; font-size: 16px; }
+		  </style>
 		<title>排期</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-		<script src="xlsx.full.min.js"></script>
-		<script src="qrcode.min.js"></script>
 		<script>
+			
 			//倒计时软件用
 			function calculateSecondsDifference(date1String, date2String) {
 				const date1 = new Date(date1String);
@@ -149,7 +125,7 @@
 				// 尝试解析JSON字符串
 				try {
 					var jsonData = JSON.parse(jsonInput);
-					console.log(jsonData.data.arr_date_plan); //全部场次
+					//console.log(jsonData.data.arr_date_plan); //全部场次
 					//删除虚拟场次
 					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
 					//console.log('删除了 ' + indicesToDelete + '场');
@@ -630,137 +606,137 @@
 					//console.log(JSON.stringify(parsed, null, 2));
 					const tasks = parsed;
 					const container = document.getElementById("movieTasks");
-					const Tasktable = document.createElement("table");
-					Tasktable.innerHTML = `
+							const Tasktable = document.createElement("table");
+							Tasktable.innerHTML = `
 					  <tr>
 					    <th>电影</th>
 					    <th>电影开始前__(分钟)播音</th>
 					    <th>播音间隔(分钟)</th>
 					  </tr>
 					`;
-
-					// 按电影名分组
-					const movieGroups = {};
-					tasks.forEach((task, index) => {
-						const end = new Date(task.EndTime);
-						const beg = new Date(task.BegTime);
-						const gap = Math.floor((end - beg) / 60000);
-						if (!movieGroups[task.TaskTopic]) {
-							movieGroups[task.TaskTopic] = {
-								rows: [],
-								gap,
-								interval: task.Interval
-							};
-						}
-						movieGroups[task.TaskTopic].rows.push({
-							index,
-							task
-						});
-					});
-
-					Object.keys(movieGroups).forEach(movie => {
-						const group = movieGroups[movie];
-						const tr = document.createElement("tr");
-						tr.dataset.movie = movie;
-						tr.innerHTML = `
+					
+							// 按电影名分组
+							const movieGroups = {};
+							tasks.forEach((task, index) => {
+								const end = new Date(task.EndTime);
+								const beg = new Date(task.BegTime);
+								const gap = Math.floor((end - beg) / 60000);
+								if (!movieGroups[task.TaskTopic]) {
+									movieGroups[task.TaskTopic] = {
+										rows: [],
+										gap,
+										interval: task.Interval
+									};
+								}
+								movieGroups[task.TaskTopic].rows.push({
+									index,
+									task
+								});
+							});
+					
+							Object.keys(movieGroups).forEach(movie => {
+								const group = movieGroups[movie];
+								const tr = document.createElement("tr");
+								tr.dataset.movie = movie;
+								tr.innerHTML = `
 					    <td>${movie}</td>
 					    <td><input type="number" class="gapInput" min="1" value="${group.gap}" /></td>
 					    <td><input type="number" class="intervalInput" min="1" value="${group.interval}" /></td>
 					  `;
-						Tasktable.appendChild(tr);
-					});
-
-					container.appendChild(Tasktable);
-
-					function formatDateTime(date) {
-						const pad = n => n.toString().padStart(2, "0");
-						return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
-					}
-
-					function formatDate(date) {
-						const pad = n => n.toString().padStart(2, "0");
-						return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
-					}
-
-					document.getElementById("finalConfirm").addEventListener("click", () => {
-						const rows = Tasktable.querySelectorAll("tr:not(:first-child)");
-						let hasError = false;
-						let results = [];
-
-						rows.forEach(row => {
-							const movie = row.dataset.movie;
-							const gap = parseInt(row.querySelector(".gapInput").value);
-							const interval = parseInt(row.querySelector(".intervalInput").value);
-							const group = movieGroups[movie];
-
-							if (interval > gap) {
-								row.classList.add("error-row");
-								hasError = true;
-								return;
-							} else {
-								row.classList.remove("error-row");
-							}
-
-							group.rows.forEach(({
-								index,
-								task: originalTask
-							}) => {
-								const task = {
-									...originalTask
-								};
-								const end = new Date(task.EndTime);
-								const newBeg = new Date(end.getTime() - gap * 60000);
-								task.BegTime = formatDateTime(newBeg);
-								task.BegDate = formatDate(newBeg);
-								task.Interval = interval;
-								results.push(task);
+								Tasktable.appendChild(tr);
 							});
-						});
-
-						if (hasError) alert("播音间隔不能大于提前播音时间，请检查红色高亮行。");
-
-						// 按 TaskID 升序排序
-						results.sort((a, b) => parseInt(a.TaskID) - parseInt(b.TaskID));
-						//console.log(JSON.stringify(results, null, 2));
-						// 取第一个TaskID作为起始值
-						let baseId = parseInt(results[0].TaskID, 10);
-
-						const lines = results.map((item, index) => {
-							const newId = baseId + index; // 顺延
-							const fields = [
-								newId,
-								item.TaskTopic,
-								item.TaskContent,
-								item.BegDate,
-								item.BegTime,
-								item.EndDate,
-								item.EndTime,
-								item.Interval,
-								item.WeekFlag1,
-								item.WeekFlag2,
-								item.WeekFlag3,
-								item.WeekFlag4,
-								item.WeekFlag5,
-								item.WeekFlag6,
-								item.WeekFlag7,
-								item.DingFlag,
-								item.VSID,
-								item.BMID,
-								item.BCTimes,
-								item.BCFlag,
-								item.Timeout,
-								item.TaskLevel,
-								item.StopFlag
-							];
-							return fields.join("\t");
-						});
-
-						const resultStr = lines.join("\n");
-						console.log(resultStr);
-						//修改后的值填写在对应框里
-						document.getElementById('byds').innerHTML = resultStr;
-						document.getElementById('copy_byds_sucess').innerHTML = '👌已修改,请重新复制👌';
-					});
+					
+							container.appendChild(Tasktable);
+					
+							function formatDateTime(date) {
+								const pad = n => n.toString().padStart(2, "0");
+								return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+							}
+					
+							function formatDate(date) {
+								const pad = n => n.toString().padStart(2, "0");
+								return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
+							}
+					
+							document.getElementById("finalConfirm").addEventListener("click", () => {
+								const rows = Tasktable.querySelectorAll("tr:not(:first-child)");
+								let hasError = false;
+								let results = [];
+					
+								rows.forEach(row => {
+									const movie = row.dataset.movie;
+									const gap = parseInt(row.querySelector(".gapInput").value);
+									const interval = parseInt(row.querySelector(".intervalInput").value);
+									const group = movieGroups[movie];
+					
+									if (interval > gap) {
+										row.classList.add("error-row");
+										hasError = true;
+										return;
+									} else {
+										row.classList.remove("error-row");
+									}
+					
+									group.rows.forEach(({
+										index,
+										task: originalTask
+									}) => {
+										const task = {
+											...originalTask
+										};
+										const end = new Date(task.EndTime);
+										const newBeg = new Date(end.getTime() - gap * 60000);
+										task.BegTime = formatDateTime(newBeg);
+										task.BegDate = formatDate(newBeg);
+										task.Interval = interval;
+										results.push(task);
+									});
+								});
+					
+								if (hasError) alert("播音间隔不能大于提前播音时间，请检查红色高亮行。");
+					
+								// 按 TaskID 升序排序
+								results.sort((a, b) => parseInt(a.TaskID) - parseInt(b.TaskID));
+								//console.log(JSON.stringify(results, null, 2));
+								// 取第一个TaskID作为起始值
+								let baseId = parseInt(results[0].TaskID, 10);
+								
+								const lines = results.map((item, index) => {
+								  const newId = baseId + index; // 顺延
+								  const fields = [
+								    newId,
+								    item.TaskTopic,
+								    item.TaskContent,
+								    item.BegDate,
+								    item.BegTime,
+								    item.EndDate,
+								    item.EndTime,
+								    item.Interval,
+								    item.WeekFlag1,
+								    item.WeekFlag2,
+								    item.WeekFlag3,
+								    item.WeekFlag4,
+								    item.WeekFlag5,
+								    item.WeekFlag6,
+								    item.WeekFlag7,
+								    item.DingFlag,
+								    item.VSID,
+								    item.BMID,
+								    item.BCTimes,
+								    item.BCFlag,
+								    item.Timeout,
+								    item.TaskLevel,
+								    item.StopFlag
+								  ];
+								  return fields.join("\t");
+								});
+								
+								const resultStr = lines.join("\n");
+								console.log(resultStr);
+								//修改后的值填写在对应框里
+								document.getElementById('byds').innerHTML = resultStr;
+								document.getElementById('copy_byds_sucess').innerHTML = '👌已修改,请重新复制👌';
+							});
 					//console.log(alltimes); //大屏幕时间界面
 					// 将票版输出到输入框，复制并清空
 					//document.getElementById('json-input').value = all;
@@ -1597,379 +1573,153 @@
 		</script>
 	</head>
 	<body>
-		<h1 style="display:contents">排片信息提取</h1><span id="X">.</span>
-		<div id="NO1">
-			<div>
-				<textarea id="start" cols="60" rows="10" style="display: none;"></textarea>
-				<button id="copyButton">粘贴</button>
-				<button onclick="extractField()" id="parseBtn">解析</button>
-				<div style="display: inline" id="extractField_sucess"></div>
+		<div>
+			<h1>排片信息提取</h1>
+			<textarea id="start" cols="60" rows="10" style="display: none;"></textarea>
+			<button id="copyButton">粘贴</button>
+			<button onclick="extractField()">解析</button>
+			<div style="display: inline" id="extractField_sucess"></div>
+			<br>
+			<textarea id="json-input" rows="3" cols="60" placeholder="慧影云排期界面<F12>,复制之后直接右键粘贴或点击上方按钮"></textarea>
+			<br><br>
+			<div style="display: inline-table">
+				<button onclick="copypiao()">【复制】票</button>
+				<div style="display: inline" id="cpoypiao_sucess"></div>
 				<br>
-				<textarea id="json-input" rows="3" cols="60" placeholder="慧影云排期界面<F12>,复制之后直接右键粘贴或点击上方按钮"></textarea>
-				<br><br>
-				<div style="display: inline-table">
-					<button onclick="copypiao()">【复制】票</button>
-					<div style="display: inline" id="cpoypiao_sucess"></div>
-					<br>
-					<textarea id="piao" rows="8" cols="60"></textarea>
-				</div>
-				<div style="display: inline-table;width: min-content;">
-					<div id="jiucuo" style="display: contents;">
-						<input type="file" id="excel-file" accept=".xlsx, .xls" style="width: 40%;">
-						<button onclick="readFile()">确定</button>
-						<div style="display: inline" id="readFile_sucess"></div>
-						<button onclick="extractField()">解析</button>
-					</div>
-					<button onclick="copydjs()" style="float: right;">【复制】倒计时</button>
-					<div style="display: inline;float: right;" id="copy_djs_sucess"></div>
-					<br>
-					<textarea id="djs" rows="8" cols="60"></textarea>
-				</div>
-				<div style="display: inline-table;width: min-content;">
-					<span style="display: inline-table; height: 23px; color: red;">🛠🛠需要精确时间的电影🛠🛠</span>
-					<textarea id="checktime" rows="8" cols="40" style="color: red;"></textarea>
-				</div>
-
-				<br><br>
-				<div style="display: inline-table">
-					<button onclick="copymovie_name()">【复制】大屏幕:电影名</button>
-					<div style="display: inline" id="copymovie_name_sucess"></div>
-					<br>
-					<textarea id="movie_name" rows="8" cols="60"></textarea>
-				</div>
-				<div style="display: inline-table;width: min-content;">
-					<button style="float: right;" onclick="copybyds()">【复制】播音大师</button>
-					<div style="display: inline;float: right;" id="copy_byds_sucess"></div>
-					<br>
-					<textarea id="byds" rows="8" cols="60"></textarea>
-				</div>
-				<div style="width: 882px; text-align:right">
-					<div id="movieTasks"></div>
-					<button id="finalConfirm" style="display: none;">确认修改</button>
-				</div>
-				<br><br>
-				<button onclick="copymovie_time()">【复制】大屏幕:时间</button>
-				<div style="display: inline" id="copymovie_time_sucess"></div>
-				<br>
-				<textarea id="movie_time" rows="8" cols="60"></textarea>
-				<br><br>
-				<div style="width: fit-content;" id="alltable">
-					<div>
-						<button onclick="sortTableByStartTime()">刷新</button>
-						<button onclick="sortTableByMovie()">前台</button>
-						<button onclick="sortTableByEndTime()">保洁</button>
-						<button onclick="sortTableByCellName()">影厅</button>
-						<button onclick="start()">重置</button>
-					</div>
-					<br>
-
-					<div style="display: inline-table;text-align: center;">
-						<button onclick="printDiv()">打印当前表格(全天)</button>
-						<button onclick="deleteFalseMovie()" style="float:right;"
-							id="button_deleteMovie">删除选中场次</button>
-						<div id="tableContainer"></div>
-					</div>
-					<div style="display: inline-table;padding-left: 50px;"></div>
-					<div style="display: inline-table;text-align: center;" id="zao">
-						<button onclick="printDivZao()">打印早班</button>
-						<div id="splitTables_1"></div>
-					</div>
-					<div style="display: inline-table;padding-left: 50px;"></div>
-					<div style="display: inline-table;text-align: center;" id="wan">
-						<button onclick="printDivWan()">打印晚班</button>
-						<div id="splitTables_2"></div>
-					</div>
-				</div>
-				<iframe id="printFrame" src="about:blank"></iframe>
-				<script>
-					// 当页面加载完成时，自动聚焦到文本区域
-					document.getElementById('json-input').focus();
-					document.getElementById('copyButton').addEventListener('click', function() {
-							// 尝试从剪贴板获取文本
-							navigator.clipboard.readText()
-								.then(text => {
-									// 如果成功获取到文本，将其复制到输入框
-									document.getElementById('json-input').value = text;
-									//extractField();
-								})
-								.catch(err => {
-									// 如果获取剪贴板内容失败，打印错误消息
-									console.error('Error reading clipboard:', err);
-									alert('无法从剪贴板复制内容。');
-								});
-
-						}
-
-					);
-				</script>
+				<textarea id="piao" rows="8" cols="60"></textarea>
 			</div>
-			<div id="biao">
-				<table border="1">
-					<thead>
-						<tr>
-							<th>电影名</th>
-							<th>电影昵称</th> <!-- 添加了电影昵称列 -->
-							<th>结束时间</th>
-							<th>龙标时间</th>
-						</tr>
-					</thead>
-					<tbody id="movie-table-body">
-						<!-- 动态内容会在这里插入 -->
-					</tbody>
-				</table>
+			<div style="display: inline-table;width: min-content;">
+				<div id="jiucuo" style="display: contents;">
+					<input type="file" id="excel-file" accept=".xlsx, .xls" style="width: 40%;">
+					<button onclick="readFile()">确定</button>
+					<div style="display: inline" id="readFile_sucess"></div>
+					<button onclick="extractField()">解析</button>
+				</div>
+				<button onclick="copydjs()" style="float: right;">【复制】倒计时</button>
+				<div style="display: inline;float: right;" id="copy_djs_sucess"></div>
+				<br>
+				<textarea id="djs" rows="8" cols="60"></textarea>
+			</div>
+			<div style="display: inline-table;width: min-content;">
+				<span style="display: inline-table; height: 23px; color: red;">🛠🛠需要精确时间的电影🛠🛠</span>
+				<textarea id="checktime" rows="8" cols="40" style="color: red;"></textarea>
 			</div>
 
+			<br><br>
+			<div style="display: inline-table">
+				<button onclick="copymovie_name()">【复制】大屏幕:电影名</button>
+				<div style="display: inline" id="copymovie_name_sucess"></div>
+				<br>
+				<textarea id="movie_name" rows="8" cols="60"></textarea>
+			</div>
+			<div style="display: inline-table;width: min-content;">
+				<button style="float: right;" onclick="copybyds()">【复制】播音大师</button>
+				<div style="display: inline;float: right;" id="copy_byds_sucess"></div>
+				<br>
+				<textarea id="byds" rows="8" cols="60"></textarea>
+			</div>
+			<div style="width: 882px; text-align:right"><div id="movieTasks"></div>
+			<button id="finalConfirm" style="display: none;">确认修改</button>
+			</div>
+			<br><br>
+			<button onclick="copymovie_time()">【复制】大屏幕:时间</button>
+			<div style="display: inline" id="copymovie_time_sucess"></div>
+			<br>
+			<textarea id="movie_time" rows="8" cols="60"></textarea>
+			<br><br>
+			<div style="width: fit-content;" id="alltable">
+				<div>
+					<button onclick="sortTableByStartTime()">刷新</button>
+					<button onclick="sortTableByMovie()">前台</button>
+					<button onclick="sortTableByEndTime()">保洁</button>
+					<button onclick="sortTableByCellName()">影厅</button>
+					<button onclick="start()">重置</button>
+				</div>
+				<br>
+
+				<div style="display: inline-table;text-align: center;">
+					<button onclick="printDiv()">打印当前表格(全天)</button>
+					<button onclick="deleteFalseMovie()" style="float:right;" id="button_deleteMovie">删除选中场次</button>
+					<div id="tableContainer"></div>
+				</div>
+				<div style="display: inline-table;padding-left: 50px;"></div>
+				<div style="display: inline-table;text-align: center;" id="zao">
+					<button onclick="printDivZao()">打印早班</button>
+					<div id="splitTables_1"></div>
+				</div>
+				<div style="display: inline-table;padding-left: 50px;"></div>
+				<div style="display: inline-table;text-align: center;" id="wan">
+					<button onclick="printDivWan()">打印晚班</button>
+					<div id="splitTables_2"></div>
+				</div>
+			</div>
+			<iframe id="printFrame" src="about:blank"></iframe>
 			<script>
-				//当没有需要增加信息的影片，隐藏读取文件按钮
-				document.addEventListener("DOMContentLoaded", function() {
-					let textarea = document.getElementById("checktime");
-					let jiucuoDiv = document.getElementById("jiucuo");
+				// 当页面加载完成时，自动聚焦到文本区域
+				document.getElementById('json-input').focus();
+				document.getElementById('copyButton').addEventListener('click', function() {
+						// 尝试从剪贴板获取文本
+						navigator.clipboard.readText()
+							.then(text => {
+								// 如果成功获取到文本，将其复制到输入框
+								document.getElementById('json-input').value = text;
+								//extractField();
+							})
+							.catch(err => {
+								// 如果获取剪贴板内容失败，打印错误消息
+								console.error('Error reading clipboard:', err);
+								alert('无法从剪贴板复制内容。');
+							});
 
-					function toggleDisplay() {
-						if (textarea.value.trim() === "") {
-							jiucuoDiv.style.display = "none";
-						} else {
-							jiucuoDiv.style.display = "contents";
-						}
 					}
 
-					// 初始检查
-					toggleDisplay();
-
-					// 使用 MutationObserver 监听 value 变化
-					let observer = new MutationObserver(toggleDisplay);
-					observer.observe(textarea, {
-						attributes: true,
-						attributeFilter: ["value"]
-					});
-
-					// 兼容某些情况下赋值不会触发 MutationObserver
-					setInterval(toggleDisplay, 500);
-				});
+				);
 			</script>
 		</div>
+		<div id="biao">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>电影名</th>
+						<th>电影昵称</th> <!-- 添加了电影昵称列 -->
+						<th>结束时间</th>
+						<th>龙标时间</th>
+					</tr>
+				</thead>
+				<tbody id="movie-table-body">
+					<!-- 动态内容会在这里插入 -->
+				</tbody>
+			</table>
+		</div>
 
-		<div id="NO2" style="display: none;">
-			<select id="resultSelect"></select>
-			<div  id="NO3" style="position: relative;height:84mm; width: 79mm; background-color: antiquewhite;">
-				<span id="hall" style="position: absolute; left: 10mm; top: 10mm; font-size: 12px;"></span>
-				<span id="hall2" style="position: absolute; left: 20mm; top: 20mm; font-size: 12px;"></span>
-				<span id="name" style="position: absolute; left: 20mm; top: 15mm; font-size: 12px;"></span>
-				<span id="date" style="position: absolute; left: 30mm; top: 45mm; font-size: 12px;"></span>
-				<span id="date2" style="position: absolute; left: 35mm; top: 50mm; font-size: 12px;"></span>
-				<span id="time" style="position: absolute; left: 30mm; top: 25mm; font-size: 12px;"></span>
-				<span id="time2" style="position: absolute; left: 30mm; top: 35mm; font-size: 12px;"></span>
-				<div id="qrcode" style="position: absolute; left: 5mm; top: 50mm;"></div>
-			</div>
-			<button onclick="printDiv2()">打印</button>
-			<script>
-				const parseBtn = document.getElementById('parseBtn');
-				const jsonInput = document.getElementById('json-input');
-				const resultSelect = document.getElementById('resultSelect');
-				const hallDiv = document.getElementById('hall');
-				const hallDiv2 = document.getElementById('hall2');
-				const nameDiv = document.getElementById('name');
-				const dateDiv = document.getElementById('date');
-				const dateDiv2 = document.getElementById('date2');
-				const timeDiv = document.getElementById('time');
-				const timeDiv2 = document.getElementById('time2');
-				const qrcodeDiv = document.getElementById('qrcode');
+		<script>
+			//当没有需要增加信息的影片，隐藏读取文件按钮
+			document.addEventListener("DOMContentLoaded", function() {
+				let textarea = document.getElementById("checktime");
+				let jiucuoDiv = document.getElementById("jiucuo");
 
-				let currentData = [];
-
-				parseBtn.addEventListener('click', () => {
-					resultSelect.innerHTML = ''; // 清空下拉框
-					hallDiv.textContent = '';
-					hallDiv2.textContent = '';
-					nameDiv.textContent = '';
-					dateDiv.textContent = '';
-					dateDiv2.textContent = '';
-					timeDiv.textContent = '';
-					timeDiv2.textContent = '';
-					qrcodeDiv.innerHTML = '';
-
-					try {
-						const obj = JSON.parse(jsonInput.value.trim());
-						const arr = obj?.data?.arr_date_plan;
-
-						if (!Array.isArray(arr)) {
-							alert('未找到 data.arr_date_plan 数组！');
-							return;
-						}
-
-						currentData = arr; // 保存当前数据
-						arr.forEach((item, index) => {
-							const hall = item.hall_name || '(无影厅)';
-							const name = item.display_name || '(无片名)';
-							const time = item.show_time_start || '(无时间)';
-							const option = document.createElement('option');
-							option.value = index; // 存索引
-							option.textContent = `${hall} - ${name} - ${time}`;
-							resultSelect.appendChild(option);
-						});
-
-						// 自动显示第一条
-						if (arr.length > 0) {
-							resultSelect.selectedIndex = 0;
-							displayInfo(0);
-						} else {
-							alert('数组为空！');
-						}
-					} catch (e) {
-						alert('JSON 格式错误，请检查输入！\n\n错误信息：' + e.message);
-					}
-				});
-
-				// 当选择变化时，显示对应详细信息
-				resultSelect.addEventListener('change', (e) => {
-					const index = e.target.value;
-					displayInfo(index);
-				});
-
-				function displayInfo(index) {
-					const item = currentData[index];
-					if (!item) return;
-
-					hallDiv.textContent = item.hall_name || '(无影厅)';
-					hallDiv2.textContent = hallDiv.textContent;
-					nameDiv.textContent = item.display_name || '(无片名)';
-
-					// 拆分 show_time_start
-					if (item.show_time_start) {
-						const [datePart, timePart] = item.show_time_start.split('T');
-						dateDiv.textContent = datePart.replace(/-/g, '.'); // 2025.10.08
-						dateDiv2.textContent = dateDiv.textContent;
-						timeDiv.textContent = timePart.slice(0, 5); // 10:25
-						timeDiv2.textContent = timeDiv.textContent;
+				function toggleDisplay() {
+					if (textarea.value.trim() === "") {
+						jiucuoDiv.style.display = "none";
 					} else {
-						dateDiv.textContent = '(无日期)';
-						timeDiv.textContent = '(无时间)';
-					}
-					
-						// 拼接二维码内容
-						const variablePart = `${hallDiv.textContent}${nameDiv.textContent}${dateDiv.textContent}${timeDiv.textContent}`;
-						const encodedPart = btoa(unescape(encodeURIComponent(variablePart))); // Base64编码
-						const qrText = `41018401${encodedPart}`;
-					
-						// 生成二维码
-						qrcodeDiv.innerHTML = '';
-						new QRCode(qrcodeDiv, {
-							text: qrText,
-							width: 100,
-							height: 100,
-							colorDark: "#000000",
-							colorLight: "#ffffff"
-						});
-					
-				}
-			</script>
-		</div>
-		
-		<script>
-				function printDiv2() {
-					// 获取要打印的内容
-					var content = document.getElementById("NO3").outerHTML;
-		
-					// 打开一个新窗口（保持原页面不关闭）
-					var printWindow = window.open('', '_blank', 'width=800,height=600');
-		
-					// 写入HTML
-					printWindow.document.open();
-					printWindow.document.write(`
-		    <html>
-		    <head>
-		        <title>打印</title>
-		        <style>
-		            html, body { margin: 0; padding: 0; }
-		            #NO3 {
-		                position: relative;
-		                height: 84mm;
-		                width: 79mm;
-		                background-color: antiquewhite;
-		            }
-		            #NO3 span, #NO3 div {
-		                position: absolute;
-		                font-size: 12px;
-		            }
-		            @media print {
-		                @page { size: auto; margin: 0; }
-		                body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-		            }
-		        </style>
-		    </head>
-		    <body>
-		        ${content}
-		    </body>
-		    </html>
-		`);
-					printWindow.document.close();
-		
-					// 等待内容渲染，再触发打印
-					printWindow.onload = function() {
-						printWindow.focus();
-						printWindow.print();
-						// 注意：这里不关闭新窗口，用户可以看到打印预览
+						jiucuoDiv.style.display = "contents";
 					}
 				}
-			</script>
 
+				// 初始检查
+				toggleDisplay();
 
-		<script>
-			const x = document.getElementById('X');
-			const no1 = document.getElementById('NO1');
-			const no2 = document.getElementById('NO2');
+				// 使用 MutationObserver 监听 value 变化
+				let observer = new MutationObserver(toggleDisplay);
+				observer.observe(textarea, {
+					attributes: true,
+					attributeFilter: ["value"]
+				});
 
-			let toggled = false; // 是否切换状态
-			let inactivityTimer; // 30秒无操作计时器
-			let countdownTimer; // 每秒更新倒计时
-			let remaining = 30; // 剩余秒数（改为30）
-
-			// 点击 X 切换显示
-			x.addEventListener('click', function() {
-				if (!toggled) {
-					no1.style.display = 'none';
-					no2.style.display = 'block';
-				} else {
-					no1.style.display = 'block';
-					no2.style.display = 'none';
-				}
-				toggled = !toggled;
+				// 兼容某些情况下赋值不会触发 MutationObserver
+				setInterval(toggleDisplay, 500);
 			});
-
-			// 恢复为默认状态
-			function resetToDefault() {
-				no1.style.display = 'block';
-				no2.style.display = 'none';
-				toggled = false;
-				resetInactivityTimer(); // 恢复后重新开始计时
-			}
-
-			// 启动倒计时显示
-			function startCountdown() {
-				clearInterval(countdownTimer);
-				countdownTimer = setInterval(() => {
-					remaining--;
-					if (remaining <= 0) {
-						clearInterval(countdownTimer);
-						resetToDefault();
-					}
-				}, 1000);
-			}
-
-			// 重置无操作计时
-			function resetInactivityTimer() {
-				clearTimeout(inactivityTimer);
-				clearInterval(countdownTimer);
-				remaining = 30; // 改为30秒
-				startCountdown();
-				inactivityTimer = setTimeout(resetToDefault, 30000); // 30秒无操作后恢复
-			}
-
-			// 监听整个页面的点击事件
-			document.addEventListener('click', resetInactivityTimer);
-
-			// 页面加载后启动
-			resetInactivityTimer();
 		</script>
+
 	</body>
 </html>
