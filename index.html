@@ -17,7 +17,9 @@
 			#alltable {
 				display: none;
 			}
-
+			#NO3 {
+				display: none;
+			}
 			/* 打印样式 */
 			@media print {
 				body * {
@@ -1804,7 +1806,7 @@
 							const time = item.show_time_start || '(无时间)';
 							const option = document.createElement('option');
 							option.value = index; // 存索引
-							option.textContent = `${hall} - ${name} - ${time}`;
+							option.textContent = `${time.slice(11, 16)} - ${hall} - ${name}`;
 							resultSelect.appendChild(option);
 						});
 
@@ -1890,6 +1892,7 @@
 		            #NO3 span, #NO3 div {
 		                position: absolute;
 		                font-size: 12px;
+						display: block;
 		            }
 		            @media print {
 		                @page { size: auto; margin: 0; }
