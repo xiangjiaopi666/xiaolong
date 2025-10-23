@@ -17,16 +17,18 @@
 			#alltable {
 				display: none;
 			}
+
 			#NO3 {
 				display: none;
 			}
+
 			/* 打印样式 */
 			@media print {
 				body * {
 					visibility: hidden;
 					/* 隐藏页面上所有内容 */
 				}
-				
+
 				#printArea,
 				#printArea * {
 					visibility: visible;
@@ -1752,18 +1754,46 @@
 		</div>
 
 		<div id="NO2" style="display: none;">
-			<select id="resultSelect"></select>
-			<div  id="NO3" style="position: relative;height:84mm; width: 79mm; background-color: antiquewhite;">
-				<span id="hall" style="position: absolute; left: 10mm; top: 10mm; font-size: 12px;"></span>
-				<span id="hall2" style="position: absolute; left: 20mm; top: 20mm; font-size: 12px;"></span>
-				<span id="name" style="position: absolute; left: 20mm; top: 15mm; font-size: 12px;"></span>
-				<span id="date" style="position: absolute; left: 30mm; top: 45mm; font-size: 12px;"></span>
-				<span id="date2" style="position: absolute; left: 35mm; top: 50mm; font-size: 12px;"></span>
-				<span id="time" style="position: absolute; left: 30mm; top: 25mm; font-size: 12px;"></span>
-				<span id="time2" style="position: absolute; left: 30mm; top: 35mm; font-size: 12px;"></span>
-				<div id="qrcode" style="position: absolute; left: 5mm; top: 50mm;"></div>
+			<select id="resultSelect"></select><br><br>
+
+			<!-- 新增输入框 -->
+			<input type="text" id="rowInput" style="width:80px;"><label>排</label>
+			<input type="text" id="seatInput" style="width:80px;"><label>座</label>
+
+			<!-- ✅ 新增下拉框 -->
+			<select id="sourceSelect">
+				<option value="">无</option>
+				<option value="学生">学生</option>
+				<option value="抖音">抖音</option>
+				<option value="工会">工会</option>
+			</select>
+
+			<!-- 打印内容区域 -->
+			<div id="NO3" style="position: relative;height:84mm; width: 79mm;">
+				<span id="hall" style="position: absolute; left: 10mm; top: 2mm; font-size: 12px;"></span><!-- 左|厅 -->
+				<span id="name" style="position: absolute; left: 10mm; top: 9mm; font-size: 12px;"></span><!-- 左|电影名 -->
+				<span id="date" style="position: absolute; left: 37mm; top: 1mm; font-size: 12px;"></span><!-- 左|日期 -->
+				<span id="time" style="position: absolute; left: 42mm; top: 4mm; font-size: 12px;"></span><!-- 左|时间 -->
+				<span id="rowSpan" style="position: absolute; left: 10mm; top: 15mm; font-size: 12px;"></span><!-- 左|排 -->
+				<span id="seatSpan" style="position: absolute; left: 20mm; top: 15mm; font-size: 12px;"></span><!-- 左|座 -->
+				<span id="hall2" style="position: absolute; left: 60mm; top: 2mm; font-size: 12px;"></span><!-- 右|厅 -->
+				<span id="date2" style="position: absolute; left: 60mm; top: 15mm; font-size: 12px;"></span><!-- 右|日期 -->
+				<span id="time2" style="position: absolute; left: 64mm; top: 19mm; font-size: 12px;"></span><!-- 右|时间 -->
+				<span id="rowSpan2" style="position: absolute; left: 66mm; top: 32mm; font-size: 12px;"></span><!-- 右|排 -->
+				<span id="seatSpan2" style="position: absolute; left: 66mm; top: 36mm; font-size: 12px;"></span><!-- 右|座 -->
+				<span id="nowTime" style="position: absolute; left: 10mm; top: 27mm; font-size: 12px;"></span><!-- 当前时间 -->
+				<span id="sourceSpan" style="position: absolute; left: 68mm; top: 44mm; font-size: 12px;"></span><!-- 来源 -->
+				<span style="position: absolute; left: 40mm; top: 17mm; font-size: 10px;">60.00</span><!-- 左|票价 -->
+				<span style="position: absolute; left: 40mm; top: 20mm; font-size: 10px;">0.00</span><!-- 左|服务费 -->
+				<span style="position: absolute; left: 66mm; top: 60mm; font-size: 12px;">60.00</span><!-- 右|票价 -->
+				<span style="position: absolute; left: 10mm; top: 20mm; font-size: 12px;">前台</span>
+				<span style="position: absolute; left: 34mm; top: 38mm; font-size: 12px;">现场售票</span>
+				<span style="position: absolute; left: 33mm; top: 55mm; font-size: 12px;">河南省郑州市<br>亚星小龙激光影城</span>
+				<div id="qrcode" style="position: absolute; left: 5mm; top: 38mm;"></div><!-- 二维码 -->
 			</div>
+
 			<button onclick="printDiv2()">打印</button>
+
 			<script>
 				const parseBtn = document.getElementById('parseBtn');
 				const jsonInput = document.getElementById('json-input');
@@ -1776,19 +1806,37 @@
 				const timeDiv = document.getElementById('time');
 				const timeDiv2 = document.getElementById('time2');
 				const qrcodeDiv = document.getElementById('qrcode');
+				const rowInput = document.getElementById('rowInput');
+				const seatInput = document.getElementById('seatInput');
+				const rowSpan = document.getElementById('rowSpan');
+				const seatSpan = document.getElementById('seatSpan');
+				const rowSpan2 = document.getElementById('rowSpan2');
+				const seatSpan2 = document.getElementById('seatSpan2');
+				const nowTimeSpan = document.getElementById('nowTime');
+				const sourceSelect = document.getElementById('sourceSelect');
+				const sourceSpan = document.getElementById('sourceSpan');
 
 				let currentData = [];
+				let currentIndex = 0;
 
+				// === 实时时间 ===
+				function updateCurrentTime() {
+					const now = new Date();
+					const Y = now.getFullYear();
+					const M = String(now.getMonth() + 1).padStart(2, '0');
+					const D = String(now.getDate()).padStart(2, '0');
+					const h = String(now.getHours()).padStart(2, '0');
+					const m = String(now.getMinutes()).padStart(2, '0');
+					const s = String(now.getSeconds()).padStart(2, '0');
+					nowTimeSpan.textContent = `${Y}.${M}.${D} ${h}:${m}:${s}`;
+				}
+				setInterval(updateCurrentTime, 1000);
+				updateCurrentTime();
+
+				// === 解析JSON ===
 				parseBtn.addEventListener('click', () => {
-					resultSelect.innerHTML = ''; // 清空下拉框
-					hallDiv.textContent = '';
-					hallDiv2.textContent = '';
-					nameDiv.textContent = '';
-					dateDiv.textContent = '';
-					dateDiv2.textContent = '';
-					timeDiv.textContent = '';
-					timeDiv2.textContent = '';
-					qrcodeDiv.innerHTML = '';
+					resultSelect.innerHTML = '';
+					clearDisplay();
 
 					try {
 						const obj = JSON.parse(jsonInput.value.trim());
@@ -1799,34 +1847,44 @@
 							return;
 						}
 
-						currentData = arr; // 保存当前数据
+						currentData = arr;
 						arr.forEach((item, index) => {
 							const hall = item.hall_name || '(无影厅)';
 							const name = item.display_name || '(无片名)';
 							const time = item.show_time_start || '(无时间)';
 							const option = document.createElement('option');
-							option.value = index; // 存索引
+							option.value = index;
 							option.textContent = `${time.slice(11, 16)} - ${hall} - ${name}`;
 							resultSelect.appendChild(option);
 						});
 
-						// 自动显示第一条
 						if (arr.length > 0) {
 							resultSelect.selectedIndex = 0;
 							displayInfo(0);
-						} else {
-							alert('数组为空！');
 						}
 					} catch (e) {
 						alert('JSON 格式错误，请检查输入！\n\n错误信息：' + e.message);
 					}
 				});
 
-				// 当选择变化时，显示对应详细信息
 				resultSelect.addEventListener('change', (e) => {
 					const index = e.target.value;
+					currentIndex = index;
 					displayInfo(index);
 				});
+
+				rowInput.addEventListener('input', updateDynamicInfo);
+				seatInput.addEventListener('input', updateDynamicInfo);
+				sourceSelect.addEventListener('change', updateDynamicInfo);
+
+				function updateDynamicInfo() {
+					rowSpan.textContent = rowInput.value ? `${rowInput.value} 排` : '';
+					seatSpan.textContent = seatInput.value ? `${seatInput.value} 座` : '';
+					rowSpan2.textContent = rowInput.value ? `${rowInput.value} 排` : '';
+					seatSpan2.textContent = seatInput.value ? `${seatInput.value} 座` : '';
+					sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
+					generateQRCode();
+				}
 
 				function displayInfo(index) {
 					const item = currentData[index];
@@ -1836,143 +1894,143 @@
 					hallDiv2.textContent = hallDiv.textContent;
 					nameDiv.textContent = item.display_name || '(无片名)';
 
-					// 拆分 show_time_start
 					if (item.show_time_start) {
 						const [datePart, timePart] = item.show_time_start.split('T');
-						dateDiv.textContent = datePart.replace(/-/g, '.'); // 2025.10.08
+						dateDiv.textContent = datePart.replace(/-/g, '.');
 						dateDiv2.textContent = dateDiv.textContent;
-						timeDiv.textContent = timePart.slice(0, 5); // 10:25
+						timeDiv.textContent = timePart.slice(0, 5);
 						timeDiv2.textContent = timeDiv.textContent;
-					} else {
-						dateDiv.textContent = '(无日期)';
-						timeDiv.textContent = '(无时间)';
 					}
-					
-						// 拼接二维码内容
-						const variablePart = `${hallDiv.textContent}${nameDiv.textContent}${dateDiv.textContent}${timeDiv.textContent}`;
-						const encodedPart = btoa(unescape(encodeURIComponent(variablePart))); // Base64编码
-						const qrText = `41018401${encodedPart}`;
-					
-						// 生成二维码
-						qrcodeDiv.innerHTML = '';
-						new QRCode(qrcodeDiv, {
-							text: qrText,
-							width: 100,
-							height: 100,
-							colorDark: "#000000",
-							colorLight: "#ffffff"
-						});
-					
+
+					generateQRCode();
 				}
-			</script>
-		</div>
-		
-		<script>
+
+				function generateQRCode() {
+					const variablePart =
+						`${hallDiv.textContent}${nameDiv.textContent}` +
+						`${rowInput.value}${seatInput.value}${nowTimeSpan.textContent}`;
+					const encodedPart = btoa(unescape(encodeURIComponent(variablePart)));
+					const qrText = `41018401${encodedPart}`;
+
+					qrcodeDiv.innerHTML = '';
+					new QRCode(qrcodeDiv, {
+						text: qrText,
+						width: 100,
+						height: 100,
+						colorDark: "#000000",
+						colorLight: "#ffffff"
+					});
+				}
+
+				function clearDisplay() {
+					hallDiv.textContent = hallDiv2.textContent = '';
+					nameDiv.textContent = '';
+					dateDiv.textContent = dateDiv2.textContent = '';
+					timeDiv.textContent = timeDiv2.textContent = '';
+					rowSpan.textContent = seatSpan.textContent = sourceSpan.textContent = '';
+					rowSpan2.textContent = seatSpan2.textContent = '';
+					qrcodeDiv.innerHTML = '';
+				}
+
+				// === 打印并自动关闭 ===
 				function printDiv2() {
-					// 获取要打印的内容
 					var content = document.getElementById("NO3").outerHTML;
-		
-					// 打开一个新窗口（保持原页面不关闭）
 					var printWindow = window.open('', '_blank', 'width=800,height=600');
-		
-					// 写入HTML
 					printWindow.document.open();
 					printWindow.document.write(`
-		    <html>
-		    <head>
-		        <title>打印</title>
-		        <style>
-		            html, body { margin: 0; padding: 0; }
-		            #NO3 {
-		                position: relative;
-		                height: 84mm;
-		                width: 79mm;
-		                background-color: antiquewhite;
-		            }
-		            #NO3 span, #NO3 div {
-		                position: absolute;
-		                font-size: 12px;
-						display: block;
-		            }
-		            @media print {
-		                @page { size: auto; margin: 0; }
-		                body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-		            }
-		        </style>
-		    </head>
-		    <body>
-		        ${content}
-		    </body>
-		    </html>
-		`);
+			    <html>
+			    <head>
+			        <title>打印</title>
+			        <style>
+			            html, body { margin: 0; padding: 0; }
+			            #NO3 {
+			                position: relative;
+			                height: 84mm;
+			                width: 79mm;
+			            }
+			            #NO3 span, #NO3 div {
+			                position: absolute;
+			                font-size: 12px;
+			                display: block;
+			            }
+			            @media print {
+			                @page { size: auto; margin: 0; }
+			                body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+			            }
+			        </style>
+			    </head>
+			    <body>
+			        ${content}
+			    </body>
+			    </html>
+			`);
 					printWindow.document.close();
-		
-					// 等待内容渲染，再触发打印
+
 					printWindow.onload = function() {
 						printWindow.focus();
 						printWindow.print();
-						// 注意：这里不关闭新窗口，用户可以看到打印预览
-					}
+						setTimeout(() => printWindow.close(), 200);
+					};
 				}
 			</script>
 
 
-		<script>
-			const x = document.getElementById('X');
-			const no1 = document.getElementById('NO1');
-			const no2 = document.getElementById('NO2');
+			<script>
+				const x = document.getElementById('X');
+				const no1 = document.getElementById('NO1');
+				const no2 = document.getElementById('NO2');
 
-			let toggled = false; // 是否切换状态
-			let inactivityTimer; // 30秒无操作计时器
-			let countdownTimer; // 每秒更新倒计时
-			let remaining = 30; // 剩余秒数（改为30）
+				let toggled = false; // 是否切换状态
+				let inactivityTimer; // 30秒无操作计时器
+				let countdownTimer; // 每秒更新倒计时
+				let remaining = 30; // 剩余秒数（改为30）
 
-			// 点击 X 切换显示
-			x.addEventListener('click', function() {
-				if (!toggled) {
-					no1.style.display = 'none';
-					no2.style.display = 'block';
-				} else {
+				// 点击 X 切换显示
+				x.addEventListener('click', function() {
+					if (!toggled) {
+						no1.style.display = 'none';
+						no2.style.display = 'block';
+					} else {
+						no1.style.display = 'block';
+						no2.style.display = 'none';
+					}
+					toggled = !toggled;
+				});
+
+				// 恢复为默认状态
+				function resetToDefault() {
 					no1.style.display = 'block';
 					no2.style.display = 'none';
+					toggled = false;
+					resetInactivityTimer(); // 恢复后重新开始计时
 				}
-				toggled = !toggled;
-			});
 
-			// 恢复为默认状态
-			function resetToDefault() {
-				no1.style.display = 'block';
-				no2.style.display = 'none';
-				toggled = false;
-				resetInactivityTimer(); // 恢复后重新开始计时
-			}
+				// 启动倒计时显示
+				function startCountdown() {
+					clearInterval(countdownTimer);
+					countdownTimer = setInterval(() => {
+						remaining--;
+						if (remaining <= 0) {
+							clearInterval(countdownTimer);
+							resetToDefault();
+						}
+					}, 1000);
+				}
 
-			// 启动倒计时显示
-			function startCountdown() {
-				clearInterval(countdownTimer);
-				countdownTimer = setInterval(() => {
-					remaining--;
-					if (remaining <= 0) {
-						clearInterval(countdownTimer);
-						resetToDefault();
-					}
-				}, 1000);
-			}
+				// 重置无操作计时
+				function resetInactivityTimer() {
+					clearTimeout(inactivityTimer);
+					clearInterval(countdownTimer);
+					remaining = 30; // 改为30秒
+					startCountdown();
+					inactivityTimer = setTimeout(resetToDefault, 30000); // 30秒无操作后恢复
+				}
 
-			// 重置无操作计时
-			function resetInactivityTimer() {
-				clearTimeout(inactivityTimer);
-				clearInterval(countdownTimer);
-				remaining = 30; // 改为30秒
-				startCountdown();
-				inactivityTimer = setTimeout(resetToDefault, 30000); // 30秒无操作后恢复
-			}
+				// 监听整个页面的点击事件
+				document.addEventListener('click', resetInactivityTimer);
 
-			// 监听整个页面的点击事件
-			document.addEventListener('click', resetInactivityTimer);
-
-			// 页面加载后启动
-			resetInactivityTimer();
-		</script>
+				// 页面加载后启动
+				resetInactivityTimer();
+			</script>
 	</body>
 </html>
