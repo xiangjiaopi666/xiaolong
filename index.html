@@ -1758,7 +1758,7 @@
 
 			<!-- 新增输入框 -->
 			<input type="text" id="rowInput" style="width:80px;"><label>排</label>
-			<input type="text" id="seatInput" style="width:80px;"><label>座</label>
+			<input type="text" id="seatInput" style="width:80px;"><label>号</label>
 
 			<!-- ✅ 新增下拉框 -->
 			<select id="sourceSelect">
@@ -1879,9 +1879,9 @@
 
 				function updateDynamicInfo() {
 					rowSpan.textContent = rowInput.value ? `${rowInput.value} 排` : '';
-					seatSpan.textContent = seatInput.value ? `${seatInput.value} 座` : '';
+					seatSpan.textContent = seatInput.value ? `${seatInput.value} 号` : '';
 					rowSpan2.textContent = rowInput.value ? `${rowInput.value} 排` : '';
-					seatSpan2.textContent = seatInput.value ? `${seatInput.value} 座` : '';
+					seatSpan2.textContent = seatInput.value ? `${seatInput.value} 号` : '';
 					sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
 					generateQRCode();
 				}
