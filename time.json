@@ -1,1824 +1,1865 @@
-[
-  {
-    "name": "电影名",
-    "nickname": "电影昵称",
-    "lightOnTime": "结束时间",
-    "posterTime": "龙标时间"
-  },
-  {
-    "name": "灿烂的她",
-    "lightOnTime": "01:55:55",
-    "posterTime": "00:03:21"
-  },
-  {
-    "name": "飞驰人生2",
-    "lightOnTime": "02:01:00",
-    "posterTime": "00:04:25"
-  },
-  {
-    "name": "红毯先生",
-    "lightOnTime": "02:00:15",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "被我弄丢的你",
-    "lightOnTime": "01:52:04",
-    "posterTime": "00:03:20"
-  },
-  {
-    "name": "周处除三害",
-    "lightOnTime": "02:09:03",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "挑战",
-    "lightOnTime": "01:54:42",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "沙丘2",
-    "lightOnTime": "02:37:45",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "热辣滚烫",
-    "lightOnTime": "02:05:20",
-    "posterTime": "00:05:00"
-  },
-  {
-    "name": "熊出没·逆转时空",
-    "nickname": "熊出默·逆转时空",
-    "lightOnTime": "01:47:31",
-    "posterTime": "00:05:01"
-  },
-  {
-    "name": "第二十条",
-    "lightOnTime": "02:19:52",
-    "posterTime": "00:02:40"
-  },
-  {
-    "name": "功夫熊猫4",
-    "lightOnTime": "01:25:00",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "堡垒",
-    "lightOnTime": "01:48:52",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "我们一起摇太阳",
-    "nickname": "我们一起姚泰阳",
-    "lightOnTime": "02:06:40",
-    "posterTime": "00:04:40"
-  },
-  {
-    "name": "银河写手",
-    "lightOnTime": "01:40:45",
-    "posterTime": "00:02:26"
-  },
-  {
-    "name": "哥斯拉大战金刚2：帝国崛起",
-    "lightOnTime": "01:46:38",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "黄雀在后！",
-    "lightOnTime": "01:37:10",
-    "posterTime": "00:03:18"
-  },
-  {
-    "name": "草木人间",
-    "lightOnTime": "01:54:19",
-    "posterTime": "00:01:35"
-  },
-  {
-    "name": "你想活出怎样的人生",
-    "lightOnTime": "01:59:18",
-    "posterTime": "00:01:07"
-  },
-  {
-    "name": "冰雪女王5：融冰之战",
-    "lightOnTime": "01:09:16",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "大“反”派",
-    "lightOnTime": "01:36:44",
-    "posterTime": "00:03:16"
-  },
-  {
-    "name": "白日之下",
-    "lightOnTime": "01:42:03",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "来自汪星的你",
-    "lightOnTime": "01:40:07",
-    "posterTime": "00:02:41"
-  },
-  {
-    "name": "年少日记",
-    "lightOnTime": "01:28:53",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "消失的木偶",
-    "lightOnTime": "01:18:21",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "数码宝贝02：最初的召唤",
-    "lightOnTime": "01:15:25",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "屋顶足球",
-    "lightOnTime": "01:34:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "重山之外",
-    "nickname": "虫山之外",
-    "lightOnTime": "01:29:25",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "小倩",
-    "lightOnTime": "01:47:50",
-    "posterTime": "00:01:03"
-  },
-  {
-    "name": "九龙城寨之围城",
-    "lightOnTime": "02:08:15",
-    "posterTime": "00:03:58"
-  },
-  {
-    "name": "没有一顿火锅解决不了的事",
-    "lightOnTime": "02:07:10",
-    "posterTime": "00:01:33"
-  },
-  {
-    "name": "间谍过家家 代号：白",
-    "lightOnTime": "01:46:41",
-    "posterTime": "00:02:35"
-  },
-  {
-    "name": "哈尔的移动城堡",
-    "lightOnTime": "01:57:35",
-    "posterTime": "00:02:32"
-  },
-  {
-    "name": "维和防暴队",
-    "lightOnTime": "01:31:35",
-    "posterTime": "00:03:31"
-  },
-  {
-    "name": "末路狂花钱",
-    "lightOnTime": "01:47:15",
-    "posterTime": "00:05:01"
-  },
-  {
-    "name": "猪猪侠大电影·星际行动",
-    "lightOnTime": "01:23:14",
-    "posterTime": "00:01:15"
-  },
-  {
-    "name": "穿过月亮的旅行",
-    "lightOnTime": "01:46:35",
-    "posterTime": "00:03:35"
-  },
-  {
-    "name": "猩球崛起：新世界",
-    "lightOnTime": "02:16:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "泪光中的妈妈",
-    "lightOnTime": "01:38:05",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "特技狂人",
-    "lightOnTime": "01:59:39",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "你就在我身边",
-    "lightOnTime": "01:31:50",
-    "posterTime": "00:01:26"
-  },
-  {
-    "name": "彷徨之刃",
-    "lightOnTime": "01:44:25",
-    "posterTime": "00:01:49"
-  },
-  {
-    "name": "朝云暮雨",
-    "nickname": "招云木雨",
-    "lightOnTime": "01:46:40",
-    "posterTime": "00:02:40"
-  },
-  {
-    "name": "今夜，就算这份爱恋从世界上消失",
-    "lightOnTime": "01:57:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "四月女友",
-    "lightOnTime": "01:43:19",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "错过你的那些年",
-    "lightOnTime": "01:57:35",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "替身纸人2",
-    "lightOnTime": "01:31:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "你是我的英雄",
-    "lightOnTime": "01:56:12",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "盟军敢死队",
-    "lightOnTime": "01:50:08",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "三叉戟",
-    "lightOnTime": "01:46:00",
-    "posterTime": "00:01:36"
-  },
-  {
-    "name": "再会长江",
-    "lightOnTime": "01:46:25",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "朱同在三年级丢失了超能力",
-    "lightOnTime": "01:35:04",
-    "posterTime": "00:02:10"
-  },
-  {
-    "name": "人生大事",
-    "lightOnTime": "01:48:35",
-    "posterTime": "00:03:47"
-  },
-  {
-    "name": "扫黑·决不放弃",
-    "lightOnTime": "01:55:12",
-    "posterTime": "00:01:53"
-  },
-  {
-    "name": "我才不要和你做朋友呢",
-    "lightOnTime": "01:54:10",
-    "posterTime": "00:02:45"
-  },
-  {
-    "name": "哆啦A梦：大雄的地球交响乐",
-    "lightOnTime": "01:52:16",
-    "posterTime": "00:00:33"
-  },
-  {
-    "name": "谈判专家",
-    "lightOnTime": "01:58:20",
-    "posterTime": "00:03:43"
-  },
-  {
-    "name": "潜艇总动员：寻龙",
-    "lightOnTime": "01:23:31",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "加菲猫家族",
-    "lightOnTime": "01:31:15",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "美国内战",
-    "lightOnTime": "01:41:09",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "来福大酒店",
-    "lightOnTime": "01:59:24",
-    "posterTime": "00:03:10"
-  },
-  {
-    "name": "疯狂的麦克斯：狂暴女神",
-    "lightOnTime": "02:17:43",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "走走停停",
-    "lightOnTime": "01:39:47",
-    "posterTime": "00:02:59"
-  },
-  {
-    "name": "机器人之梦",
-    "lightOnTime": "01:37:57",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "狗阵",
-    "lightOnTime": "01:53:28",
-    "posterTime": "00:02:14"
-  },
-  {
-    "name": "爸爸是外星人",
-    "lightOnTime": "01:34:33",
-    "posterTime": "00:03:05"
-  },
-  {
-    "name": "排球少年！！垃圾场决战",
-    "lightOnTime": "01:17:49",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "神秘友友",
-    "lightOnTime": "01:37:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "头脑特工队2",
-    "lightOnTime": "01:26:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "云边有个小卖部",
-    "lightOnTime": "02:10:08",
-    "posterTime": "00:03:58"
-  },
-  {
-    "name": "绝地战警：生死与共",
-    "lightOnTime": "01:49:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "沙漏",
-    "lightOnTime": "01:47:05",
-    "posterTime": "00:01:50"
-  },
-  {
-    "name": "寂静之地：入侵日",
-    "lightOnTime": "01:28:41",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "海关战线",
-    "lightOnTime": "01:52:02",
-    "posterTime": "00:03:26"
-  },
-  {
-    "name": "默杀",
-    "lightOnTime": "01:58:40",
-    "posterTime": "00:04:22"
-  },
-  {
-    "name": "欢迎来到我身边",
-    "lightOnTime": "01:40:36",
-    "posterTime": "00:03:13"
-  },
-  {
-    "name": "脑洞大开",
-    "lightOnTime": "01:45:16",
-    "posterTime": "00:00:15"
-  },
-  {
-    "name": "传说",
-    "lightOnTime": "02:07:20",
-    "posterTime": "00:01:51"
-  },
-  {
-    "name": "伞少女",
-    "lightOnTime": "01:34:20",
-    "posterTime": "00:04:16"
-  },
-  {
-    "name": "落凡尘",
-    "lightOnTime": "01:54:01",
-    "posterTime": "00:02:25"
-  },
-  {
-    "name": "神偷奶爸4",
-    "lightOnTime": "01:31:36",
-    "posterTime": "00:02:53"
-  },
-  {
-    "name": "抓娃娃",
-    "lightOnTime": "02:13:00",
-    "posterTime": "00:04:23"
-  },
-  {
-    "name": "二郎神之深海蛟龙",
-    "lightOnTime": "01:29:13",
-    "posterTime": "00:00:15"
-  },
-  {
-    "name": "喜羊羊与灰太狼之守护",
-    "lightOnTime": "01:33:03",
-    "posterTime": "00:02:35"
-  },
-  {
-    "name": "寻秘自然：地球往事",
-    "lightOnTime": "01:22:40",
-    "posterTime": "00:01:40"
-  },
-  {
-    "name": "你的名字。",
-    "lightOnTime": "01:41:25",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "龙卷风",
-    "lightOnTime": "01:54:00",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "死侍与金刚狼",
-    "lightOnTime": "01:57:25",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "蓝色禁区：凪",
-    "nickname": "蓝色禁区：止",
-    "lightOnTime": "01:23:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "异人之下",
-    "lightOnTime": "02:10:45",
-    "posterTime": "00:03:39"
-  },
-  {
-    "name": "解密",
-    "lightOnTime": "02:27:18",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "八十天环游地球",
-    "lightOnTime": "01:16:56",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "从21世纪安全撤离",
-    "lightOnTime": "01:34:55",
-    "posterTime": "00:02:02"
-  },
-  {
-    "name": "白蛇：浮生",
-    "lightOnTime": "02:07:00",
-    "posterTime": "00:02:25"
-  },
-  {
-    "name": "灌篮高手",
-    "lightOnTime": "01:59:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "逆行人生",
-    "lightOnTime": "01:58:20",
-    "posterTime": "00:03:30"
-  },
-  {
-    "name": "负负得正",
-    "nickname": "负负德正",
-    "lightOnTime": "01:39:00",
-    "posterTime": "00:03:00"
-  },
-  {
-    "name": "重生",
-    "nickname": "崇生",
-    "lightOnTime": "01:51:16",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "名侦探柯南：百万美元的五棱星",
-    "lightOnTime": "01:43:47",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "红楼梦之金玉良缘",
-    "lightOnTime": "01:53:05",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "异形：夺命舰",
-    "lightOnTime": "01:52:00",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "阿狸",
-    "lightOnTime": "01:29:05",
-    "posterTime": "00:00:30"
-  },
-  {
-    "name": "假如，我是这世上最爱你的人",
-    "lightOnTime": "01:49:41",
-    "posterTime": "00:01:35"
-  },
-  {
-    "name": "航海王：强者天下",
-    "lightOnTime": "01:50:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "刺猬",
-    "lightOnTime": "01:44:08",
-    "posterTime": "00:03:22"
-  },
-  {
-    "name": "逆鳞",
-    "lightOnTime": "01:53:10",
-    "posterTime": "00:03:57"
-  },
-  {
-    "name": "姥姥的外孙",
-    "lightOnTime": "01:59:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "倒仓",
-    "lightOnTime": "01:39:05",
-    "posterTime": "00:01:52"
-  },
-  {
-    "name": "孤注一掷",
-    "lightOnTime": "02:08:43",
-    "posterTime": "00:03:30"
-  },
-  {
-    "name": "又是充满希望的一天",
-    "lightOnTime": "02:08:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "新龙门客栈（舞台纪录电影•越剧）",
-    "nickname": "新龙门客栈",
-    "lightOnTime": "01:50:24",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "爱情，到此为止",
-    "lightOnTime": "02:03:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "转生大作战",
-    "lightOnTime": "01:28:01",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "通往夏天的隧道，再见的出口",
-    "lightOnTime": "01:18:33",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "食神",
-    "lightOnTime": "01:30:25",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "出走的决心",
-    "lightOnTime": "01:46:50",
-    "posterTime": "00:04:05"
-  },
-  {
-    "name": "蛋宝大营救",
-    "lightOnTime": "01:20:27",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "里斯本丸沉没",
-    "lightOnTime": "01:54:42",
-    "posterTime": "00:01:36"
-  },
-  {
-    "name": "野孩子",
-    "lightOnTime": "02:02:45",
-    "posterTime": "00:02:07"
-  },
-  {
-    "name": "大圣降妖",
-    "nickname": "大圣翔妖",
-    "lightOnTime": "01:26:16",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "全员嫌疑人",
-    "lightOnTime": "01:31:36",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "一雪前耻",
-    "lightOnTime": "01:50:08",
-    "posterTime": "00:01:20"
-  },
-  {
-    "name": "流浪地球2",
-    "lightOnTime": "02:46:45",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "祝你幸福！",
-    "lightOnTime": "01:52:48",
-    "posterTime": "00:02:40"
-  },
-  {
-    "name": "大场面",
-    "lightOnTime": "01:41:26",
-    "posterTime": "00:04:18"
-  },
-  {
-    "name": "我是哪吒2之英雄归来",
-    "lightOnTime": "01:18:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "奇妙萌可大电影",
-    "lightOnTime": "01:23:08",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "看不见的朋友",
-    "lightOnTime": "01:39:25",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "荒野机器人",
-    "lightOnTime": "01:33:33",
-    "posterTime": "00:00:20"
-  },
-  {
-    "name": "富都青年",
-    "lightOnTime": "01:50:36",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "变形金刚：起源",
-    "lightOnTime": "01:35:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "只此青绿",
-    "lightOnTime": "01:25:05",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "志愿军：存亡之战",
-    "lightOnTime": "02:22:30",
-    "posterTime": "00:05:23"
-  },
-  {
-    "name": "危机航线",
-    "lightOnTime": "01:59:29",
-    "posterTime": "00:04:23"
-  },
-  {
-    "name": "出入平安",
-    "lightOnTime": "02:13:44",
-    "posterTime": "00:04:45"
-  },
-  {
-    "name": "熊猫计划",
-    "lightOnTime": "01:40:15",
-    "posterTime": "00:04:39"
-  },
-  {
-    "name": "爆款好人",
-    "lightOnTime": "01:50:37",
-    "posterTime": "00:01:04"
-  },
-  {
-    "name": "749局",
-    "nickname": "七四九局",
-    "lightOnTime": "02:01:30",
-    "posterTime": "00:03:43"
-  },
-  {
-    "name": "新大头儿子和小头爸爸6 迷你大冒险",
-    "lightOnTime": "01:26:02",
-    "posterTime": "00:00:32"
-  },
-  {
-    "name": "浴火之路",
-    "lightOnTime": "02:04:10",
-    "posterTime": "00:04:55"
-  },
-  {
-    "name": "绑架游戏",
-    "lightOnTime": "01:26:36",
-    "posterTime": "00:02:00"
-  },
-  {
-    "name": "小丑2：双重妄想",
-    "lightOnTime": "02:08:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "海绵宝宝：拯救比奇堡",
-    "lightOnTime": "01:17:15",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "密室逃脱",
-    "lightOnTime": "01:33:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "毒液：最后一舞",
-    "lightOnTime": "01:35:03",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "乔妍的心事",
-    "lightOnTime": "01:48:32",
-    "posterTime": "00:02:14"
-  },
-  {
-    "name": "蓦然回首",
-    "lightOnTime": "00:52:35",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "伟大征程",
-    "lightOnTime": "02:02:49",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "焚城",
-    "lightOnTime": "02:12:55",
-    "posterTime": "00:02:09"
-  },
-  {
-    "name": "这个杀手不太冷",
-    "lightOnTime": "02:07:45",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "老枪",
-    "lightOnTime": "01:54:45",
-    "posterTime": "00:00:30"
-  },
-  {
-    "name": "爱你很久很久",
-    "lightOnTime": "01:47:42",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "鸳鸯楼·惊魂",
-    "lightOnTime": "01:36:08",
-    "posterTime": "00:04:25"
-  },
-  {
-    "name": "胜券在握",
-    "lightOnTime": "02:16:54",
-    "posterTime": "00:04:25"
-  },
-  {
-    "name": "红色一号：冬日行动",
-    "lightOnTime": "01:56:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "夹缝之间",
-    "lightOnTime": "01:28:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "那个不为人知的故事",
-    "lightOnTime": "01:45:08",
-    "posterTime": "00:04:56"
-  },
-  {
-    "name": "火影忍者剧场版：忍者之路",
-    "lightOnTime": "01:43:07",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "我谈的那场恋爱",
-    "lightOnTime": "01:50:22",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "海上钢琴师",
-    "lightOnTime": "01:58:43",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "戴假发的人",
-    "lightOnTime": "02:00:43",
-    "posterTime": "00:04:25"
-  },
-  {
-    "name": "好东西",
-    "lightOnTime": "02:01:10",
-    "posterTime": "00:00:15"
-  },
-  {
-    "name": "古宅谜案",
-    "lightOnTime": "01:30:57",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "金钱堡垒",
-    "lightOnTime": "01:31:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "角斗士2",
-    "nickname": "决斗士2",
-    "lightOnTime": "02:18:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "风流一代",
-    "lightOnTime": "01:46:00",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "蜡笔小新：我们的恐龙日记",
-    "lightOnTime": "01:40:44",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "因果报应",
-    "lightOnTime": "02:18:25",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "大突围",
-    "lightOnTime": "01:42:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "海洋奇缘2",
-    "lightOnTime": "01:32:50",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "噬魂岛",
-    "lightOnTime": "01:39:00",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "好运来",
-    "lightOnTime": "01:40:16",
-    "posterTime": "00:03:36"
-  },
-  {
-    "name": "热血燃烧",
-    "lightOnTime": "01:25:48",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "不想和你有遗憾",
-    "lightOnTime": "01:35:45",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "如父如子",
-    "lightOnTime": "01:56:52",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "魔法坏女巫",
-    "lightOnTime": "02:31:22",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "孤星计划",
-    "lightOnTime": "01:44:25",
-    "posterTime": "00:03:20"
-  },
-  {
-    "name": "雄狮少年2",
-    "lightOnTime": "02:05:31",
-    "posterTime": "00:02:56"
-  },
-  {
-    "name": "误判",
-    "lightOnTime": "01:54:57",
-    "posterTime": "00:02:50"
-  },
-  {
-    "name": "美人鱼的夏天",
-    "lightOnTime": "01:24:33",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "破·地狱",
-    "lightOnTime": "02:02:17",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "多想和你再见一面",
-    "lightOnTime": "01:45:03",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "猎人克莱文",
-    "lightOnTime": "01:58:47",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "张杰曜北斗巡回演唱会",
-    "lightOnTime": "02:36:24",
-    "posterTime": "00:01:05"
-  },
-  {
-    "name": "狮子王：木法沙传奇",
-    "lightOnTime": "01:51:15",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "“骗骗”喜欢你",
-    "lightOnTime": "01:55:08",
-    "posterTime": "00:04:20"
-  },
-  {
-    "name": "小小的我",
-    "lightOnTime": "02:09:41",
-    "posterTime": "00:03:39"
-  },
-  {
-    "name": "名侦探柯南：迷宫的十字路口",
-    "lightOnTime": "01:44:05",
-    "posterTime": "00:01:05"
-  },
-  {
-    "name": "误杀3",
-    "lightOnTime": "01:46:32",
-    "posterTime": "00:03:18"
-  },
-  {
-    "name": "窗前明月，咣！",
-    "lightOnTime": "01:46:25",
-    "posterTime": "00:02:51"
-  },
-  {
-    "name": "帕丁顿熊3：秘鲁大冒险",
-    "lightOnTime": "01:39:32",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "火锅艺术家",
-    "lightOnTime": "01:36:18",
-    "posterTime": "00:03:20"
-  },
-  {
-    "name": "要牛",
-    "lightOnTime": "01:32:08",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "刺猬索尼克3",
-    "lightOnTime": "01:43:52",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "大红包2：龙凤呈祥",
-    "lightOnTime": "02:02:41",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "假爸爸",
-    "lightOnTime": "01:32:51",
-    "posterTime": "00:01:18"
-  },
-  {
-    "name": "碟仙玩偶",
-    "lightOnTime": "01:21:27",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "穿越时空的少女",
-    "lightOnTime": "01:34:43",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "恶行之外",
-    "lightOnTime": "01:21:10",
-    "posterTime": "00:01:31"
-  },
-  {
-    "name": "真爱找麻烦！",
-    "lightOnTime": "01:27:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "莫莉的冒险",
-    "lightOnTime": "01:40:33",
-    "posterTime": "00:01:36"
-  },
-  {
-    "name": "蛟龙行动",
-    "lightOnTime": "02:26:23",
-    "posterTime": "00:01:49"
-  },
-  {
-    "name": "射雕英雄传：侠之大者",
-    "lightOnTime": "02:26:58",
-    "posterTime": "00:06:33"
-  },
-  {
-    "name": "封神第二部：战火西岐",
-    "lightOnTime": "02:25:34",
-    "posterTime": "00:04:20"
-  },
-  {
-    "name": "唐探1900",
-	"nickname": "唐探一九零零",
-    "lightOnTime": "02:17:30",
-    "posterTime": "00:04:49"
-  },
-  {
-    "name": "熊出没·重启未来",
-    "lightOnTime": "01:47:25",
-    "posterTime": "00:05:15"
-  },
-  {
-    "name": "哪吒之魔童闹海",
-	"nickname": "呢吒之魔童闹海",
-    "lightOnTime": "02:25:15",
-    "posterTime": "00:03:27"
-  },
-  {
-    "name": "小英雄雨来",
-    "lightOnTime": "01:24:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "美国队长4",
-    "lightOnTime": "01:47:58",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "花样年华",
-    "lightOnTime": "01:42:23",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "诡才之道",
-    "lightOnTime": "01:44:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "您的声音",
-    "lightOnTime": "01:27:23",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "你的颜色",
-    "lightOnTime": "01:30:04",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "猫猫的奇幻漂流",
-    "lightOnTime": "01:22:27",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "致命抉择",
-    "lightOnTime": "01:31:40",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "初步举证",
-    "lightOnTime": "01:45:15",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "阴阳师0",
-    "lightOnTime": "01:48:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "编号17",
-    "lightOnTime": "02:05:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "插翅难飞",
-    "lightOnTime": "01:24:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "多幸运遇见你",
-    "lightOnTime": "01:30:24",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "还有明天",
-    "lightOnTime": "01:54:34",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "天堂旅行团",
-    "lightOnTime": "01:32:40",
-    "posterTime": "00:02:18"
-  },
-  {
-    "name": "海绵宝宝：皮老板大电影",
-    "lightOnTime": "01:18:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "平原上的火焰",
-    "lightOnTime": "01:38:45",
-    "posterTime": "00:03:54"
-  },
-  {
-    "name": "想飞的女孩",
-    "lightOnTime": "01:50:55",
-    "posterTime": "00:01:05"
-  },
-  {
-    "name": "非标准恋爱",
-    "lightOnTime": "01:35:04",
-    "posterTime": "00:02:05"
-  },
-  {
-    "name": "真爱营业",
-    "lightOnTime": "01:38:55",
-    "posterTime": "00:04:20"
-  },
-  {
-    "name": "久别·重逢",
-    "lightOnTime": "01:42:42",
-    "posterTime": "00:00:32"
-  },
-  {
-    "name": "疾速追杀4",
-    "lightOnTime": "02:38:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "夜半凶宅",
-    "lightOnTime": "01:28:05",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "歪打正好",
-    "lightOnTime": "01:37:12",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "我会好好的",
-    "lightOnTime": "02:00:03",
-    "posterTime": "00:02:13"
-  },
-  {
-    "name": "援藏日记",
-    "lightOnTime": "01:51:16",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "白雪公主",
-    "lightOnTime": "01:39:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "倩女幽魂（87版）",
-	"nickname": "倩女幽魂（八七版）",
-    "lightOnTime": "01:34:37",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "怒水西流",
-	"nickname": "怒水溪流",
-    "lightOnTime": "01:30:55",
-    "posterTime": "00:03:35"
-  },
-  {
-    "name": "制暴：无限杀机",
-    "lightOnTime": "01:50:15",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "猎狐·行动",
-    "lightOnTime": "01:43:35",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "向阳·花",
-    "lightOnTime": "02:03:29",
-    "posterTime": "00:03:21"
-  },
-  {
-    "name": "不说话的爱",
-    "lightOnTime": "01:42:00",
-    "posterTime": "00:03:28"
-  },
-  {
-    "name": "阳光照耀青春里",
-    "lightOnTime": "02:06:10",
-    "posterTime": "00:02:57"
-  },
-  {
-    "name": "机动战士高达：跨时之战",
-    "lightOnTime": "01:16:04",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "我的世界大电影",
-    "lightOnTime": "01:33:46",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "此心安处",
-    "lightOnTime": "01:35:14",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "速度与激情7",
-    "lightOnTime": "02:09:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "命中罪爱",
-    "lightOnTime": "01:41:46",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "谍网追凶",
-    "lightOnTime": "01:56:51",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "火之鸟 伊甸之花",
-    "lightOnTime": "01:27:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "孤独的美食家 剧场版",
-    "lightOnTime": "01:45:26",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "乐一通大电影：地球爆炸之日",
-    "lightOnTime": "01:25:46",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "触碰你",
-    "lightOnTime": "01:41:33",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "有病才会喜欢你",
-    "lightOnTime": "01:45:46",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "孤独摇滚（上）",
-    "lightOnTime": "01:25:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "荣耀",
-    "lightOnTime": "01:33:37",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "人生开门红",
-    "lightOnTime": "01:49:07",
-    "posterTime": "00:02:09"
-  },
-  {
-    "name": "雷霆特攻队*",
-    "lightOnTime": "01:54:03",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "水饺皇后",
-    "lightOnTime": "02:00:45",
-    "posterTime": "00:02:57"
-  },
-  {
-    "name": "大风杀",
-    "lightOnTime": "02:08:24",
-    "posterTime": "00:02:09"
-  },
-  {
-    "name": "海底小纵队：海啸大危机",
-    "lightOnTime": "01:25:40",
-    "posterTime": "00:01:25"
-  },
-  {
-    "name": "猎金·游戏",
-    "lightOnTime": "02:07:23",
-    "posterTime": "00:04:17"
-  },
-  {
-    "name": "苍茫的天涯是我的爱",
-    "lightOnTime": "01:47:19",
-    "posterTime": "00:03:13"
-  },
-  {
-    "name": "幽灵公主",
-    "lightOnTime": "02:08:29",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "开心超人之逆世营救",
-    "lightOnTime": "01:36:44",
-    "posterTime": "00:00:15"
-  },
-  {
-    "name": "独一无二",
-    "lightOnTime": "02:00:24",
-    "posterTime": "00:01:35"
-  },
-  {
-    "name": "地上的云朵",
-    "lightOnTime": "01:21:35",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "孤独摇滚（下）",
-    "lightOnTime": "01:10:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "冲·撞",
-    "lightOnTime": "02:00:25",
-    "posterTime": "00:01:03"
-  },
-  {
-    "name": "攻壳机动队",
-    "lightOnTime": "01:17:38",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "情书",
-    "lightOnTime": "01:53:35",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "会计刺客2",
-    "lightOnTime": "02:03:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "永不失联的爱",
-    "lightOnTime": "01:35:27",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "时间之子",
-    "lightOnTime": "01:43:50",
-    "posterTime": "00:03:21"
-  },
-  {
-    "name": "星际宝贝史迪奇",
-    "lightOnTime": "01:38:51",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "心理有秘密",
-    "lightOnTime": "01:30:40",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "红嫁衣",
-    "lightOnTime": "01:26:38",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "碟中谍8：最终清算",
-    "lightOnTime": "02:42:05",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "新大头儿子和小头爸爸3俄罗斯奇遇记",
-    "lightOnTime": "01:18:01",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "哆啦A梦：大雄的绘画奇遇记",
-    "lightOnTime": "01:41:35",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "私家侦探",
-    "lightOnTime": "01:40:43",
-    "posterTime": "00:03:45"
-  },
-  {
-    "name": "潜艇总动员：冒险岛",
-    "lightOnTime": "01:23:12",
-    "posterTime": "00:00:32"
-  },
-  {
-    "name": "疾速追杀：芭蕾杀姬",
-    "lightOnTime": "01:55:45",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "功夫梦：融合之道",
-    "lightOnTime": "01:27:02",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "新·驯龙高手",
-    "lightOnTime": "01:57:05",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "分手清单",
-    "lightOnTime": "02:06:25",
-    "posterTime": "00:02:54"
-  },
-  {
-    "name": "星月童话",
-    "lightOnTime": "01:43:21",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "非常交易",
-    "lightOnTime": "01:32:15",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "酱园弄·悬案",
-    "lightOnTime": "01:34:40",
-    "posterTime": "00:03:46"
-  },
-  {
-    "name": "人生会议",
-    "lightOnTime": "01:44:33",
-    "posterTime": "00:03:38"
-  },
-  {
-    "name": "艺术学院1994",
-	"nickname": "艺术学院一九九四",
-    "lightOnTime": "01:56:00",
-    "posterTime": "00:02:55"
-  },
-  {
-    "name": "阿克达拉",
-    "lightOnTime": "01:34:51",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "炽热年华",
-    "lightOnTime": "01:35:23",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "一生交给党",
-    "lightOnTime": "01:28:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "新三峡",
-    "lightOnTime": "00:58:08",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "F1：狂飙飞车",
-    "lightOnTime": "02:28:56",
-    "posterTime": "00:01:02"
-  },
-  {
-    "name": "无名之辈：否极泰来",
-	"nickname": "无名之辈：痞极泰来",
-    "lightOnTime": "02:01:58",
-    "posterTime": "00:03:44"
-  },
-  {
-    "name": "名侦探柯南：独眼的残像",
-    "lightOnTime": "01:41:10",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "地球特派员",
-    "lightOnTime": "01:29:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "蜡笔小新：大人王国的反击",
-    "lightOnTime": "01:27:27",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "恶意",
-    "lightOnTime": "01:38:55",
-    "posterTime": "00:03:46"
-  },
-  {
-    "name": "山庄·惊魂",
-    "lightOnTime": "01:37:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "当哒当：邪视",
-    "lightOnTime": "01:28:18",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "侏罗纪世界：重生",
-    "lightOnTime": "02:06:05",
-    "posterTime": "00:01:59"
-  },
-  {
-    "name": "和我说早安",
-    "lightOnTime": "01:27:00",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "小白船",
-    "lightOnTime": "01:26:00",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "天宝",
-    "lightOnTime": "01:42:50",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "午夜游戏",
-    "lightOnTime": "01:23:49",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "超人",
-    "lightOnTime": "01:58:59",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "聊斋：兰若寺",
-    "lightOnTime": "02:25:40",
-    "posterTime": "00:01:37"
-  },
-  {
-    "name": "戏台",
-    "lightOnTime": "01:54:35",
-    "posterTime": "00:03:37"
-  },
-  {
-    "name": "长安的荔枝",
-    "lightOnTime": "01:59:50",
-    "posterTime": "00:04:08"
-  },
-  {
-    "name": "花漾少女杀人事件",
-    "lightOnTime": "01:43:50",
-    "posterTime": "00:01:34"
-  },
-  {
-    "name": "魔法蓝精灵",
-    "lightOnTime": "01:24:12",
-    "posterTime": "00:00:48"
-  },
-  {
-    "name": "罗小黑战记2",
-    "lightOnTime": "01:59:40",
-    "posterTime": "00:03:30"
-  },
-  {
-    "name": "寻秘自然：时间的形状",
-    "lightOnTime": "01:22:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "你行！你上！",
-	"nickname": "你型！你上！",
-    "lightOnTime": "02:24:00",
-    "posterTime": "00:03:09"
-  },
-  {
-    "name": "喜羊羊与灰太狼之异国破晓",
-    "lightOnTime": "01:32:28",
-    "posterTime": "00:00:45"
-  },
-  {
-    "name": "南京照相馆",
-    "lightOnTime": "02:17:45",
-    "posterTime": "00:04:00"
-  },
-  {
-    "name": "封门村惊魂",
-    "lightOnTime": "01:26:29",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "神奇4侠：初露锋芒",
-    "lightOnTime": "01:46:54",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "浪浪山小妖怪",
-    "lightOnTime": "01:56:40",
-    "posterTime": "00:03:23"
-  },
-  {
-    "name": "猫和老鼠：星盘奇缘",
-    "lightOnTime": "01:34:38",
-    "posterTime": "00:00:48"
-  },
-  {
-    "name": "捕风追影",
-    "lightOnTime": "02:19:05",
-    "posterTime": "00:03:06"
-  },
-  {
-    "name": "东极岛",
-    "lightOnTime": "02:12:02",
-    "posterTime": "00:04:15"
-  },
-  {
-    "name": "奇遇",
-    "lightOnTime": "02:09:05",
-    "posterTime": "00:03:22"
-  },
-  {
-    "name": "山河为证",
-    "lightOnTime": "01:41:13",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "非人哉：限时玩家",
-    "lightOnTime": "01:39:26",
-    "posterTime": "00:03:40"
-  },
-  {
-    "name": "坏蛋联盟2",
-    "lightOnTime": "01:33:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "脱缰者也",
-    "lightOnTime": "01:56:40",
-    "posterTime": "00:00:47"
-  },
-  {
-    "name": "赎梦",
-    "lightOnTime": "01:30:30",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "青蛇",
-    "lightOnTime": "01:36:32",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "死神来了：血脉诅咒",
-    "lightOnTime": "01:41:49",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "蛟龙行动（特别版）",
-    "lightOnTime": "02:07:50",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "7天",
-    "lightOnTime": "02:00:40",
-    "posterTime": "00:02:40"
-  },
-  {
-    "name": "有朵云像你",
-    "lightOnTime": "01:57:35",
-    "posterTime": "00:01:53"
-  },
-  {
-    "name": "午夜凶镜",
-    "lightOnTime": "01:22:22",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "轻于鸿毛",
-    "lightOnTime": "01:47:49",
-    "posterTime": "00:02:22"
-  },
-  {
-    "name": "营救飞虎",
-    "lightOnTime": "01:40:25",
-    "posterTime": "00:00:38"
-  },
-  {
-    "name": "关于约会的一切",
-    "lightOnTime": "01:31:54",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "窗外是蓝星",
-    "lightOnTime": "01:24:26",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "小鹿斑比：清算",
-    "lightOnTime": "01:14:13",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "熊孩子·探险熊兵",
-    "lightOnTime": "01:12:52",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "午夜怪谈2",
-    "lightOnTime": "01:27:47",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "731",
-	"nickname": "七三幺",
-    "lightOnTime": "02:02:30",
-    "posterTime": "00:00:30"
-  },
-  {
-    "name": "天大的事",
-    "lightOnTime": "01:37:55",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "临时决斗",
-    "lightOnTime": "01:43:48",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "浪浪人生",
-    "lightOnTime": "02:03:03",
-    "posterTime": "00:03:53"
-  },
-  {
-    "name": "志愿军：浴血和平",
-    "lightOnTime": "02:22:18",
-    "posterTime": "00:04:26"
-  },
-  {
-    "name": "风林火山",
-    "lightOnTime": "02:02:48",
-    "posterTime": "00:03:37"
-  },
-  {
-    "name": "疯狂电脑城",
-    "lightOnTime": "01:25:59",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "毕正明的证明",
-    "lightOnTime": "02:03:40",
-    "posterTime": "00:02:10"
-  },
-  {
-    "name": "猪猪侠·一只老猪的逆袭",
-    "lightOnTime": "01:22:20",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "三国的星空第一部",
-    "lightOnTime": "01:58:25",
-    "posterTime": "00:02:35"
-  },
-  {
-    "name": "刺杀小说家2",
-    "lightOnTime": "02:13:02",
-    "posterTime": "00:04:10"
-  },
-  {
-    "name": "震耳欲聋",
-    "lightOnTime": "02:03:27",
-    "posterTime": "00:02:40"
-  },
-  {
-    "name": "巫咒",
-    "lightOnTime": "01:27:00",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "火种",
-    "lightOnTime": "01:32:53",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "创：战神",
-    "lightOnTime": "01:51:05",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "一战再战",
-    "lightOnTime": "02:33:54",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "寻她",
-	"nickname": "寻 她",
-    "lightOnTime": "01:41:59",
-    "posterTime": "00:00:00"
-  },
-  {
-    "name": "小山河",
-	"nickname": "",
-    "lightOnTime": "01:29:32",
-    "posterTime": "00:00:00"
-  }
+[{
+		"name": "电影名",
+		"nickname": "电影昵称",
+		"lightOnTime": "结束时间",
+		"posterTime": "龙标时间"
+	},
+	{
+		"name": "灿烂的她",
+		"lightOnTime": "01:55:55",
+		"posterTime": "00:03:21"
+	},
+	{
+		"name": "飞驰人生2",
+		"lightOnTime": "02:01:00",
+		"posterTime": "00:04:25"
+	},
+	{
+		"name": "红毯先生",
+		"lightOnTime": "02:00:15",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "被我弄丢的你",
+		"lightOnTime": "01:52:04",
+		"posterTime": "00:03:20"
+	},
+	{
+		"name": "周处除三害",
+		"lightOnTime": "02:09:03",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "挑战",
+		"lightOnTime": "01:54:42",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "沙丘2",
+		"lightOnTime": "02:37:45",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "热辣滚烫",
+		"lightOnTime": "02:05:20",
+		"posterTime": "00:05:00"
+	},
+	{
+		"name": "熊出没·逆转时空",
+		"nickname": "熊出默·逆转时空",
+		"lightOnTime": "01:47:31",
+		"posterTime": "00:05:01"
+	},
+	{
+		"name": "第二十条",
+		"lightOnTime": "02:19:52",
+		"posterTime": "00:02:40"
+	},
+	{
+		"name": "功夫熊猫4",
+		"lightOnTime": "01:25:00",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "堡垒",
+		"lightOnTime": "01:48:52",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "我们一起摇太阳",
+		"nickname": "我们一起姚泰阳",
+		"lightOnTime": "02:06:40",
+		"posterTime": "00:04:40"
+	},
+	{
+		"name": "银河写手",
+		"lightOnTime": "01:40:45",
+		"posterTime": "00:02:26"
+	},
+	{
+		"name": "哥斯拉大战金刚2：帝国崛起",
+		"lightOnTime": "01:46:38",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "黄雀在后！",
+		"lightOnTime": "01:37:10",
+		"posterTime": "00:03:18"
+	},
+	{
+		"name": "草木人间",
+		"lightOnTime": "01:54:19",
+		"posterTime": "00:01:35"
+	},
+	{
+		"name": "你想活出怎样的人生",
+		"lightOnTime": "01:59:18",
+		"posterTime": "00:01:07"
+	},
+	{
+		"name": "冰雪女王5：融冰之战",
+		"lightOnTime": "01:09:16",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "大“反”派",
+		"lightOnTime": "01:36:44",
+		"posterTime": "00:03:16"
+	},
+	{
+		"name": "白日之下",
+		"lightOnTime": "01:42:03",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "来自汪星的你",
+		"lightOnTime": "01:40:07",
+		"posterTime": "00:02:41"
+	},
+	{
+		"name": "年少日记",
+		"lightOnTime": "01:28:53",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "消失的木偶",
+		"lightOnTime": "01:18:21",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "数码宝贝02：最初的召唤",
+		"lightOnTime": "01:15:25",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "屋顶足球",
+		"lightOnTime": "01:34:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "重山之外",
+		"nickname": "虫山之外",
+		"lightOnTime": "01:29:25",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "小倩",
+		"lightOnTime": "01:47:50",
+		"posterTime": "00:01:03"
+	},
+	{
+		"name": "九龙城寨之围城",
+		"lightOnTime": "02:08:15",
+		"posterTime": "00:03:58"
+	},
+	{
+		"name": "没有一顿火锅解决不了的事",
+		"lightOnTime": "02:07:10",
+		"posterTime": "00:01:33"
+	},
+	{
+		"name": "间谍过家家 代号：白",
+		"lightOnTime": "01:46:41",
+		"posterTime": "00:02:35"
+	},
+	{
+		"name": "哈尔的移动城堡",
+		"lightOnTime": "01:57:35",
+		"posterTime": "00:02:32"
+	},
+	{
+		"name": "维和防暴队",
+		"lightOnTime": "01:31:35",
+		"posterTime": "00:03:31"
+	},
+	{
+		"name": "末路狂花钱",
+		"lightOnTime": "01:47:15",
+		"posterTime": "00:05:01"
+	},
+	{
+		"name": "猪猪侠大电影·星际行动",
+		"lightOnTime": "01:23:14",
+		"posterTime": "00:01:15"
+	},
+	{
+		"name": "穿过月亮的旅行",
+		"lightOnTime": "01:46:35",
+		"posterTime": "00:03:35"
+	},
+	{
+		"name": "猩球崛起：新世界",
+		"lightOnTime": "02:16:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "泪光中的妈妈",
+		"lightOnTime": "01:38:05",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "特技狂人",
+		"lightOnTime": "01:59:39",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "你就在我身边",
+		"lightOnTime": "01:31:50",
+		"posterTime": "00:01:26"
+	},
+	{
+		"name": "彷徨之刃",
+		"lightOnTime": "01:44:25",
+		"posterTime": "00:01:49"
+	},
+	{
+		"name": "朝云暮雨",
+		"nickname": "招云木雨",
+		"lightOnTime": "01:46:40",
+		"posterTime": "00:02:40"
+	},
+	{
+		"name": "今夜，就算这份爱恋从世界上消失",
+		"lightOnTime": "01:57:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "四月女友",
+		"lightOnTime": "01:43:19",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "错过你的那些年",
+		"lightOnTime": "01:57:35",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "替身纸人2",
+		"lightOnTime": "01:31:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "你是我的英雄",
+		"lightOnTime": "01:56:12",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "盟军敢死队",
+		"lightOnTime": "01:50:08",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "三叉戟",
+		"lightOnTime": "01:46:00",
+		"posterTime": "00:01:36"
+	},
+	{
+		"name": "再会长江",
+		"lightOnTime": "01:46:25",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "朱同在三年级丢失了超能力",
+		"lightOnTime": "01:35:04",
+		"posterTime": "00:02:10"
+	},
+	{
+		"name": "人生大事",
+		"lightOnTime": "01:48:35",
+		"posterTime": "00:03:47"
+	},
+	{
+		"name": "扫黑·决不放弃",
+		"lightOnTime": "01:55:12",
+		"posterTime": "00:01:53"
+	},
+	{
+		"name": "我才不要和你做朋友呢",
+		"lightOnTime": "01:54:10",
+		"posterTime": "00:02:45"
+	},
+	{
+		"name": "哆啦A梦：大雄的地球交响乐",
+		"lightOnTime": "01:52:16",
+		"posterTime": "00:00:33"
+	},
+	{
+		"name": "谈判专家",
+		"lightOnTime": "01:58:20",
+		"posterTime": "00:03:43"
+	},
+	{
+		"name": "潜艇总动员：寻龙",
+		"lightOnTime": "01:23:31",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "加菲猫家族",
+		"lightOnTime": "01:31:15",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "美国内战",
+		"lightOnTime": "01:41:09",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "来福大酒店",
+		"lightOnTime": "01:59:24",
+		"posterTime": "00:03:10"
+	},
+	{
+		"name": "疯狂的麦克斯：狂暴女神",
+		"lightOnTime": "02:17:43",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "走走停停",
+		"lightOnTime": "01:39:47",
+		"posterTime": "00:02:59"
+	},
+	{
+		"name": "机器人之梦",
+		"lightOnTime": "01:37:57",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "狗阵",
+		"lightOnTime": "01:53:28",
+		"posterTime": "00:02:14"
+	},
+	{
+		"name": "爸爸是外星人",
+		"lightOnTime": "01:34:33",
+		"posterTime": "00:03:05"
+	},
+	{
+		"name": "排球少年！！垃圾场决战",
+		"lightOnTime": "01:17:49",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "神秘友友",
+		"lightOnTime": "01:37:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "头脑特工队2",
+		"lightOnTime": "01:26:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "云边有个小卖部",
+		"lightOnTime": "02:10:08",
+		"posterTime": "00:03:58"
+	},
+	{
+		"name": "绝地战警：生死与共",
+		"lightOnTime": "01:49:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "沙漏",
+		"lightOnTime": "01:47:05",
+		"posterTime": "00:01:50"
+	},
+	{
+		"name": "寂静之地：入侵日",
+		"lightOnTime": "01:28:41",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "海关战线",
+		"lightOnTime": "01:52:02",
+		"posterTime": "00:03:26"
+	},
+	{
+		"name": "默杀",
+		"lightOnTime": "01:58:40",
+		"posterTime": "00:04:22"
+	},
+	{
+		"name": "欢迎来到我身边",
+		"lightOnTime": "01:40:36",
+		"posterTime": "00:03:13"
+	},
+	{
+		"name": "脑洞大开",
+		"lightOnTime": "01:45:16",
+		"posterTime": "00:00:15"
+	},
+	{
+		"name": "传说",
+		"lightOnTime": "02:07:20",
+		"posterTime": "00:01:51"
+	},
+	{
+		"name": "伞少女",
+		"lightOnTime": "01:34:20",
+		"posterTime": "00:04:16"
+	},
+	{
+		"name": "落凡尘",
+		"lightOnTime": "01:54:01",
+		"posterTime": "00:02:25"
+	},
+	{
+		"name": "神偷奶爸4",
+		"lightOnTime": "01:31:36",
+		"posterTime": "00:02:53"
+	},
+	{
+		"name": "抓娃娃",
+		"lightOnTime": "02:13:00",
+		"posterTime": "00:04:23"
+	},
+	{
+		"name": "二郎神之深海蛟龙",
+		"lightOnTime": "01:29:13",
+		"posterTime": "00:00:15"
+	},
+	{
+		"name": "喜羊羊与灰太狼之守护",
+		"lightOnTime": "01:33:03",
+		"posterTime": "00:02:35"
+	},
+	{
+		"name": "寻秘自然：地球往事",
+		"lightOnTime": "01:22:40",
+		"posterTime": "00:01:40"
+	},
+	{
+		"name": "你的名字。",
+		"lightOnTime": "01:41:25",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "龙卷风",
+		"lightOnTime": "01:54:00",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "死侍与金刚狼",
+		"lightOnTime": "01:57:25",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "蓝色禁区：凪",
+		"nickname": "蓝色禁区：止",
+		"lightOnTime": "01:23:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "异人之下",
+		"lightOnTime": "02:10:45",
+		"posterTime": "00:03:39"
+	},
+	{
+		"name": "解密",
+		"lightOnTime": "02:27:18",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "八十天环游地球",
+		"lightOnTime": "01:16:56",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "从21世纪安全撤离",
+		"lightOnTime": "01:34:55",
+		"posterTime": "00:02:02"
+	},
+	{
+		"name": "白蛇：浮生",
+		"lightOnTime": "02:07:00",
+		"posterTime": "00:02:25"
+	},
+	{
+		"name": "灌篮高手",
+		"lightOnTime": "01:59:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "逆行人生",
+		"lightOnTime": "01:58:20",
+		"posterTime": "00:03:30"
+	},
+	{
+		"name": "负负得正",
+		"nickname": "负负德正",
+		"lightOnTime": "01:39:00",
+		"posterTime": "00:03:00"
+	},
+	{
+		"name": "重生",
+		"nickname": "崇生",
+		"lightOnTime": "01:51:16",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "名侦探柯南：百万美元的五棱星",
+		"lightOnTime": "01:43:47",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "红楼梦之金玉良缘",
+		"lightOnTime": "01:53:05",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "异形：夺命舰",
+		"lightOnTime": "01:52:00",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "阿狸",
+		"lightOnTime": "01:29:05",
+		"posterTime": "00:00:30"
+	},
+	{
+		"name": "假如，我是这世上最爱你的人",
+		"lightOnTime": "01:49:41",
+		"posterTime": "00:01:35"
+	},
+	{
+		"name": "航海王：强者天下",
+		"lightOnTime": "01:50:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "刺猬",
+		"lightOnTime": "01:44:08",
+		"posterTime": "00:03:22"
+	},
+	{
+		"name": "逆鳞",
+		"lightOnTime": "01:53:10",
+		"posterTime": "00:03:57"
+	},
+	{
+		"name": "姥姥的外孙",
+		"lightOnTime": "01:59:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "倒仓",
+		"lightOnTime": "01:39:05",
+		"posterTime": "00:01:52"
+	},
+	{
+		"name": "孤注一掷",
+		"lightOnTime": "02:08:43",
+		"posterTime": "00:03:30"
+	},
+	{
+		"name": "又是充满希望的一天",
+		"lightOnTime": "02:08:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "新龙门客栈（舞台纪录电影•越剧）",
+		"nickname": "新龙门客栈",
+		"lightOnTime": "01:50:24",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "爱情，到此为止",
+		"lightOnTime": "02:03:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "转生大作战",
+		"lightOnTime": "01:28:01",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "通往夏天的隧道，再见的出口",
+		"lightOnTime": "01:18:33",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "食神",
+		"lightOnTime": "01:30:25",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "出走的决心",
+		"lightOnTime": "01:46:50",
+		"posterTime": "00:04:05"
+	},
+	{
+		"name": "蛋宝大营救",
+		"lightOnTime": "01:20:27",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "里斯本丸沉没",
+		"lightOnTime": "01:54:42",
+		"posterTime": "00:01:36"
+	},
+	{
+		"name": "野孩子",
+		"lightOnTime": "02:02:45",
+		"posterTime": "00:02:07"
+	},
+	{
+		"name": "大圣降妖",
+		"nickname": "大圣翔妖",
+		"lightOnTime": "01:26:16",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "全员嫌疑人",
+		"lightOnTime": "01:31:36",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "一雪前耻",
+		"lightOnTime": "01:50:08",
+		"posterTime": "00:01:20"
+	},
+	{
+		"name": "流浪地球2",
+		"lightOnTime": "02:46:45",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "祝你幸福！",
+		"lightOnTime": "01:52:48",
+		"posterTime": "00:02:40"
+	},
+	{
+		"name": "大场面",
+		"lightOnTime": "01:41:26",
+		"posterTime": "00:04:18"
+	},
+	{
+		"name": "我是哪吒2之英雄归来",
+		"lightOnTime": "01:18:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "奇妙萌可大电影",
+		"lightOnTime": "01:23:08",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "看不见的朋友",
+		"lightOnTime": "01:39:25",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "荒野机器人",
+		"lightOnTime": "01:33:33",
+		"posterTime": "00:00:20"
+	},
+	{
+		"name": "富都青年",
+		"lightOnTime": "01:50:36",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "变形金刚：起源",
+		"lightOnTime": "01:35:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "只此青绿",
+		"lightOnTime": "01:25:05",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "志愿军：存亡之战",
+		"lightOnTime": "02:22:30",
+		"posterTime": "00:05:23"
+	},
+	{
+		"name": "危机航线",
+		"lightOnTime": "01:59:29",
+		"posterTime": "00:04:23"
+	},
+	{
+		"name": "出入平安",
+		"lightOnTime": "02:13:44",
+		"posterTime": "00:04:45"
+	},
+	{
+		"name": "熊猫计划",
+		"lightOnTime": "01:40:15",
+		"posterTime": "00:04:39"
+	},
+	{
+		"name": "爆款好人",
+		"lightOnTime": "01:50:37",
+		"posterTime": "00:01:04"
+	},
+	{
+		"name": "749局",
+		"nickname": "七四九局",
+		"lightOnTime": "02:01:30",
+		"posterTime": "00:03:43"
+	},
+	{
+		"name": "新大头儿子和小头爸爸6 迷你大冒险",
+		"lightOnTime": "01:26:02",
+		"posterTime": "00:00:32"
+	},
+	{
+		"name": "浴火之路",
+		"lightOnTime": "02:04:10",
+		"posterTime": "00:04:55"
+	},
+	{
+		"name": "绑架游戏",
+		"lightOnTime": "01:26:36",
+		"posterTime": "00:02:00"
+	},
+	{
+		"name": "小丑2：双重妄想",
+		"lightOnTime": "02:08:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "海绵宝宝：拯救比奇堡",
+		"lightOnTime": "01:17:15",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "密室逃脱",
+		"lightOnTime": "01:33:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "毒液：最后一舞",
+		"lightOnTime": "01:35:03",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "乔妍的心事",
+		"lightOnTime": "01:48:32",
+		"posterTime": "00:02:14"
+	},
+	{
+		"name": "蓦然回首",
+		"lightOnTime": "00:52:35",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "伟大征程",
+		"lightOnTime": "02:02:49",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "焚城",
+		"lightOnTime": "02:12:55",
+		"posterTime": "00:02:09"
+	},
+	{
+		"name": "这个杀手不太冷",
+		"lightOnTime": "02:07:45",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "老枪",
+		"lightOnTime": "01:54:45",
+		"posterTime": "00:00:30"
+	},
+	{
+		"name": "爱你很久很久",
+		"lightOnTime": "01:47:42",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "鸳鸯楼·惊魂",
+		"lightOnTime": "01:36:08",
+		"posterTime": "00:04:25"
+	},
+	{
+		"name": "胜券在握",
+		"lightOnTime": "02:16:54",
+		"posterTime": "00:04:25"
+	},
+	{
+		"name": "红色一号：冬日行动",
+		"lightOnTime": "01:56:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "夹缝之间",
+		"lightOnTime": "01:28:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "那个不为人知的故事",
+		"lightOnTime": "01:45:08",
+		"posterTime": "00:04:56"
+	},
+	{
+		"name": "火影忍者剧场版：忍者之路",
+		"lightOnTime": "01:43:07",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "我谈的那场恋爱",
+		"lightOnTime": "01:50:22",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "海上钢琴师",
+		"lightOnTime": "01:58:43",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "戴假发的人",
+		"lightOnTime": "02:00:43",
+		"posterTime": "00:04:25"
+	},
+	{
+		"name": "好东西",
+		"lightOnTime": "02:01:10",
+		"posterTime": "00:00:15"
+	},
+	{
+		"name": "古宅谜案",
+		"lightOnTime": "01:30:57",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "金钱堡垒",
+		"lightOnTime": "01:31:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "角斗士2",
+		"nickname": "决斗士2",
+		"lightOnTime": "02:18:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "风流一代",
+		"lightOnTime": "01:46:00",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "蜡笔小新：我们的恐龙日记",
+		"lightOnTime": "01:40:44",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "因果报应",
+		"lightOnTime": "02:18:25",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "大突围",
+		"lightOnTime": "01:42:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "海洋奇缘2",
+		"lightOnTime": "01:32:50",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "噬魂岛",
+		"lightOnTime": "01:39:00",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "好运来",
+		"lightOnTime": "01:40:16",
+		"posterTime": "00:03:36"
+	},
+	{
+		"name": "热血燃烧",
+		"lightOnTime": "01:25:48",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "不想和你有遗憾",
+		"lightOnTime": "01:35:45",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "如父如子",
+		"lightOnTime": "01:56:52",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "魔法坏女巫",
+		"lightOnTime": "02:31:22",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "孤星计划",
+		"lightOnTime": "01:44:25",
+		"posterTime": "00:03:20"
+	},
+	{
+		"name": "雄狮少年2",
+		"lightOnTime": "02:05:31",
+		"posterTime": "00:02:56"
+	},
+	{
+		"name": "误判",
+		"lightOnTime": "01:54:57",
+		"posterTime": "00:02:50"
+	},
+	{
+		"name": "美人鱼的夏天",
+		"lightOnTime": "01:24:33",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "破·地狱",
+		"lightOnTime": "02:02:17",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "多想和你再见一面",
+		"lightOnTime": "01:45:03",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "猎人克莱文",
+		"lightOnTime": "01:58:47",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "张杰曜北斗巡回演唱会",
+		"lightOnTime": "02:36:24",
+		"posterTime": "00:01:05"
+	},
+	{
+		"name": "狮子王：木法沙传奇",
+		"lightOnTime": "01:51:15",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "“骗骗”喜欢你",
+		"lightOnTime": "01:55:08",
+		"posterTime": "00:04:20"
+	},
+	{
+		"name": "小小的我",
+		"lightOnTime": "02:09:41",
+		"posterTime": "00:03:39"
+	},
+	{
+		"name": "名侦探柯南：迷宫的十字路口",
+		"lightOnTime": "01:44:05",
+		"posterTime": "00:01:05"
+	},
+	{
+		"name": "误杀3",
+		"lightOnTime": "01:46:32",
+		"posterTime": "00:03:18"
+	},
+	{
+		"name": "窗前明月，咣！",
+		"lightOnTime": "01:46:25",
+		"posterTime": "00:02:51"
+	},
+	{
+		"name": "帕丁顿熊3：秘鲁大冒险",
+		"lightOnTime": "01:39:32",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "火锅艺术家",
+		"lightOnTime": "01:36:18",
+		"posterTime": "00:03:20"
+	},
+	{
+		"name": "要牛",
+		"lightOnTime": "01:32:08",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "刺猬索尼克3",
+		"lightOnTime": "01:43:52",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "大红包2：龙凤呈祥",
+		"lightOnTime": "02:02:41",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "假爸爸",
+		"lightOnTime": "01:32:51",
+		"posterTime": "00:01:18"
+	},
+	{
+		"name": "碟仙玩偶",
+		"lightOnTime": "01:21:27",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "穿越时空的少女",
+		"lightOnTime": "01:34:43",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "恶行之外",
+		"lightOnTime": "01:21:10",
+		"posterTime": "00:01:31"
+	},
+	{
+		"name": "真爱找麻烦！",
+		"lightOnTime": "01:27:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "莫莉的冒险",
+		"lightOnTime": "01:40:33",
+		"posterTime": "00:01:36"
+	},
+	{
+		"name": "蛟龙行动",
+		"lightOnTime": "02:26:23",
+		"posterTime": "00:01:49"
+	},
+	{
+		"name": "射雕英雄传：侠之大者",
+		"lightOnTime": "02:26:58",
+		"posterTime": "00:06:33"
+	},
+	{
+		"name": "封神第二部：战火西岐",
+		"lightOnTime": "02:25:34",
+		"posterTime": "00:04:20"
+	},
+	{
+		"name": "唐探1900",
+		"nickname": "唐探一九零零",
+		"lightOnTime": "02:17:30",
+		"posterTime": "00:04:49"
+	},
+	{
+		"name": "熊出没·重启未来",
+		"lightOnTime": "01:47:25",
+		"posterTime": "00:05:15"
+	},
+	{
+		"name": "哪吒之魔童闹海",
+		"nickname": "呢吒之魔童闹海",
+		"lightOnTime": "02:25:15",
+		"posterTime": "00:03:27"
+	},
+	{
+		"name": "小英雄雨来",
+		"lightOnTime": "01:24:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "美国队长4",
+		"lightOnTime": "01:47:58",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "花样年华",
+		"lightOnTime": "01:42:23",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "诡才之道",
+		"lightOnTime": "01:44:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "您的声音",
+		"lightOnTime": "01:27:23",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "你的颜色",
+		"lightOnTime": "01:30:04",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "猫猫的奇幻漂流",
+		"lightOnTime": "01:22:27",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "致命抉择",
+		"lightOnTime": "01:31:40",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "初步举证",
+		"lightOnTime": "01:45:15",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "阴阳师0",
+		"lightOnTime": "01:48:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "编号17",
+		"lightOnTime": "02:05:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "插翅难飞",
+		"lightOnTime": "01:24:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "多幸运遇见你",
+		"lightOnTime": "01:30:24",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "还有明天",
+		"lightOnTime": "01:54:34",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "天堂旅行团",
+		"lightOnTime": "01:32:40",
+		"posterTime": "00:02:18"
+	},
+	{
+		"name": "海绵宝宝：皮老板大电影",
+		"lightOnTime": "01:18:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "平原上的火焰",
+		"lightOnTime": "01:38:45",
+		"posterTime": "00:03:54"
+	},
+	{
+		"name": "想飞的女孩",
+		"lightOnTime": "01:50:55",
+		"posterTime": "00:01:05"
+	},
+	{
+		"name": "非标准恋爱",
+		"lightOnTime": "01:35:04",
+		"posterTime": "00:02:05"
+	},
+	{
+		"name": "真爱营业",
+		"lightOnTime": "01:38:55",
+		"posterTime": "00:04:20"
+	},
+	{
+		"name": "久别·重逢",
+		"lightOnTime": "01:42:42",
+		"posterTime": "00:00:32"
+	},
+	{
+		"name": "疾速追杀4",
+		"lightOnTime": "02:38:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "夜半凶宅",
+		"lightOnTime": "01:28:05",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "歪打正好",
+		"lightOnTime": "01:37:12",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "我会好好的",
+		"lightOnTime": "02:00:03",
+		"posterTime": "00:02:13"
+	},
+	{
+		"name": "援藏日记",
+		"lightOnTime": "01:51:16",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "白雪公主",
+		"lightOnTime": "01:39:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "倩女幽魂（87版）",
+		"nickname": "倩女幽魂（八七版）",
+		"lightOnTime": "01:34:37",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "怒水西流",
+		"nickname": "怒水溪流",
+		"lightOnTime": "01:30:55",
+		"posterTime": "00:03:35"
+	},
+	{
+		"name": "制暴：无限杀机",
+		"lightOnTime": "01:50:15",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "猎狐·行动",
+		"lightOnTime": "01:43:35",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "向阳·花",
+		"lightOnTime": "02:03:29",
+		"posterTime": "00:03:21"
+	},
+	{
+		"name": "不说话的爱",
+		"lightOnTime": "01:42:00",
+		"posterTime": "00:03:28"
+	},
+	{
+		"name": "阳光照耀青春里",
+		"lightOnTime": "02:06:10",
+		"posterTime": "00:02:57"
+	},
+	{
+		"name": "机动战士高达：跨时之战",
+		"lightOnTime": "01:16:04",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "我的世界大电影",
+		"lightOnTime": "01:33:46",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "此心安处",
+		"lightOnTime": "01:35:14",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "速度与激情7",
+		"lightOnTime": "02:09:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "命中罪爱",
+		"lightOnTime": "01:41:46",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "谍网追凶",
+		"lightOnTime": "01:56:51",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "火之鸟 伊甸之花",
+		"lightOnTime": "01:27:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "孤独的美食家 剧场版",
+		"lightOnTime": "01:45:26",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "乐一通大电影：地球爆炸之日",
+		"lightOnTime": "01:25:46",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "触碰你",
+		"lightOnTime": "01:41:33",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "有病才会喜欢你",
+		"lightOnTime": "01:45:46",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "孤独摇滚（上）",
+		"lightOnTime": "01:25:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "荣耀",
+		"lightOnTime": "01:33:37",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "人生开门红",
+		"lightOnTime": "01:49:07",
+		"posterTime": "00:02:09"
+	},
+	{
+		"name": "雷霆特攻队*",
+		"lightOnTime": "01:54:03",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "水饺皇后",
+		"lightOnTime": "02:00:45",
+		"posterTime": "00:02:57"
+	},
+	{
+		"name": "大风杀",
+		"lightOnTime": "02:08:24",
+		"posterTime": "00:02:09"
+	},
+	{
+		"name": "海底小纵队：海啸大危机",
+		"lightOnTime": "01:25:40",
+		"posterTime": "00:01:25"
+	},
+	{
+		"name": "猎金·游戏",
+		"lightOnTime": "02:07:23",
+		"posterTime": "00:04:17"
+	},
+	{
+		"name": "苍茫的天涯是我的爱",
+		"lightOnTime": "01:47:19",
+		"posterTime": "00:03:13"
+	},
+	{
+		"name": "幽灵公主",
+		"lightOnTime": "02:08:29",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "开心超人之逆世营救",
+		"lightOnTime": "01:36:44",
+		"posterTime": "00:00:15"
+	},
+	{
+		"name": "独一无二",
+		"lightOnTime": "02:00:24",
+		"posterTime": "00:01:35"
+	},
+	{
+		"name": "地上的云朵",
+		"lightOnTime": "01:21:35",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "孤独摇滚（下）",
+		"lightOnTime": "01:10:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "冲·撞",
+		"lightOnTime": "02:00:25",
+		"posterTime": "00:01:03"
+	},
+	{
+		"name": "攻壳机动队",
+		"lightOnTime": "01:17:38",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "情书",
+		"lightOnTime": "01:53:35",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "会计刺客2",
+		"lightOnTime": "02:03:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "永不失联的爱",
+		"lightOnTime": "01:35:27",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "时间之子",
+		"lightOnTime": "01:43:50",
+		"posterTime": "00:03:21"
+	},
+	{
+		"name": "星际宝贝史迪奇",
+		"lightOnTime": "01:38:51",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "心理有秘密",
+		"lightOnTime": "01:30:40",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "红嫁衣",
+		"lightOnTime": "01:26:38",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "碟中谍8：最终清算",
+		"lightOnTime": "02:42:05",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "新大头儿子和小头爸爸3俄罗斯奇遇记",
+		"lightOnTime": "01:18:01",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "哆啦A梦：大雄的绘画奇遇记",
+		"lightOnTime": "01:41:35",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "私家侦探",
+		"lightOnTime": "01:40:43",
+		"posterTime": "00:03:45"
+	},
+	{
+		"name": "潜艇总动员：冒险岛",
+		"lightOnTime": "01:23:12",
+		"posterTime": "00:00:32"
+	},
+	{
+		"name": "疾速追杀：芭蕾杀姬",
+		"lightOnTime": "01:55:45",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "功夫梦：融合之道",
+		"lightOnTime": "01:27:02",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "新·驯龙高手",
+		"lightOnTime": "01:57:05",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "分手清单",
+		"lightOnTime": "02:06:25",
+		"posterTime": "00:02:54"
+	},
+	{
+		"name": "星月童话",
+		"lightOnTime": "01:43:21",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "非常交易",
+		"lightOnTime": "01:32:15",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "酱园弄·悬案",
+		"lightOnTime": "01:34:40",
+		"posterTime": "00:03:46"
+	},
+	{
+		"name": "人生会议",
+		"lightOnTime": "01:44:33",
+		"posterTime": "00:03:38"
+	},
+	{
+		"name": "艺术学院1994",
+		"nickname": "艺术学院一九九四",
+		"lightOnTime": "01:56:00",
+		"posterTime": "00:02:55"
+	},
+	{
+		"name": "阿克达拉",
+		"lightOnTime": "01:34:51",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "炽热年华",
+		"lightOnTime": "01:35:23",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "一生交给党",
+		"lightOnTime": "01:28:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "新三峡",
+		"lightOnTime": "00:58:08",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "F1：狂飙飞车",
+		"lightOnTime": "02:28:56",
+		"posterTime": "00:01:02"
+	},
+	{
+		"name": "无名之辈：否极泰来",
+		"nickname": "无名之辈：痞极泰来",
+		"lightOnTime": "02:01:58",
+		"posterTime": "00:03:44"
+	},
+	{
+		"name": "名侦探柯南：独眼的残像",
+		"lightOnTime": "01:41:10",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "地球特派员",
+		"lightOnTime": "01:29:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "蜡笔小新：大人王国的反击",
+		"lightOnTime": "01:27:27",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "恶意",
+		"lightOnTime": "01:38:55",
+		"posterTime": "00:03:46"
+	},
+	{
+		"name": "山庄·惊魂",
+		"lightOnTime": "01:37:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "当哒当：邪视",
+		"lightOnTime": "01:28:18",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "侏罗纪世界：重生",
+		"lightOnTime": "02:06:05",
+		"posterTime": "00:01:59"
+	},
+	{
+		"name": "和我说早安",
+		"lightOnTime": "01:27:00",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "小白船",
+		"lightOnTime": "01:26:00",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "天宝",
+		"lightOnTime": "01:42:50",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "午夜游戏",
+		"lightOnTime": "01:23:49",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "超人",
+		"lightOnTime": "01:58:59",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "聊斋：兰若寺",
+		"lightOnTime": "02:25:40",
+		"posterTime": "00:01:37"
+	},
+	{
+		"name": "戏台",
+		"lightOnTime": "01:54:35",
+		"posterTime": "00:03:37"
+	},
+	{
+		"name": "长安的荔枝",
+		"lightOnTime": "01:59:50",
+		"posterTime": "00:04:08"
+	},
+	{
+		"name": "花漾少女杀人事件",
+		"lightOnTime": "01:43:50",
+		"posterTime": "00:01:34"
+	},
+	{
+		"name": "魔法蓝精灵",
+		"lightOnTime": "01:24:12",
+		"posterTime": "00:00:48"
+	},
+	{
+		"name": "罗小黑战记2",
+		"lightOnTime": "01:59:40",
+		"posterTime": "00:03:30"
+	},
+	{
+		"name": "寻秘自然：时间的形状",
+		"lightOnTime": "01:22:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "你行！你上！",
+		"nickname": "你型！你上！",
+		"lightOnTime": "02:24:00",
+		"posterTime": "00:03:09"
+	},
+	{
+		"name": "喜羊羊与灰太狼之异国破晓",
+		"lightOnTime": "01:32:28",
+		"posterTime": "00:00:45"
+	},
+	{
+		"name": "南京照相馆",
+		"lightOnTime": "02:17:45",
+		"posterTime": "00:04:00"
+	},
+	{
+		"name": "封门村惊魂",
+		"lightOnTime": "01:26:29",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "神奇4侠：初露锋芒",
+		"lightOnTime": "01:46:54",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "浪浪山小妖怪",
+		"lightOnTime": "01:56:40",
+		"posterTime": "00:03:23"
+	},
+	{
+		"name": "猫和老鼠：星盘奇缘",
+		"lightOnTime": "01:34:38",
+		"posterTime": "00:00:48"
+	},
+	{
+		"name": "捕风追影",
+		"lightOnTime": "02:19:05",
+		"posterTime": "00:03:06"
+	},
+	{
+		"name": "东极岛",
+		"lightOnTime": "02:12:02",
+		"posterTime": "00:04:15"
+	},
+	{
+		"name": "奇遇",
+		"lightOnTime": "02:09:05",
+		"posterTime": "00:03:22"
+	},
+	{
+		"name": "山河为证",
+		"lightOnTime": "01:41:13",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "非人哉：限时玩家",
+		"lightOnTime": "01:39:26",
+		"posterTime": "00:03:40"
+	},
+	{
+		"name": "坏蛋联盟2",
+		"lightOnTime": "01:33:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "脱缰者也",
+		"lightOnTime": "01:56:40",
+		"posterTime": "00:00:47"
+	},
+	{
+		"name": "赎梦",
+		"lightOnTime": "01:30:30",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "青蛇",
+		"lightOnTime": "01:36:32",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "死神来了：血脉诅咒",
+		"lightOnTime": "01:41:49",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "蛟龙行动（特别版）",
+		"lightOnTime": "02:07:50",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "7天",
+		"lightOnTime": "02:00:40",
+		"posterTime": "00:02:40"
+	},
+	{
+		"name": "有朵云像你",
+		"lightOnTime": "01:57:35",
+		"posterTime": "00:01:53"
+	},
+	{
+		"name": "午夜凶镜",
+		"lightOnTime": "01:22:22",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "轻于鸿毛",
+		"lightOnTime": "01:47:49",
+		"posterTime": "00:02:22"
+	},
+	{
+		"name": "营救飞虎",
+		"lightOnTime": "01:40:25",
+		"posterTime": "00:00:38"
+	},
+	{
+		"name": "关于约会的一切",
+		"lightOnTime": "01:31:54",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "窗外是蓝星",
+		"lightOnTime": "01:24:26",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "小鹿斑比：清算",
+		"lightOnTime": "01:14:13",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "熊孩子·探险熊兵",
+		"lightOnTime": "01:12:52",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "午夜怪谈2",
+		"lightOnTime": "01:27:47",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "731",
+		"nickname": "七三幺",
+		"lightOnTime": "02:02:30",
+		"posterTime": "00:00:30"
+	},
+	{
+		"name": "天大的事",
+		"lightOnTime": "01:37:55",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "临时决斗",
+		"lightOnTime": "01:43:48",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "浪浪人生",
+		"lightOnTime": "02:03:03",
+		"posterTime": "00:03:53"
+	},
+	{
+		"name": "志愿军：浴血和平",
+		"lightOnTime": "02:22:18",
+		"posterTime": "00:04:26"
+	},
+	{
+		"name": "风林火山",
+		"lightOnTime": "02:02:48",
+		"posterTime": "00:03:37"
+	},
+	{
+		"name": "疯狂电脑城",
+		"lightOnTime": "01:25:59",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "毕正明的证明",
+		"lightOnTime": "02:03:40",
+		"posterTime": "00:02:10"
+	},
+	{
+		"name": "猪猪侠·一只老猪的逆袭",
+		"lightOnTime": "01:22:20",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "三国的星空第一部",
+		"lightOnTime": "01:58:25",
+		"posterTime": "00:02:35"
+	},
+	{
+		"name": "刺杀小说家2",
+		"lightOnTime": "02:13:02",
+		"posterTime": "00:04:10"
+	},
+	{
+		"name": "震耳欲聋",
+		"lightOnTime": "02:03:27",
+		"posterTime": "00:02:40"
+	},
+	{
+		"name": "巫咒",
+		"lightOnTime": "01:27:00",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "火种",
+		"lightOnTime": "01:32:53",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "创：战神",
+		"lightOnTime": "01:51:05",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "一战再战",
+		"lightOnTime": "02:33:54",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "寻她",
+		"nickname": "寻 她",
+		"lightOnTime": "01:41:59",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "小山河",
+		"nickname": "",
+		"lightOnTime": "01:29:32",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "阳光俱乐部",
+		"nickname": "",
+		"lightOnTime": "01:32:45",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "世界计划：无法歌唱的初音未来",
+		"nickname": "",
+		"lightOnTime": "01:40:40",
+		"posterTime": "00:00:00"
+	},
+	{
+		"name": "带你回家",
+		"lightOnTime": "01:38:03",
+		"posterTime": "00:00:00",
+		"nickname": ""
+	},
+	{
+		"name": "下一个台风",
+		"nickname": "",
+		"lightOnTime": "01:33:43",
+		"posterTime": "00:02:08"
+	},
+	{
+		"name": "向光花盛开",
+		"lightOnTime": "01:27:10",
+		"posterTime": "00:00:00",
+		"nickname": ""
+	},
+	{
+		"name": "偷天盗日",
+		"lightOnTime": "01:39:12",
+		"posterTime": "00:00:00",
+		"nickname": ""
+	},
+	{
+		"name": "陪你到清晨",
+		"lightOnTime": "01:40:41",
+		"posterTime": "00:00:00",
+		"nickname": ""
+	}
 ]
