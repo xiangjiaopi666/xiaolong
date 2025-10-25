@@ -153,7 +153,7 @@
 				// 尝试解析JSON字符串
 				try {
 					var jsonData = JSON.parse(jsonInput);
-					console.log(jsonData.data.arr_date_plan); //全部场次
+					//console.log(jsonData.data.arr_date_plan); //全部场次
 					//删除虚拟场次
 					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
 					//console.log('删除了 ' + indicesToDelete + '场');
@@ -227,69 +227,7 @@
 
 
 						var nameCell = document.createElement('td');
-						/*
-						//result0:普通立体=普通
-						const th0 = '普通立体'
-						const tihuan0 = '普通';
-						const result0 = replaceSpecifiedString(rowData.display_name, th0, tihuan0)
-						//result1:去掉（普通/国语）
-						const th1 = '（普通/国语）'
-						const tihuan1 = '';
-						const result1 = replaceSpecifiedString(result0, th1, tihuan1)
-						//result2:（普通/日语）=(日语)
-						const th2 = '（普通/日语）'
-						const tihuan2 = '（日语）🌏';
-						const result2 = replaceSpecifiedString(result1, th2, tihuan2)
-						//result3:（普通/英语）=(英语)
-						const th3 = '（普通/英语）'
-						const tihuan3 = '（英语）🌏';
-						const result3 = replaceSpecifiedString(result2, th3, tihuan3)
-						//result4:（普通/印度语）=(印度语)
-						const th4 = '（普通/印度语）'
-						const tihuan4 = '（印度语）🌏';
-						const result4 = replaceSpecifiedString(result3, th4, tihuan4)
-						//result5:（普通/印尼语）=(印尼语)
-						const th5 = '（普通/印尼语）'
-						const tihuan5 = '（印尼语）🌏';
-						const result5 = replaceSpecifiedString(result4, th5, tihuan5)
-						//result6:（普通/法语）=(法语)
-						const th6 = '（普通/法语）'
-						const tihuan6 = '（法语）🌏';
-						const result6 = replaceSpecifiedString(result5, th6, tihuan6)
-						//result7:（普通/意大利语）=(意大利语)
-						const th7 = '（普通/意大利语）'
-						const tihuan7 = '（意大利语）🌏';
-						const result7 = replaceSpecifiedString(result6, th7, tihuan7)
-						//result8:（普通/韩语）=(韩语)
-						const th8 = '（普通/韩语）'
-						const tihuan8 = '（韩语）🌏';
-						const result8 = replaceSpecifiedString(result7, th8, tihuan8)
-						//result9:（普通/俄语）=(俄语)
-						const th9 = '（普通/俄语）'
-						const tihuan9 = '（俄语）🌏';
-						const result9 = replaceSpecifiedString(result8, th9, tihuan9)
-						//result10:（普通/其他）=(其他)
-						const th10 = '（普通/其他）'
-						const tihuan10 = '（其他）🌏';
-						const result10 = replaceSpecifiedString(result9, th10, tihuan10)
-						//result11:（数字3D）=(3D)
-						const th11 = '（数字3D）'
-						const tihuan11 = ' 3D👓';
-						const result11 = replaceSpecifiedString(result10, th11, tihuan11)
-						//result11:（数字3D）=(3D)
-						const th12 = '（数字）'
-						const tihuan12 = '';
-						const result12 = replaceSpecifiedString(result11, th12, tihuan12)
-						//result12:去掉（普通 2D/国语）
-						const th13 = '（普通 2D/国语）'
-						const tihuan13 = '';
-						const result13 = replaceSpecifiedString(result12, th13, tihuan13)
-						//result13:去掉（普通 2D/英语）
-						const th14 = '（普通 2D/英语）'
-						const tihuan14 = '';
-						const result14 = replaceSpecifiedString(result13, th14, tihuan14)
-						const result = result14;
-						*/
+
 						const replaceMap = [
 							['普通立体', '普通'],
 							['（普通/国语）', ''],
@@ -760,7 +698,7 @@
 						});
 
 						const resultStr = lines.join("\n");
-						console.log(resultStr);
+						//console.log(resultStr);
 						//修改后的值填写在对应框里
 						document.getElementById('byds').innerHTML = resultStr;
 						document.getElementById('copy_byds_sucess').innerHTML = '👌已修改,请重新复制👌';
@@ -1234,21 +1172,6 @@
 					}
 				});
 			}
-			// 电影信息数组
-			/*const movies = [{
-					name: "飞驰人生2",
-					nickname: "飞2",
-					lightOnTime: "02:01:00",
-					posterTime: "00:04:25"
-				},{
-					name: "飞驰人生2",
-					nickname: "飞2",
-					lightOnTime: "02:01:00",
-					posterTime: "00:04:25"
-				},
-				// 可以继续添加其他电影信息
-			];*/
-			//console.log(movies);
 			// 计算时间差的函数
 			function calculateTimeDifference(lightOnTime, posterTime) { //结束时间，龙标时间
 				const lightOnDate = new Date(`1970-01-01T${lightOnTime}Z`);
@@ -1329,7 +1252,43 @@
 				document.getElementById('readFile_sucess').innerHTML = "😁👉"
 			}
 
+			// ✅ 检测是否为桌面版 Google Chrome，并进行拦截提示
+			function checkIfDesktopChrome() {
+				var ua = navigator.userAgent;
+				var vendor = navigator.vendor;
+				var isDesktopChrome = /Chrome/.test(ua) &&
+					/Google Inc/.test(vendor) &&
+					!/Edg/.test(ua) // 排除 Edge
+					&&
+					!/OPR/.test(ua) // 排除 Opera
+					&&
+					!/Mobile/.test(ua); // 排除移动端 Chrome
+
+				if (isDesktopChrome) {
+					alert("请使用Edge浏览器打印\n请使用Edge浏览器打印\n请使用Edge浏览器打印\n请使用Edge浏览器打印\n请使用Edge浏览器打印");
+					return true; // 表示已拦截
+				}
+				return false; // 表示可继续执行
+			}
+
+			function hideElementIfEdge(elementId) {
+				var ua = navigator.userAgent;
+				// 兼容新旧版本 Edge（旧版带 "Edge"，新版基于 Chromium 带 "Edg"）
+				var isEdge = /Edg/.test(ua) || /Edge/.test(ua);
+
+				if (isEdge) {
+					var el = document.getElementById(elementId);
+					if (el) {
+						el.style.display = "none";
+					}
+				}
+			}
+
+			// ✅ 打印方法示例
 			function printDiv() {
+				// 调用检测函数，如果返回 true，则中断执行
+				if (checkIfDesktopChrome()) return;
+
 				var printArea = document.getElementById('tableContainer');
 				var printFrame = document.getElementById('printFrame');
 				var printWindow = printFrame.contentWindow || printFrame.contentDocument.document;
@@ -1355,7 +1314,9 @@
 				printWindow.print();
 			}
 
+
 			function printDivZao() {
+				if (checkIfDesktopChrome()) return;
 				var printArea = document.getElementById('splitTables_1');
 				var printFrame = document.getElementById('printFrame');
 				var printWindow = printFrame.contentWindow || printFrame.contentDocument.document;
@@ -1380,6 +1341,7 @@
 			}
 
 			function printDivWan() {
+				if (checkIfDesktopChrome()) return;
 				var printArea = document.getElementById('splitTables_2');
 				var printFrame = document.getElementById('printFrame');
 				var printWindow = printFrame.contentWindow || printFrame.contentDocument.document;
@@ -1601,7 +1563,7 @@
 		</script>
 	</head>
 	<body>
-		<h1 style="display:contents">排片信息提取</h1><span id="X">.</span>
+		<h1 style="display:contents">排片信息提取</h1><span id="X" style="opacity: 0;">.</span>
 		<div id="NO1">
 			<div>
 				<textarea id="start" cols="60" rows="10" style="display: none;"></textarea>
@@ -1611,7 +1573,7 @@
 				<br>
 				<textarea id="json-input" rows="3" cols="60" placeholder="慧影云排期界面<F12>,复制之后直接右键粘贴或点击上方按钮"></textarea>
 				<br><br>
-				<div style="display: inline-table">
+				<div style="display: none">
 					<button onclick="copypiao()">【复制】票</button>
 					<div style="display: inline" id="cpoypiao_sucess"></div>
 					<br>
@@ -1641,22 +1603,24 @@
 					<br>
 					<textarea id="movie_name" rows="8" cols="60"></textarea>
 				</div>
+				<div style="display: inline-table">
+					<button onclick="copymovie_time()">【复制】大屏幕:时间</button>
+					<div style="display: inline" id="copymovie_time_sucess"></div>
+					<br>
+					<textarea id="movie_time" rows="8" cols="60"></textarea>
+				</div>
+				<br><br>
+				<div style="width: 882px; text-align:right">
+					<div id="movieTasks"></div>
+					<button id="finalConfirm" style="display: none;">确认修改</button>
+				</div>
 				<div style="display: inline-table;width: min-content;">
 					<button style="float: right;" onclick="copybyds()">【复制】播音大师</button>
 					<div style="display: inline;float: right;" id="copy_byds_sucess"></div>
 					<br>
 					<textarea id="byds" rows="8" cols="60"></textarea>
 				</div>
-				<div style="width: 882px; text-align:right">
-					<div id="movieTasks"></div>
-					<button id="finalConfirm" style="display: none;">确认修改</button>
-				</div>
-				<br><br>
-				<button onclick="copymovie_time()">【复制】大屏幕:时间</button>
-				<div style="display: inline" id="copymovie_time_sucess"></div>
-				<br>
-				<textarea id="movie_time" rows="8" cols="60"></textarea>
-				<br><br>
+				<br><br><br>
 				<div style="width: fit-content;" id="alltable">
 					<div>
 						<button onclick="sortTableByStartTime()">刷新</button>
@@ -1753,191 +1717,229 @@
 			</script>
 		</div>
 
-		<div id="NO2" style="display: none;">
-			<select id="resultSelect"></select><br><br>
+		<div>
+			<div>
+				<div>
+					<div>
+						<div>
+							<div>
+								<div>
+									<div>
+										<div>
+											<div>
+												<div>
+													<div>
+														<div>
+															<div>
+																<div id="NO2" style="display: none;">
+																	<select id="resultSelect"></select><br><br>
 
-			<!-- 新增输入框 -->
-			<input type="text" id="rowInput" style="width:80px;"><label>排</label>
-			<input type="text" id="seatInput" style="width:80px;"><label>座</label>
+																	<!-- 新增输入框 -->
+																	<input type="text" id="rowInput"
+																		style="width:80px;"><label>排</label>
+																	<input type="text" id="seatInput"
+																		style="width:80px;"><label>号</label>
 
-			<!-- ✅ 新增下拉框 -->
-			<select id="sourceSelect">
-				<option value="">无</option>
-				<option value="学生">学生</option>
-				<option value="抖音">抖音</option>
-				<option value="工会">工会</option>
-			</select>
+																	<!-- ✅ 新增下拉框 -->
+																	<select id="sourceSelect">
+																		<option value="">无</option>
+																		<option value="学生">学生</option>
+																		<option value="抖音">抖音</option>
+																		<option value="工会">工会</option>
+																	</select>
 
-			<!-- 打印内容区域 -->
-			<div id="NO3" style="position: relative;height:84mm; width: 79mm;">
-				<span id="hall" style="position: absolute; left: 10mm; top: 2mm; font-size: 12px;"></span><!-- 左|厅 -->
-				<span id="name" style="position: absolute; left: 10mm; top: 9mm; font-size: 12px;"></span><!-- 左|电影名 -->
-				<span id="date" style="position: absolute; left: 37mm; top: 1mm; font-size: 12px;"></span><!-- 左|日期 -->
-				<span id="time" style="position: absolute; left: 42mm; top: 4mm; font-size: 12px;"></span><!-- 左|时间 -->
-				<span id="rowSpan" style="position: absolute; left: 10mm; top: 15mm; font-size: 12px;"></span><!-- 左|排 -->
-				<span id="seatSpan" style="position: absolute; left: 20mm; top: 15mm; font-size: 12px;"></span><!-- 左|座 -->
-				<span id="hall2" style="position: absolute; left: 60mm; top: 2mm; font-size: 12px;"></span><!-- 右|厅 -->
-				<span id="date2" style="position: absolute; left: 60mm; top: 15mm; font-size: 12px;"></span><!-- 右|日期 -->
-				<span id="time2" style="position: absolute; left: 64mm; top: 19mm; font-size: 12px;"></span><!-- 右|时间 -->
-				<span id="rowSpan2" style="position: absolute; left: 66mm; top: 32mm; font-size: 12px;"></span><!-- 右|排 -->
-				<span id="seatSpan2" style="position: absolute; left: 66mm; top: 36mm; font-size: 12px;"></span><!-- 右|座 -->
-				<span id="nowTime" style="position: absolute; left: 10mm; top: 27mm; font-size: 12px;"></span><!-- 当前时间 -->
-				<span id="sourceSpan" style="position: absolute; left: 68mm; top: 44mm; font-size: 12px;"></span><!-- 来源 -->
-				<span style="position: absolute; left: 40mm; top: 17mm; font-size: 10px;">60.00</span><!-- 左|票价 -->
-				<span style="position: absolute; left: 40mm; top: 20mm; font-size: 10px;">0.00</span><!-- 左|服务费 -->
-				<span style="position: absolute; left: 66mm; top: 60mm; font-size: 12px;">60.00</span><!-- 右|票价 -->
-				<span style="position: absolute; left: 10mm; top: 20mm; font-size: 12px;">前台</span>
-				<span style="position: absolute; left: 34mm; top: 38mm; font-size: 12px;">现场售票</span>
-				<span style="position: absolute; left: 33mm; top: 55mm; font-size: 12px;">河南省郑州市<br>亚星小龙激光影城</span>
-				<div id="qrcode" style="position: absolute; left: 5mm; top: 38mm;"></div><!-- 二维码 -->
-			</div>
+																	<!-- 打印内容区域 -->
+																	<div id="NO3"
+																		style="position: relative;height:84mm; width: 79mm;">
+																		<span id="hall"
+																			style="position: absolute; left: 10mm; top: 2mm; font-size: 12px;"></span><!-- 左|厅 -->
+																		<span id="name"
+																			style="position: absolute; left: 10mm; top: 9mm; font-size: 12px;"></span><!-- 左|电影名 -->
+																		<span id="date"
+																			style="position: absolute; left: 37mm; top: 1mm; font-size: 12px;"></span><!-- 左|日期 -->
+																		<span id="time"
+																			style="position: absolute; left: 42mm; top: 4mm; font-size: 12px;"></span><!-- 左|时间 -->
+																		<span id="rowSpan"
+																			style="position: absolute; left: 10mm; top: 15mm; font-size: 12px;"></span><!-- 左|排 -->
+																		<span id="seatSpan"
+																			style="position: absolute; left: 20mm; top: 15mm; font-size: 12px;"></span><!-- 左|座 -->
+																		<span id="hall2"
+																			style="position: absolute; left: 60mm; top: 2mm; font-size: 12px;"></span><!-- 右|厅 -->
+																		<span id="date2"
+																			style="position: absolute; left: 60mm; top: 15mm; font-size: 12px;"></span><!-- 右|日期 -->
+																		<span id="time2"
+																			style="position: absolute; left: 64mm; top: 19mm; font-size: 12px;"></span><!-- 右|时间 -->
+																		<span id="rowSpan2"
+																			style="position: absolute; left: 66mm; top: 32mm; font-size: 12px;"></span><!-- 右|排 -->
+																		<span id="seatSpan2"
+																			style="position: absolute; left: 66mm; top: 36mm; font-size: 12px;"></span><!-- 右|座 -->
+																		<span id="nowTime"
+																			style="position: absolute; left: 10mm; top: 27mm; font-size: 12px;"></span><!-- 当前时间 -->
+																		<span id="sourceSpan"
+																			style="position: absolute; left: 68mm; top: 44mm; font-size: 12px;"></span><!-- 来源 -->
+																		<span
+																			style="position: absolute; left: 40mm; top: 17mm; font-size: 10px;">60.00</span><!-- 左|票价 -->
+																		<span
+																			style="position: absolute; left: 40mm; top: 20mm; font-size: 10px;">0.00</span><!-- 左|服务费 -->
+																		<span
+																			style="position: absolute; left: 66mm; top: 60mm; font-size: 12px;">60.00</span><!-- 右|票价 -->
+																		<span
+																			style="position: absolute; left: 10mm; top: 20mm; font-size: 12px;">前台</span>
+																		<span
+																			style="position: absolute; left: 34mm; top: 38mm; font-size: 12px;">现场售票</span>
+																		<span
+																			style="position: absolute; left: 33mm; top: 55mm; font-size: 12px;">河南省郑州市<br>亚星小龙激光影城</span>
+																		<div id="qrcode"
+																			style="position: absolute; left: 5mm; top: 38mm;">
+																		</div><!-- 二维码 -->
+																	</div>
 
-			<button onclick="printDiv2()">打印</button>
+																	<button onclick="printDiv2()">打印</button>
 
-			<script>
-				const parseBtn = document.getElementById('parseBtn');
-				const jsonInput = document.getElementById('json-input');
-				const resultSelect = document.getElementById('resultSelect');
-				const hallDiv = document.getElementById('hall');
-				const hallDiv2 = document.getElementById('hall2');
-				const nameDiv = document.getElementById('name');
-				const dateDiv = document.getElementById('date');
-				const dateDiv2 = document.getElementById('date2');
-				const timeDiv = document.getElementById('time');
-				const timeDiv2 = document.getElementById('time2');
-				const qrcodeDiv = document.getElementById('qrcode');
-				const rowInput = document.getElementById('rowInput');
-				const seatInput = document.getElementById('seatInput');
-				const rowSpan = document.getElementById('rowSpan');
-				const seatSpan = document.getElementById('seatSpan');
-				const rowSpan2 = document.getElementById('rowSpan2');
-				const seatSpan2 = document.getElementById('seatSpan2');
-				const nowTimeSpan = document.getElementById('nowTime');
-				const sourceSelect = document.getElementById('sourceSelect');
-				const sourceSpan = document.getElementById('sourceSpan');
+																	<script>
+																		const parseBtn = document.getElementById('parseBtn');
+																		const jsonInput = document.getElementById('json-input');
+																		const resultSelect = document.getElementById('resultSelect');
+																		const hallDiv = document.getElementById('hall');
+																		const hallDiv2 = document.getElementById('hall2');
+																		const nameDiv = document.getElementById('name');
+																		const dateDiv = document.getElementById('date');
+																		const dateDiv2 = document.getElementById('date2');
+																		const timeDiv = document.getElementById('time');
+																		const timeDiv2 = document.getElementById('time2');
+																		const qrcodeDiv = document.getElementById('qrcode');
+																		const rowInput = document.getElementById('rowInput');
+																		const seatInput = document.getElementById('seatInput');
+																		const rowSpan = document.getElementById('rowSpan');
+																		const seatSpan = document.getElementById('seatSpan');
+																		const rowSpan2 = document.getElementById('rowSpan2');
+																		const seatSpan2 = document.getElementById('seatSpan2');
+																		const nowTimeSpan = document.getElementById('nowTime');
+																		const sourceSelect = document.getElementById('sourceSelect');
+																		const sourceSpan = document.getElementById('sourceSpan');
 
-				let currentData = [];
-				let currentIndex = 0;
+																		let currentData = [];
+																		let currentIndex = 0;
 
-				// === 实时时间 ===
-				function updateCurrentTime() {
-					const now = new Date();
-					const Y = now.getFullYear();
-					const M = String(now.getMonth() + 1).padStart(2, '0');
-					const D = String(now.getDate()).padStart(2, '0');
-					const h = String(now.getHours()).padStart(2, '0');
-					const m = String(now.getMinutes()).padStart(2, '0');
-					const s = String(now.getSeconds()).padStart(2, '0');
-					nowTimeSpan.textContent = `${Y}.${M}.${D} ${h}:${m}:${s}`;
-				}
-				setInterval(updateCurrentTime, 1000);
-				updateCurrentTime();
+																		// === 实时时间 ===
+																		function updateCurrentTime() {
+																			const now = new Date();
+																			const Y = now.getFullYear();
+																			const M = String(now.getMonth() + 1).padStart(2, '0');
+																			const D = String(now.getDate()).padStart(2, '0');
+																			const h = String(now.getHours()).padStart(2, '0');
+																			const m = String(now.getMinutes()).padStart(2, '0');
+																			const s = String(now.getSeconds()).padStart(2, '0');
+																			nowTimeSpan.textContent = `${Y}.${M}.${D} ${h}:${m}:${s}`;
+																		}
+																		setInterval(updateCurrentTime, 1000);
+																		updateCurrentTime();
 
-				// === 解析JSON ===
-				parseBtn.addEventListener('click', () => {
-					resultSelect.innerHTML = '';
-					clearDisplay();
+																		// === 解析JSON ===
+																		parseBtn.addEventListener('click', () => {
+																			resultSelect.innerHTML = '';
+																			clearDisplay();
 
-					try {
-						const obj = JSON.parse(jsonInput.value.trim());
-						const arr = obj?.data?.arr_date_plan;
+																			try {
+																				const obj = JSON.parse(jsonInput.value.trim());
+																				const arr = obj?.data?.arr_date_plan;
 
-						if (!Array.isArray(arr)) {
-							alert('未找到 data.arr_date_plan 数组！');
-							return;
-						}
+																				if (!Array.isArray(arr)) {
+																					alert('未找到 data.arr_date_plan 数组！');
+																					return;
+																				}
 
-						currentData = arr;
-						arr.forEach((item, index) => {
-							const hall = item.hall_name || '(无影厅)';
-							const name = item.display_name || '(无片名)';
-							const time = item.show_time_start || '(无时间)';
-							const option = document.createElement('option');
-							option.value = index;
-							option.textContent = `${time.slice(11, 16)} - ${hall} - ${name}`;
-							resultSelect.appendChild(option);
-						});
+																				currentData = arr;
+																				arr.forEach((item, index) => {
+																					const hall = item.hall_name || '(无影厅)';
+																					const name = item.display_name || '(无片名)';
+																					const time = item.show_time_start || '(无时间)';
+																					const option = document.createElement('option');
+																					option.value = index;
+																					option.textContent = `${time.slice(11, 16)} - ${hall} - ${name}`;
+																					resultSelect.appendChild(option);
+																				});
 
-						if (arr.length > 0) {
-							resultSelect.selectedIndex = 0;
-							displayInfo(0);
-						}
-					} catch (e) {
-						alert('JSON 格式错误，请检查输入！\n\n错误信息：' + e.message);
-					}
-				});
+																				if (arr.length > 0) {
+																					resultSelect.selectedIndex = 0;
+																					displayInfo(0);
+																				}
+																			} catch (e) {
+																				alert('JSON 格式错误，请检查输入！\n\n错误信息：' + e.message);
+																			}
+																		});
 
-				resultSelect.addEventListener('change', (e) => {
-					const index = e.target.value;
-					currentIndex = index;
-					displayInfo(index);
-				});
+																		resultSelect.addEventListener('change', (e) => {
+																			const index = e.target.value;
+																			currentIndex = index;
+																			displayInfo(index);
+																		});
 
-				rowInput.addEventListener('input', updateDynamicInfo);
-				seatInput.addEventListener('input', updateDynamicInfo);
-				sourceSelect.addEventListener('change', updateDynamicInfo);
+																		rowInput.addEventListener('input', updateDynamicInfo);
+																		seatInput.addEventListener('input', updateDynamicInfo);
+																		sourceSelect.addEventListener('change', updateDynamicInfo);
 
-				function updateDynamicInfo() {
-					rowSpan.textContent = rowInput.value ? `${rowInput.value} 排` : '';
-					seatSpan.textContent = seatInput.value ? `${seatInput.value} 座` : '';
-					rowSpan2.textContent = rowInput.value ? `${rowInput.value} 排` : '';
-					seatSpan2.textContent = seatInput.value ? `${seatInput.value} 座` : '';
-					sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
-					generateQRCode();
-				}
+																		function updateDynamicInfo() {
+																			rowSpan.textContent = rowInput.value ? `${rowInput.value} 排` : '';
+																			seatSpan.textContent = seatInput.value ? `${seatInput.value} 号` : '';
+																			rowSpan2.textContent = rowInput.value ? `${rowInput.value} 排` : '';
+																			seatSpan2.textContent = seatInput.value ? `${seatInput.value} 号` : '';
+																			sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
+																			generateQRCode();
+																		}
 
-				function displayInfo(index) {
-					const item = currentData[index];
-					if (!item) return;
+																		function displayInfo(index) {
+																			const item = currentData[index];
+																			if (!item) return;
 
-					hallDiv.textContent = item.hall_name || '(无影厅)';
-					hallDiv2.textContent = hallDiv.textContent;
-					nameDiv.textContent = item.display_name || '(无片名)';
+																			hallDiv.textContent = item.hall_name || '(无影厅)';
+																			hallDiv2.textContent = hallDiv.textContent;
+																			nameDiv.textContent = item.display_name || '(无片名)';
 
-					if (item.show_time_start) {
-						const [datePart, timePart] = item.show_time_start.split('T');
-						dateDiv.textContent = datePart.replace(/-/g, '.');
-						dateDiv2.textContent = dateDiv.textContent;
-						timeDiv.textContent = timePart.slice(0, 5);
-						timeDiv2.textContent = timeDiv.textContent;
-					}
+																			if (item.show_time_start) {
+																				const [datePart, timePart] = item.show_time_start.split('T');
+																				dateDiv.textContent = datePart.replace(/-/g, '.');
+																				dateDiv2.textContent = dateDiv.textContent;
+																				timeDiv.textContent = timePart.slice(0, 5);
+																				timeDiv2.textContent = timeDiv.textContent;
+																			}
 
-					generateQRCode();
-				}
+																			generateQRCode();
+																		}
 
-				function generateQRCode() {
-					const variablePart =
-						`${hallDiv.textContent}${nameDiv.textContent}` +
-						`${rowInput.value}${seatInput.value}${nowTimeSpan.textContent}`;
-					const encodedPart = btoa(unescape(encodeURIComponent(variablePart)));
-					const qrText = `41018401${encodedPart}`;
+																		function generateQRCode() {
+																			const variablePart =
+																				`${hallDiv.textContent}${nameDiv.textContent}` +
+																				`${rowInput.value}${seatInput.value}${nowTimeSpan.textContent}`;
+																			const encodedPart = btoa(unescape(encodeURIComponent(variablePart)));
+																			const qrText = `41018401${encodedPart}`;
 
-					qrcodeDiv.innerHTML = '';
-					new QRCode(qrcodeDiv, {
-						text: qrText,
-						width: 100,
-						height: 100,
-						colorDark: "#000000",
-						colorLight: "#ffffff"
-					});
-				}
+																			qrcodeDiv.innerHTML = '';
+																			new QRCode(qrcodeDiv, {
+																				text: qrText,
+																				width: 100,
+																				height: 100,
+																				colorDark: "#000000",
+																				colorLight: "#ffffff"
+																			});
+																		}
 
-				function clearDisplay() {
-					hallDiv.textContent = hallDiv2.textContent = '';
-					nameDiv.textContent = '';
-					dateDiv.textContent = dateDiv2.textContent = '';
-					timeDiv.textContent = timeDiv2.textContent = '';
-					rowSpan.textContent = seatSpan.textContent = sourceSpan.textContent = '';
-					rowSpan2.textContent = seatSpan2.textContent = '';
-					qrcodeDiv.innerHTML = '';
-				}
+																		function clearDisplay() {
+																			hallDiv.textContent = hallDiv2.textContent = '';
+																			nameDiv.textContent = '';
+																			dateDiv.textContent = dateDiv2.textContent = '';
+																			timeDiv.textContent = timeDiv2.textContent = '';
+																			rowSpan.textContent = seatSpan.textContent = sourceSpan.textContent = '';
+																			rowSpan2.textContent = seatSpan2.textContent = '';
+																			qrcodeDiv.innerHTML = '';
+																		}
 
-				// === 打印并自动关闭 ===
-				function printDiv2() {
-					var content = document.getElementById("NO3").outerHTML;
-					var printWindow = window.open('', '_blank', 'width=800,height=600');
-					printWindow.document.open();
-					printWindow.document.write(`
+																		// === 打印并自动关闭 ===
+																		function printDiv2() {
+																			var content = document.getElementById("NO3").outerHTML;
+																			var printWindow = window.open('', '_blank', 'width=800,height=600');
+																			printWindow.document.open();
+																			printWindow.document.write(`
 			    <html>
 			    <head>
 			        <title>打印</title>
@@ -1964,73 +1966,89 @@
 			    </body>
 			    </html>
 			`);
-					printWindow.document.close();
+																			printWindow.document.close();
 
-					printWindow.onload = function() {
-						printWindow.focus();
-						printWindow.print();
-						setTimeout(() => printWindow.close(), 200);
-					};
-				}
-			</script>
+																			printWindow.onload = function() {
+																				printWindow.focus();
+																				printWindow.print();
+																				setTimeout(() => printWindow.close(), 200);
+																			};
+																		}
+																	</script>
 
 
-			<script>
-				const x = document.getElementById('X');
-				const no1 = document.getElementById('NO1');
-				const no2 = document.getElementById('NO2');
+																	<script>
+																		const x = document.getElementById('X');
+																		const no1 = document.getElementById('NO1');
+																		const no2 = document.getElementById('NO2');
 
-				let toggled = false; // 是否切换状态
-				let inactivityTimer; // 30秒无操作计时器
-				let countdownTimer; // 每秒更新倒计时
-				let remaining = 30; // 剩余秒数（改为30）
+																		let toggled = false; // 是否切换状态
+																		let inactivityTimer; // 15秒无操作计时器
+																		let countdownTimer; // 每秒更新倒计时
+																		let remaining = 15; // 剩余秒数（改为15）
 
-				// 点击 X 切换显示
-				x.addEventListener('click', function() {
-					if (!toggled) {
-						no1.style.display = 'none';
-						no2.style.display = 'block';
-					} else {
-						no1.style.display = 'block';
-						no2.style.display = 'none';
-					}
-					toggled = !toggled;
-				});
+																		// 点击 X 切换显示
+																		x.addEventListener('click', function() {
+																			if (!toggled) {
+																				no1.style.display = 'none';
+																				no2.style.display = 'block';
+																			} else {
+																				no1.style.display = 'block';
+																				no2.style.display = 'none';
+																			}
+																			toggled = !toggled;
+																		});
 
-				// 恢复为默认状态
-				function resetToDefault() {
-					no1.style.display = 'block';
-					no2.style.display = 'none';
-					toggled = false;
-					resetInactivityTimer(); // 恢复后重新开始计时
-				}
+																		// 恢复为默认状态
+																		function resetToDefault() {
+																			no1.style.display = 'block';
+																			no2.style.display = 'none';
+																			toggled = false;
+																			resetInactivityTimer(); // 恢复后重新开始计时
+																		}
 
-				// 启动倒计时显示
-				function startCountdown() {
-					clearInterval(countdownTimer);
-					countdownTimer = setInterval(() => {
-						remaining--;
-						if (remaining <= 0) {
-							clearInterval(countdownTimer);
-							resetToDefault();
-						}
-					}, 1000);
-				}
+																		// 启动倒计时显示
+																		function startCountdown() {
+																			clearInterval(countdownTimer);
+																			countdownTimer = setInterval(() => {
+																				remaining--;
+																				if (remaining <= 0) {
+																					clearInterval(countdownTimer);
+																					resetToDefault();
+																				}
+																			}, 1000);
+																		}
 
-				// 重置无操作计时
-				function resetInactivityTimer() {
-					clearTimeout(inactivityTimer);
-					clearInterval(countdownTimer);
-					remaining = 30; // 改为30秒
-					startCountdown();
-					inactivityTimer = setTimeout(resetToDefault, 30000); // 30秒无操作后恢复
-				}
+																		// 重置无操作计时
+																		function resetInactivityTimer() {
+																			clearTimeout(inactivityTimer);
+																			clearInterval(countdownTimer);
+																			remaining = 15; // 改为15秒
+																			startCountdown();
+																			inactivityTimer = setTimeout(resetToDefault, 15000); // 15秒无操作后恢复
+																		}
 
-				// 监听整个页面的点击事件
-				document.addEventListener('click', resetInactivityTimer);
+																		// 监听整个页面的点击事件
+																		document.addEventListener('click', resetInactivityTimer);
 
-				// 页面加载后启动
-				resetInactivityTimer();
-			</script>
+																		// 页面加载后启动
+																		resetInactivityTimer();
+																	</script>
+
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
