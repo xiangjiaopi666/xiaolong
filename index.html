@@ -52,7 +52,7 @@
 				top: 10px;
 				right: 10px;
 				background-color: white;
-				z-index: 1000;
+				z-index: -9999;
 				padding: 10px;
 				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 				border-radius: 5px;
@@ -1563,16 +1563,20 @@
 		</script>
 	</head>
 	<body>
-		<h1 style="display:contents">排片信息提取</h1><span id="X" style="opacity: 0;">.</span>
+		<div style="background-color:white;width: 441px;">
+			<h1 style="display:contents">排片信息提取</h1><span id="X" style="opacity: 0;">.</span>
+		</div>
 		<div id="NO1">
 			<div>
-				<textarea id="start" cols="60" rows="10" style="display: none;"></textarea>
-				<button id="copyButton">粘贴</button>
-				<button onclick="extractField()" id="parseBtn">解析</button>
-				<div style="display: inline" id="extractField_sucess"></div>
-				<br>
-				<textarea id="json-input" rows="3" cols="60" placeholder="慧影云排期界面<F12>,复制之后直接右键粘贴或点击上方按钮"></textarea>
-				<br><br>
+				<div style="width: fit-content;background-color: white;">
+					<textarea id="start" cols="60" rows="10" style="display: none;"></textarea>
+					<button id="copyButton">粘贴</button>
+					<button onclick="extractField()" id="parseBtn">解析</button>
+					<div style="display: inline" id="extractField_sucess"></div>
+					<br>
+					<textarea id="json-input" rows="3" cols="60"
+						placeholder="慧影云排期界面<F12>,复制之后直接右键粘贴或点击上方按钮"></textarea>
+				</div><br><br>
 				<div style="display: none">
 					<button onclick="copypiao()">【复制】票</button>
 					<div style="display: inline" id="cpoypiao_sucess"></div>
@@ -1716,7 +1720,7 @@
 				});
 			</script>
 		</div>
-		
+
 		<div>
 			<div>
 				<div>
@@ -1793,43 +1797,45 @@
 																			style="position: absolute; left: 5mm; top: 38mm;">
 																		</div><!-- 二维码 -->
 																		<span
-																			style="position: absolute; left: 5mm; top: 70mm; font-size: 12px;" id="spanpiaohao-left"></span>
+																			style="position: absolute; left: 5mm; top: 70mm; font-size: 12px;"
+																			id="spanpiaohao-left"></span>
 																		<span
-																			style="position: absolute; left: 63mm; top: 46mm; font-size: 12px;" id="spanpiaohao-right"></span>
+																			style="position: absolute; left: 63mm; top: 46mm; font-size: 12px;"
+																			id="spanpiaohao-right"></span>
 																	</div>
 
 																	<button onclick="printDiv2()">打印</button>
 																	<script>
-																	  // 生成符合规则的字符串
-																	  function generate() {
-																	    const prefix = "41018401";
-																	    const digit = () => Math.floor(Math.random() * 10);
-																	    const upper = () => String.fromCharCode(65 + Math.floor(Math.random() * 26)); // A-Z
-																	    const lower = () => String.fromCharCode(97 + Math.floor(Math.random() * 26)); // a-z
-																	    const threeDigits = () => String(Math.floor(Math.random() * 1000)).padStart(3, '0');
-																	    const letter = () =>
-																	      Math.random() < 0.5
-																	        ? String.fromCharCode(65 + Math.floor(Math.random() * 26))
-																	        : String.fromCharCode(97 + Math.floor(Math.random() * 26));
-																	
-																	    return prefix + digit() + upper() + lower() + threeDigits() + letter();
-																	  }
-																	
-																	  // 将值放入两个 span 中，第二个在中间换行
-																	  function fillSpans() {
-																	    const val = generate();
-																	    const span1 = document.getElementById('spanpiaohao-left');
-																	    const span2 = document.getElementById('spanpiaohao-right');
-																	
-																	    if (span1) span1.textContent = val;
-																	
-																	    if (span2) {
-																	      // 计算中间位置（在第8位后换行）
-																	      const midIndex = Math.floor(val.length / 2);
-																	      const valWithBreak = val.slice(0, midIndex) + "\n" + val.slice(midIndex);
-																	      span2.textContent = valWithBreak; // 注意：这里用 \n 而不是 <br>
-																	    }
-																	  }
+																		// 生成符合规则的字符串
+																		function generate() {
+																			const prefix = "41018401";
+																			const digit = () => Math.floor(Math.random() * 10);
+																			const upper = () => String.fromCharCode(65 + Math.floor(Math.random() * 26)); // A-Z
+																			const lower = () => String.fromCharCode(97 + Math.floor(Math.random() * 26)); // a-z
+																			const threeDigits = () => String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+																			const letter = () =>
+																				Math.random() < 0.5 ?
+																				String.fromCharCode(65 + Math.floor(Math.random() * 26)) :
+																				String.fromCharCode(97 + Math.floor(Math.random() * 26));
+
+																			return prefix + digit() + upper() + lower() + threeDigits() + letter();
+																		}
+
+																		// 将值放入两个 span 中，第二个在中间换行
+																		function fillSpans() {
+																			const val = generate();
+																			const span1 = document.getElementById('spanpiaohao-left');
+																			const span2 = document.getElementById('spanpiaohao-right');
+
+																			if (span1) span1.textContent = val;
+
+																			if (span2) {
+																				// 计算中间位置（在第8位后换行）
+																				const midIndex = Math.floor(val.length / 2);
+																				const valWithBreak = val.slice(0, midIndex) + "\n" + val.slice(midIndex);
+																				span2.textContent = valWithBreak; // 注意：这里用 \n 而不是 <br>
+																			}
+																		}
 																	</script>
 																	<script>
 																		const parseBtn = document.getElementById('parseBtn');
@@ -1943,7 +1949,7 @@
 																		}
 
 																		function generateQRCode() {
-																			fillSpans();//生成序列号
+																			fillSpans(); //生成序列号
 																			const variablePart =
 																				`${hallDiv.textContent}${nameDiv.textContent}` +
 																				`${rowInput.value}${seatInput.value}${nowTimeSpan.textContent}`;
