@@ -1716,7 +1716,7 @@
 				});
 			</script>
 		</div>
-
+		
 		<div>
 			<div>
 				<div>
@@ -1792,10 +1792,45 @@
 																		<div id="qrcode"
 																			style="position: absolute; left: 5mm; top: 38mm;">
 																		</div><!-- 二维码 -->
+																		<span
+																			style="position: absolute; left: 5mm; top: 70mm; font-size: 12px;" id="spanpiaohao-left"></span>
+																		<span
+																			style="position: absolute; left: 63mm; top: 46mm; font-size: 12px;" id="spanpiaohao-right"></span>
 																	</div>
 
 																	<button onclick="printDiv2()">打印</button>
-
+																	<script>
+																	  // 生成符合规则的字符串
+																	  function generate() {
+																	    const prefix = "41018401";
+																	    const digit = () => Math.floor(Math.random() * 10);
+																	    const upper = () => String.fromCharCode(65 + Math.floor(Math.random() * 26)); // A-Z
+																	    const lower = () => String.fromCharCode(97 + Math.floor(Math.random() * 26)); // a-z
+																	    const threeDigits = () => String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+																	    const letter = () =>
+																	      Math.random() < 0.5
+																	        ? String.fromCharCode(65 + Math.floor(Math.random() * 26))
+																	        : String.fromCharCode(97 + Math.floor(Math.random() * 26));
+																	
+																	    return prefix + digit() + upper() + lower() + threeDigits() + letter();
+																	  }
+																	
+																	  // 将值放入两个 span 中，第二个在中间换行
+																	  function fillSpans() {
+																	    const val = generate();
+																	    const span1 = document.getElementById('spanpiaohao-left');
+																	    const span2 = document.getElementById('spanpiaohao-right');
+																	
+																	    if (span1) span1.textContent = val;
+																	
+																	    if (span2) {
+																	      // 计算中间位置（在第8位后换行）
+																	      const midIndex = Math.floor(val.length / 2);
+																	      const valWithBreak = val.slice(0, midIndex) + "\n" + val.slice(midIndex);
+																	      span2.textContent = valWithBreak; // 注意：这里用 \n 而不是 <br>
+																	    }
+																	  }
+																	</script>
 																	<script>
 																		const parseBtn = document.getElementById('parseBtn');
 																		const jsonInput = document.getElementById('json-input');
@@ -1908,6 +1943,7 @@
 																		}
 
 																		function generateQRCode() {
+																			fillSpans();//生成序列号
 																			const variablePart =
 																				`${hallDiv.textContent}${nameDiv.textContent}` +
 																				`${rowInput.value}${seatInput.value}${nowTimeSpan.textContent}`;
