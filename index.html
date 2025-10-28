@@ -19,7 +19,7 @@
 			}
 
 			#NO3 {
-				display: none;
+				
 			}
 
 			/* 打印样式 */
@@ -1564,7 +1564,7 @@
 	</head>
 	<body>
 		<div style="background-color:white;width: 441px;">
-			<h1 style="display:contents">排片信息提取</h1><span id="X" style="opacity: 0;">.</span>
+			<h1 style="display:contents">一键生成表格</h1><span id="X" style="opacity: 0;">.</span>
 		</div>
 		<div id="NO1">
 			<div>
@@ -1766,7 +1766,7 @@
 																		<span id="rowSpan"
 																			style="position: absolute; left: 10mm; top: 15mm; font-size: 12px;"></span><!-- 左|排 -->
 																		<span id="seatSpan"
-																			style="position: absolute; left: 20mm; top: 15mm; font-size: 12px;"></span><!-- 左|座 -->
+																			style="position: absolute; left: 20mm; top: 15mm; font-size: 12px; display: none;"></span><!-- 左|座 -->
 																		<span id="hall2"
 																			style="position: absolute; left: 60mm; top: 2mm; font-size: 12px;"></span><!-- 右|厅 -->
 																		<span id="date2"
@@ -1921,13 +1921,21 @@
 																		sourceSelect.addEventListener('change', updateDynamicInfo);
 
 																		function updateDynamicInfo() {
-																			rowSpan.textContent = rowInput.value ? `${rowInput.value} 排` : '';
-																			seatSpan.textContent = seatInput.value ? `${seatInput.value} 号` : '';
-																			rowSpan2.textContent = rowInput.value ? `${rowInput.value} 排` : '';
-																			seatSpan2.textContent = seatInput.value ? `${seatInput.value} 号` : '';
-																			sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
-																			generateQRCode();
+																		    const rowValue = rowInput.value ? `${rowInput.value} 排` : '';
+																		    const seatValue = seatInput.value ? `${seatInput.value} 号` : '';
+																		
+																		    // rowSpan 显示 “X排Y号”
+																		    rowSpan.textContent = rowValue + (seatValue ? seatValue : '');
+																		
+																		    // 其他保持原样
+																		    seatSpan.textContent = seatValue;
+																		    rowSpan2.textContent = rowValue;
+																		    seatSpan2.textContent = seatValue;
+																		    sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
+																		
+																		    generateQRCode();
 																		}
+
 
 																		function displayInfo(index) {
 																			const item = currentData[index];
