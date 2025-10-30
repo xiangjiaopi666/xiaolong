@@ -1816,50 +1816,42 @@
 	},
 	{
 		"name": "小山河",
-		"nickname": "",
 		"lightOnTime": "01:29:32",
 		"posterTime": "00:00:00"
 	},
 	{
 		"name": "阳光俱乐部",
-		"nickname": "",
 		"lightOnTime": "01:32:45",
 		"posterTime": "00:00:00"
 	},
 	{
 		"name": "世界计划：无法歌唱的初音未来",
-		"nickname": "",
 		"lightOnTime": "01:40:40",
 		"posterTime": "00:00:00"
 	},
 	{
 		"name": "带你回家",
 		"lightOnTime": "01:38:03",
-		"posterTime": "00:00:00",
-		"nickname": ""
+		"posterTime": "00:00:00"
 	},
 	{
 		"name": "下一个台风",
-		"nickname": "",
 		"lightOnTime": "01:33:43",
 		"posterTime": "00:02:08"
 	},
 	{
 		"name": "向光花盛开",
 		"lightOnTime": "01:27:10",
-		"posterTime": "00:00:00",
-		"nickname": ""
+		"posterTime": "00:00:00"
 	},
 	{
 		"name": "偷天盗日",
 		"lightOnTime": "01:39:12",
-		"posterTime": "00:00:00",
-		"nickname": ""
+		"posterTime": "00:00:00"
 	},
 	{
 		"name": "陪你到清晨",
 		"lightOnTime": "01:40:41",
-		"posterTime": "00:00:00",
-		"nickname": ""
+		"posterTime": "00:00:00"
 	}
 ]
