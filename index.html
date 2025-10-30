@@ -389,7 +389,7 @@
 							NeedCheck.push(name_min); //将需要精确时间的电影名给对应数组，方便输出提示
 							//console.log(name_min_new + "  无任何信息");
 						} else {
-							if (result.nickname == undefined) { //如果昵称为空，则不需要替换
+							if (result.nickname == undefined || result.nickname == '') { //如果昵称为空，则不需要替换
 								name_min_new = name_min;
 							} else {
 								name_min_new = result.nickname;
