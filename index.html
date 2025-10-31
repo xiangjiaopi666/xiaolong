@@ -1921,19 +1921,19 @@
 																		sourceSelect.addEventListener('change', updateDynamicInfo);
 
 																		function updateDynamicInfo() {
-																		    const rowValue = rowInput.value ? `${rowInput.value} 排` : '';
-																		    const seatValue = seatInput.value ? `${seatInput.value} 号` : '';
-																		
-																		    // rowSpan 显示 “X排Y号”
-																		    rowSpan.textContent = rowValue + (seatValue ? seatValue : '');
-																		
-																		    // 其他保持原样
-																		    seatSpan.textContent = seatValue;
-																		    rowSpan2.textContent = rowValue;
-																		    seatSpan2.textContent = seatValue;
-																		    sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
-																		
-																		    generateQRCode();
+																			const rowValue = rowInput.value ? `${rowInput.value} 排` : '';
+																			const seatValue = seatInput.value ? `${seatInput.value} 号` : '';
+
+																			// rowSpan 显示 “X排Y号”
+																			rowSpan.textContent = rowValue + (seatValue ? seatValue : '');
+
+																			// 其他保持原样
+																			seatSpan.textContent = seatValue;
+																			rowSpan2.textContent = rowValue;
+																			seatSpan2.textContent = seatValue;
+																			sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
+
+																			generateQRCode();
 																		}
 
 
@@ -1994,7 +1994,11 @@
 			    <head>
 			        <title>打印</title>
 			        <style>
-			            html, body { margin: 0; padding: 0; }
+			            html, body {
+			                margin: 0;
+			                padding: 0;
+			                font-family: SimSun, "宋体", serif;
+			            }
 			            #NO3 {
 			                position: relative;
 			                height: 84mm;
