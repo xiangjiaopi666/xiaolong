@@ -1332,11 +1332,14 @@
 				// 将div的内容写入iframe的document中
 				printWindow.document.open();
 				printWindow.document.write(
-					'<html><head><title>打印内容</title><style>' +
-					/* 在这里复制打印样式 */
-					'</style></head><body>' +
-					printArea.innerHTML +
-					'</body></html>'
+				    '<html><head><title>打印内容</title><style>' +
+				    'body, div, span, p, table, td, th {' +
+				    '   font-family: "Microsoft YaHei", sans-serif;' +
+				    '   font-weight: bold;' +
+				    '}' +
+				    '</style></head><body>' +
+				    printArea.innerHTML +
+				    '</body></html>'
 				);
 				printWindow.document.close();
 				// 打印iframe的内容
@@ -1357,11 +1360,14 @@
 				// 将div的内容写入iframe的document中
 				printWindow.document.open();
 				printWindow.document.write(
-					'<html><head><title>打印内容</title><style>' +
-					/* 在这里复制打印样式 */
-					'</style></head><body>' +
-					printArea.innerHTML +
-					'</body></html>'
+				    '<html><head><title>打印内容</title><style>' +
+				    'body, div, span, p, table, td, th {' +
+				    '   font-family: "Microsoft YaHei", sans-serif;' +
+				    '   font-weight: bold;' +
+				    '}' +
+				    '</style></head><body>' +
+				    printArea.innerHTML +
+				    '</body></html>'
 				);
 				printWindow.document.close();
 				// 打印iframe的内容
