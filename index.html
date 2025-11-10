@@ -1252,42 +1252,49 @@
 				document.getElementById('readFile_sucess').innerHTML = "😁👉"
 			}
 
-			// ✅ 检测是否为桌面版 Google Chrome，并进行拦截提示
-			function checkIfDesktopChrome() {
-				var ua = navigator.userAgent;
-				var vendor = navigator.vendor;
-				var isDesktopChrome = /Chrome/.test(ua) &&
-					/Google Inc/.test(vendor) &&
-					!/Edg/.test(ua) // 排除 Edge
-					&&
-					!/OPR/.test(ua) // 排除 Opera
-					&&
-					!/Mobile/.test(ua); // 排除移动端 Chrome
-
-				if (isDesktopChrome) {
-					alert("请使用Edge浏览器打印\n请使用Edge浏览器打印\n请使用Edge浏览器打印\n请使用Edge浏览器打印\n请使用Edge浏览器打印");
-					return true; // 表示已拦截
-				}
-				return false; // 表示可继续执行
+			
+			// ✅ 检测是否为 Edge，并进行拦截提示
+			function checkIfEdgeOnly() {
+			    var ua = navigator.userAgent;
+			
+			    // Edge 的 UA 一定包含 "Edg/"
+			    var isEdge = ua.includes("Edg/");
+			
+			    if (!isEdge) {
+			        alert("请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n");
+			        return true; 
+			    }
+			
+			    return false; 
 			}
-
-			function hideElementIfEdge(elementId) {
-				var ua = navigator.userAgent;
-				// 兼容新旧版本 Edge（旧版带 "Edge"，新版基于 Chromium 带 "Edg"）
-				var isEdge = /Edg/.test(ua) || /Edge/.test(ua);
-
-				if (isEdge) {
-					var el = document.getElementById(elementId);
-					if (el) {
-						el.style.display = "none";
-					}
-				}
+			// ✅ 检测是否为 Google Chrome，并进行拦截提示
+			function checkIfChromeOnly() {
+			    var ua = navigator.userAgent;
+				//console.log(ua);
+			    // Edge: 包含 "Edg/"
+			    var isEdge = ua.includes("Edg/");
+			
+			    // Opera: 包含 "OPR/"
+			    var isOpera = ua.includes("OPR/");
+				
+				// QuarkPC: 包含 "QuarkPC/"
+				var isQuarkPC = ua.includes("QuarkPC/");
+			
+			    // Chrome（但排除 Edge 和 Opera）
+			    var isChrome = ua.includes("Chrome/") && !isEdge && !isOpera && !isQuarkPC;
+			
+			    if (!isChrome) {
+			        //alert("请使用 Google Chrome 浏览器");
+			        return true; 
+			    }
+			
+			    return false; 
 			}
 
 			// ✅ 打印方法示例
 			function printDiv() {
 				// 调用检测函数，如果返回 true，则中断执行
-				if (checkIfDesktopChrome()) return;
+				if (checkIfEdgeOnly()) return;
 
 				var printArea = document.getElementById('tableContainer');
 				var printFrame = document.getElementById('printFrame');
@@ -1320,7 +1327,7 @@
 
 
 			function printDivZao() {
-				if (checkIfDesktopChrome()) return;
+				if (checkIfEdgeOnly()) return;
 				var printArea = document.getElementById('splitTables_1');
 				var printFrame = document.getElementById('printFrame');
 				var printWindow = printFrame.contentWindow || printFrame.contentDocument.document;
@@ -1348,7 +1355,7 @@
 			}
 
 			function printDivWan() {
-				if (checkIfDesktopChrome()) return;
+				if (checkIfEdgeOnly()) return;
 				var printArea = document.getElementById('splitTables_2');
 				var printFrame = document.getElementById('printFrame');
 				var printWindow = printFrame.contentWindow || printFrame.contentDocument.document;
@@ -2053,6 +2060,7 @@
 
 																		// 点击 X 切换显示
 																		x.addEventListener('click', function() {
+																			if (checkIfChromeOnly()) return;
 																			if (!toggled) {
 																				no1.style.display = 'none';
 																				no2.style.display = 'block';
