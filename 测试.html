@@ -2,78 +2,182 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>链式 TXT 下载（序号在日期后）</title>
+  <title>TXT 生成器（IndexedDB 完整版）</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .row { margin-bottom: 6px; }
+    button { margin-top: 10px; margin-right: 10px; padding: 6px 14px; }
+    #result { margin-top: 12px; color: #0a5; word-break: break-all; }
+  </style>
 </head>
 <body>
 
-日期：<input id="dateDiv" readonly><br>
-时间：<input id="timeDiv" readonly><br>
-厅号：<input id="hallDiv" value="3厅"><br><br>
+<h2>TXT 文件生成（IndexedDB）</h2>
 
-<button onclick="downloadNext()">下载下一个文件</button>
+<div class="row">当前时间：<span id="nowTime">2025.12.31 20:34:18</span></div>
+<div class="row">开场时间：<span id="time">11:00</span></div>
+<div class="row">影厅：<span id="hall">9号商务厅</span></div>
+<div class="row">影片名：<span id="name">情圣3（普通 2D/国语）</span></div>
+<div class="row">座位：<span id="rowSpan">1排1号</span></div>
+<div class="row">来源：<span id="sourceSpan">抖音</span></div>
+
+<button onclick="createRecord()">生成记录</button>
+<button onclick="clearIndexedDB()">清空 IndexedDB</button>
+
+<div id="result"></div>
 
 <script>
-let index = 1;          // [1][2][3] 序号
-let lastFileName = ""; // 上一个文件名
-let lastContent = "";  // 上一个文件内容
-
-function pad(n) {
-  return n.toString().padStart(2, "0");
+/* ================== 时间工具 ================== */
+function getChinaDate() {
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  return new Date(utc + 8 * 60 * 60000);
 }
 
-function getCurrentDate() {
-  const d = new Date();
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+function getBusinessDate() {
+  const d = getChinaDate();
+  if (d.getHours() < 5) d.setDate(d.getDate() - 1);
+  return d.toISOString().slice(0, 10);
 }
 
-function getCurrentTimeWithMs() {
-  const d = new Date();
-  return (
-    pad(d.getHours()) + "-" +
-    pad(d.getMinutes()) + "-" +
-    pad(d.getSeconds()) + "-" +
-    d.getMilliseconds()
-  );
+/* ================== IndexedDB ================== */
+const DB_NAME = "txt_generator_db";
+const STORE_NAME = "history";
+let db = null;
+
+function openDB() {
+  return new Promise(resolve => {
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = e => {
+      e.target.result.createObjectStore(STORE_NAME, { keyPath: "id" });
+    };
+    req.onsuccess = e => {
+      db = e.target.result;
+      resolve();
+    };
+  });
 }
 
-function download(name, content) {
+function getState() {
+  return new Promise(resolve => {
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const req = tx.objectStore(STORE_NAME).get(1);
+    req.onsuccess = () => resolve(req.result || null);
+  });
+}
+
+function saveState(state) {
+  return new Promise(resolve => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    tx.objectStore(STORE_NAME).put(state);
+    tx.oncomplete = resolve;
+  });
+}
+
+/* ================== 文件名生成 ================== */
+function getSafeFileName(index) {
+  let nowTime = document.getElementById("nowTime").textContent;
+  nowTime = nowTime
+    .replace(" ", "_")
+    .replace(":", "h")
+    .replace(":", "m") + "s";
+  nowTime += "【" + String(index).padStart(3, "0") + "】";
+
+  const time = document.getElementById("time").textContent.replace(":", ".");
+  const hall = document.getElementById("hall").textContent;
+
+  let name = document.getElementById("name").textContent;
+  name = name.replace(/普通|2D|国语/g, "");
+
+  const rowSpan = document.getElementById("rowSpan").textContent;
+  const source = document.getElementById("sourceSpan").textContent;
+
+  return [nowTime, time, hall, name, rowSpan, source]
+    .join("_")
+    .replace(/[\\\/:*?"<>|（）\s]/g, "");
+}
+
+/* ================== 下载 TXT ================== */
+function downloadTxt(name, content) {
   const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
+  a.href = url;
   a.download = name + ".txt";
   a.click();
-  URL.revokeObjectURL(a.href);
+  URL.revokeObjectURL(url);
 }
 
-function downloadNext() {
-  dateDiv.value = getCurrentDate();
-  timeDiv.value = getCurrentTimeWithMs();
+/* ================== 主逻辑 ================== */
+async function createRecord() {
+  if (!db) await openDB();
 
-  // ⭐ 序号放在日期后面
-  const currentFileName =
-    dateDiv.value + "_[" + index + "]_" +
-    timeDiv.value + "_" +
-    hallDiv.value;
+  const today = getBusinessDate();
+  let state = await getState();
 
-  let currentContent;
-  if (index === 1) {
-    // 第一个文件：内容为空
-    currentContent = "";
-  } else {
-    // 链式规则（换行）
-    currentContent = lastFileName + "\n" + lastContent;
+  if (!state || state.businessDate !== today) {
+    state = {
+      id: 1,
+      businessDate: today,
+      fileIndex: 1,
+      recordCount: 0,
+      content: ""
+    };
   }
 
-  download(currentFileName, currentContent);
+  // 防御式初始化（防 NaN）
+  state.fileIndex   = Number(state.fileIndex)   || 1;
+  state.recordCount = Number(state.recordCount) || 0;
+  state.content     = state.content || "";
 
-  lastFileName = currentFileName;
-  lastContent = currentContent;
-  index++;
+  const fileName = getSafeFileName(state.fileIndex);
+
+  // 链式内容（当前在最上）
+  state.content = state.content
+    ? fileName + "\n" + state.content
+    : fileName;
+
+  state.fileIndex++;
+  state.recordCount++;
+
+  if (state.recordCount % 5 === 0) {
+    downloadTxt(fileName, state.content);
+    document.getElementById("result").textContent =
+      `第 ${state.recordCount} 条，已下载 ${fileName}.txt`;
+  } else {
+    document.getElementById("result").textContent =
+      `已记录第 ${state.recordCount} 条（未下载）`;
+  }
+
+  await saveState(state);
 }
 
-// 初始化
-dateDiv.value = getCurrentDate();
-timeDiv.value = getCurrentTimeWithMs();
+/* ================== 清空 IndexedDB ================== */
+async function clearIndexedDB() {
+  const ok = confirm("确认清空 IndexedDB？此操作不可恢复！");
+  if (!ok) return;
+
+  if (db) {
+    db.close();
+    db = null;
+  }
+
+  const req = indexedDB.deleteDatabase(DB_NAME);
+
+  req.onsuccess = () => {
+    document.getElementById("result").textContent =
+      "IndexedDB 已清空，请刷新页面";
+  };
+
+  req.onerror = () => alert("IndexedDB 清空失败");
+  req.onblocked = () => alert("数据库被占用，请关闭其它页面");
+}
+
+/* ======== 挂到 window，确保控制台可用 ======== */
+window.createRecord = createRecord;
+window.clearIndexedDB = clearIndexedDB;
+
+openDB();
 </script>
 
 </body>

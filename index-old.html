@@ -19,7 +19,7 @@
 			}
 
 			#NO3 {
-				/*display: none;*/
+				display: none;
 			}
 
 			/* 打印样式 */
@@ -153,7 +153,7 @@
 				// 尝试解析JSON字符串
 				try {
 					var jsonData = JSON.parse(jsonInput);
-					console.log(jsonData.data.arr_date_plan); //全部场次
+					//console.log(jsonData.data.arr_date_plan); //全部场次
 					//删除虚拟场次
 					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
 					//console.log('删除了 ' + indicesToDelete + '场');
@@ -258,25 +258,25 @@
 							['（普通 3D/国语）', '👓'],
 							['（普通 3D/英语）', '（英语🌏）👓'],
 						];*/
-						
+
 						const replaceMap = [
-						  // 普通立体
-						  ['普通立体', '普通'],
-						
-						  // 普通 / 国语（含 2D）
-						  [/（普通 ?2D?\/国语）/g, ''],
-						
-						  // 普通 / 外语（含 2D）
-						  [/（普通 ?2D?\/(.+?)）/g, '（$1🌏）'],
-						
-						  // 数字 3D
-						  ['（数字3D）', ''],
-						
-						  // 普通 3D / 国语
-						  [/（普通 3D\/国语）/g, '👓'],
-						
-						  // 普通 3D / 外语
-						  [/（普通 3D\/(.+?)）/g, '（$1🌏）👓'],
+							// 普通立体
+							['普通立体', '普通'],
+
+							// 普通 / 国语（含 2D）
+							[/（普通 ?2D?\/国语）/g, ''],
+
+							// 普通 / 外语（含 2D）
+							[/（普通 ?2D?\/(.+?)）/g, '（$1🌏）'],
+
+							// 数字 3D
+							['（数字3D）', ''],
+
+							// 普通 3D / 国语
+							[/（普通 3D\/国语）/g, '👓'],
+
+							// 普通 3D / 外语
+							[/（普通 3D\/(.+?)）/g, '（$1🌏）👓'],
 						];
 
 
@@ -825,15 +825,15 @@
 				return result;
 			}*/
 			function replaceSpecifiedString(inputString, targetSubstring, tihuancheng) {
-			  // ✅ 如果是正则，直接用
-			  if (targetSubstring instanceof RegExp) {
-			    return inputString.replace(targetSubstring, tihuancheng);
-			  }
-			
-			  // ✅ 原有字符串逻辑（完全保留）
-			  const escapedTarget = targetSubstring.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-			  const regex = new RegExp(escapedTarget, 'g');
-			  return inputString.replace(regex, tihuancheng);
+				// ✅ 如果是正则，直接用
+				if (targetSubstring instanceof RegExp) {
+					return inputString.replace(targetSubstring, tihuancheng);
+				}
+
+				// ✅ 原有字符串逻辑（完全保留）
+				const escapedTarget = targetSubstring.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+				const regex = new RegExp(escapedTarget, 'g');
+				return inputString.replace(regex, tihuancheng);
 			}
 
 
@@ -1010,7 +1010,8 @@
 						var firstContent = firstCell.textContent || firstCell.innerText;
 						var secondContent = secondCell.textContent || secondCell.innerText;
 						var thiredContent = thirdCell.textContent || thirdCell.innerText;
-						var stringsToReplace = ['🌏', ' 3D👓', '（英语）👓', '👓', '（日语）', '（英语）', '（其他）', '（印度语）', '（印尼语）', '（法语）', '（意大利语）', '（韩语）',
+						var stringsToReplace = ['🌏', ' 3D👓', '（英语）👓', '👓', '（日语）', '（英语）', '（粤语）', '（其他）', '（印度语）',
+							'（印尼语）', '（法语）', '（意大利语）', '（韩语）',
 							'（俄语）'
 						];
 						var originalString = thiredContent;
@@ -1287,43 +1288,43 @@
 				document.getElementById('readFile_sucess').innerHTML = "😁👉"
 			}
 
-			
+
 			// ✅ 检测是否为 Edge，并进行拦截提示
 			function checkIfEdgeOnly() {
-			    var ua = navigator.userAgent;
-			
-			    // Edge 的 UA 一定包含 "Edg/"
-			    var isEdge = ua.includes("Edg/");
-			
-			    if (!isEdge) {
-			        alert("请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n");
-			        return true; 
-			    }
-			
-			    return false; 
+				var ua = navigator.userAgent;
+
+				// Edge 的 UA 一定包含 "Edg/"
+				var isEdge = ua.includes("Edg/");
+
+				if (!isEdge) {
+					alert("请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n");
+					return true;
+				}
+
+				return false;
 			}
 			// ✅ 检测是否为 Google Chrome，并进行拦截提示
 			function checkIfChromeOnly() {
-			    var ua = navigator.userAgent;
+				var ua = navigator.userAgent;
 				//console.log(ua);
-			    // Edge: 包含 "Edg/"
-			    var isEdge = ua.includes("Edg/");
-			
-			    // Opera: 包含 "OPR/"
-			    var isOpera = ua.includes("OPR/");
-				
+				// Edge: 包含 "Edg/"
+				var isEdge = ua.includes("Edg/");
+
+				// Opera: 包含 "OPR/"
+				var isOpera = ua.includes("OPR/");
+
 				// QuarkPC: 包含 "QuarkPC/"
 				var isQuarkPC = ua.includes("QuarkPC/");
-			
-			    // Chrome（但排除 Edge 和 Opera）
-			    var isChrome = ua.includes("Chrome/") && !isEdge && !isOpera && !isQuarkPC;
-			
-			    if (!isChrome) {
-			        //alert("请使用 Google Chrome 浏览器");
-			        return true; 
-			    }
-			
-			    return false; 
+
+				// Chrome（但排除 Edge 和 Opera）
+				var isChrome = ua.includes("Chrome/") && !isEdge && !isOpera && !isQuarkPC;
+
+				if (!isChrome) {
+					//alert("请使用 Google Chrome 浏览器");
+					return true;
+				}
+
+				return false;
 			}
 
 			// ✅ 打印方法示例
@@ -1342,14 +1343,14 @@
 				// 将div的内容写入iframe的document中
 				printWindow.document.open();
 				printWindow.document.write(
-				    '<html><head><title>打印内容</title><style>' +
-				    'body, div, span, p, table, td, th {' +
-				    '   font-family: "Microsoft YaHei", sans-serif;' +
-				    '   font-weight: bold;' +
-				    '}' +
-				    '</style></head><body>' +
-				    printArea.innerHTML +
-				    '</body></html>'
+					'<html><head><title>打印内容</title><style>' +
+					'body, div, span, p, table, td, th {' +
+					'   font-family: "Microsoft YaHei", sans-serif;' +
+					'   font-weight: bold;' +
+					'}' +
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
 				);
 				printWindow.document.close();
 
@@ -1372,14 +1373,14 @@
 				// 将div的内容写入iframe的document中
 				printWindow.document.open();
 				printWindow.document.write(
-				    '<html><head><title>打印内容</title><style>' +
-				    'body, div, span, p, table, td, th {' +
-				    '   font-family: "Microsoft YaHei", sans-serif;' +
-				    '   font-weight: bold;' +
-				    '}' +
-				    '</style></head><body>' +
-				    printArea.innerHTML +
-				    '</body></html>'
+					'<html><head><title>打印内容</title><style>' +
+					'body, div, span, p, table, td, th {' +
+					'   font-family: "Microsoft YaHei", sans-serif;' +
+					'   font-weight: bold;' +
+					'}' +
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
 				);
 				printWindow.document.close();
 				// 打印iframe的内容
@@ -1400,14 +1401,14 @@
 				// 将div的内容写入iframe的document中
 				printWindow.document.open();
 				printWindow.document.write(
-				    '<html><head><title>打印内容</title><style>' +
-				    'body, div, span, p, table, td, th {' +
-				    '   font-family: "Microsoft YaHei", sans-serif;' +
-				    '   font-weight: bold;' +
-				    '}' +
-				    '</style></head><body>' +
-				    printArea.innerHTML +
-				    '</body></html>'
+					'<html><head><title>打印内容</title><style>' +
+					'body, div, span, p, table, td, th {' +
+					'   font-family: "Microsoft YaHei", sans-serif;' +
+					'   font-weight: bold;' +
+					'}' +
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
 				);
 				printWindow.document.close();
 				// 打印iframe的内容
@@ -1911,6 +1912,7 @@
 																		const sourceSelect = document.getElementById('sourceSelect');
 																		const sourceSpan = document.getElementById('sourceSpan');
 
+
 																		let currentData = [];
 																		let currentIndex = 0;
 
@@ -1973,8 +1975,8 @@
 																		sourceSelect.addEventListener('change', updateDynamicInfo);
 
 																		function updateDynamicInfo() {
-																			const rowValue = rowInput.value ? `${rowInput.value} 排` : '';
-																			const seatValue = seatInput.value ? `${seatInput.value} 号` : '';
+																			const rowValue = rowInput.value ? `${rowInput.value}排` : '';
+																			const seatValue = seatInput.value ? `${seatInput.value}号` : '';
 
 																			// rowSpan 显示 “X排Y号”
 																			rowSpan.textContent = rowValue + (seatValue ? seatValue : '');
@@ -2036,8 +2038,12 @@
 																			qrcodeDiv.innerHTML = '';
 																		}
 
+
+
+
 																		// === 打印并自动关闭 ===
 																		function printDiv2() {
+																			createRecord();
 																			var content = document.getElementById("NO3").outerHTML;
 																			var printWindow = window.open('', '_blank', 'width=800,height=600');
 																			printWindow.document.open();
@@ -2080,6 +2086,153 @@
 																				setTimeout(() => printWindow.close(), 200);
 																			};
 																		}
+																	</script>
+																	<script>
+																	/* ================== 时间工具 ================== */
+																	function getChinaDate() {
+																	  const now = new Date();
+																	  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+																	  return new Date(utc + 8 * 60 * 60000);
+																	}
+																	
+																	function getBusinessDate() {
+																	  const d = getChinaDate();
+																	  if (d.getHours() < 5) d.setDate(d.getDate() - 1);
+																	  return d.toISOString().slice(0, 10);
+																	}
+																	
+																	/* ================== IndexedDB ================== */
+																	const DB_NAME = "txt_generator_db";
+																	const STORE_NAME = "history";
+																	let db = null;
+																	
+																	function openDB() {
+																	  return new Promise(resolve => {
+																	    const req = indexedDB.open(DB_NAME, 1);
+																	    req.onupgradeneeded = e => {
+																	      e.target.result.createObjectStore(STORE_NAME, { keyPath: "id" });
+																	    };
+																	    req.onsuccess = e => {
+																	      db = e.target.result;
+																	      resolve();
+																	    };
+																	  });
+																	}
+																	
+																	function getState() {
+																	  return new Promise(resolve => {
+																	    const tx = db.transaction(STORE_NAME, "readonly");
+																	    const req = tx.objectStore(STORE_NAME).get(1);
+																	    req.onsuccess = () => resolve(req.result || null);
+																	  });
+																	}
+																	
+																	function saveState(state) {
+																	  return new Promise(resolve => {
+																	    const tx = db.transaction(STORE_NAME, "readwrite");
+																	    tx.objectStore(STORE_NAME).put(state);
+																	    tx.oncomplete = resolve;
+																	  });
+																	}
+																	
+																	/* ================== 文件名生成 ================== */
+																	function getSafeFileName(index) {
+																	  let nowTime = document.getElementById("nowTime").textContent;
+																	  nowTime = nowTime
+																	    .replace(" ", "_")
+																	    .replace(":", "h")
+																	    .replace(":", "m") + "s";
+																	  nowTime += "【" + String(index).padStart(3, "0") + "】";
+																	
+																	  const time = document.getElementById("time").textContent.replace(":", ".");
+																	  const hall = document.getElementById("hall").textContent;
+																	
+																	  let name = document.getElementById("name").textContent;
+																	  name = name.replace(/普通|2D|国语/g, "");
+																	
+																	  const rowSpan = document.getElementById("rowSpan").textContent;
+																	  const source = document.getElementById("sourceSpan").textContent;
+																	
+																	  return [nowTime, time, hall, name, rowSpan, source]
+																	    .join("_")
+																	    .replace(/[\\\/:*?"<>|（）\s]/g, "");
+																	}
+																	
+																	/* ================== 下载 TXT ================== */
+																	function downloadTxt(name, content) {
+																	  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+																	  const url = URL.createObjectURL(blob);
+																	  const a = document.createElement("a");
+																	  a.href = url;
+																	  a.download = name + ".txt";
+																	  a.click();
+																	  URL.revokeObjectURL(url);
+																	}
+																	
+																	/* ================== 主逻辑 ================== */
+																	async function createRecord() {
+																	  if (!db) await openDB();
+																	
+																	  const today = getBusinessDate();
+																	  let state = await getState();
+																	
+																	  if (!state || state.businessDate !== today) {
+																	    state = {
+																	      id: 1,
+																	      businessDate: today,
+																	      fileIndex: 1,
+																	      recordCount: 0,
+																	      content: ""
+																	    };
+																	  }
+																	
+																	  // 防御式初始化（防 NaN）
+																	  state.fileIndex   = Number(state.fileIndex)   || 1;
+																	  state.recordCount = Number(state.recordCount) || 0;
+																	  state.content     = state.content || "";
+																	
+																	  const fileName = getSafeFileName(state.fileIndex);
+																	
+																	  // 链式内容（当前在最上）
+																	  state.content = state.content
+																	    ? fileName + "\n" + state.content
+																	    : fileName;
+																	
+																	  state.fileIndex++;
+																	  state.recordCount++;
+																	
+																	  if (state.recordCount % 5 === 0) {
+																	    downloadTxt(fileName, state.content);
+																	  }
+																	
+																	  await saveState(state);
+																	}
+																	
+																	/* ================== 清空 IndexedDB ================== */
+																	async function clearIndexedDB() {
+																	  const ok = confirm("确认清空 IndexedDB？此操作不可恢复！");
+																	  if (!ok) return;
+																	
+																	  if (db) {
+																	    db.close();
+																	    db = null;
+																	  }
+																	
+																	  const req = indexedDB.deleteDatabase(DB_NAME);
+																	
+																	  req.onsuccess = () => {
+																	    confirm("IndexedDB 已清空，请刷新页面")
+																	  };
+																	
+																	  req.onerror = () => alert("IndexedDB 清空失败");
+																	  req.onblocked = () => alert("数据库被占用，请关闭其它页面");
+																	}
+																	
+																	/* ======== 挂到 window，确保控制台可用 ======== */
+																	window.createRecord = createRecord;
+																	window.clearIndexedDB = clearIndexedDB;
+																	
+																	openDB();
 																	</script>
 
 
