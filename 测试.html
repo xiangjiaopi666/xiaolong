@@ -1,247 +1,80 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-	<head>
-		<meta charset="UTF-8">
-		<title>打印二维码示例</title>
-		<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-		<style>
-			#NO3 {
-				position: relative;
-				height: 84mm;
-				width: 79mm;
-				border: 1px solid #ccc;
-				margin-top: 10px;
-			}
+<head>
+  <meta charset="UTF-8">
+  <title>链式 TXT 下载（序号在日期后）</title>
+</head>
+<body>
 
-			#NO3 span {
-				position: absolute;
-				font-size: 12px;
-			}
+日期：<input id="dateDiv" readonly><br>
+时间：<input id="timeDiv" readonly><br>
+厅号：<input id="hallDiv" value="3厅"><br><br>
 
-			#qrcode {
-				position: absolute;
-				left: 5mm;
-				top: 38mm;
-			}
-		</style>
-	</head>
-	<body>
+<button onclick="downloadNext()">下载下一个文件</button>
 
-		<!-- 输入区 -->
-		<textarea id="json-input" placeholder="在这里粘贴 JSON 数据" style="width:300px;height:100px;"></textarea><br>
-		<button id="parseBtn">解析JSON</button>
-		<select id="resultSelect"></select><br><br>
+<script>
+let index = 1;          // [1][2][3] 序号
+let lastFileName = ""; // 上一个文件名
+let lastContent = "";  // 上一个文件内容
 
-		<!-- 新增输入框 -->
-		<label>排号：</label><input type="text" id="rowInput" style="width:80px;">
-		<label>座位号：</label><input type="text" id="seatInput" style="width:80px;"><br><br>
+function pad(n) {
+  return n.toString().padStart(2, "0");
+}
 
-		<!-- ✅ 新增下拉框 -->
-		<label>来源：</label>
-		<select id="sourceSelect">
-			<option value="">请选择</option>
-			<option value="学生">学生</option>
-			<option value="抖音">抖音</option>
-			<option value="工会">工会</option>
-		</select><br><br>
+function getCurrentDate() {
+  const d = new Date();
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
 
-		<!-- 打印内容区域 -->
-		<div id="NO3">
-			<span id="hall" style="left: 10mm; top: 2mm;"></span>
-			<span id="name" style="left: 10mm; top: 9mm;"></span>
-			<span id="date" style="left: 37mm; top: 1mm;"></span>
-			<span id="time" style="left: 42mm; top: 3mm;"></span>
-			<span id="hall2" style="left: 60mm; top: 2mm;"></span>
-			<span id="date2" style="left: 60mm; top: 15mm;"></span>
-			<span id="time2" style="left: 64mm; top: 19mm;"></span>
+function getCurrentTimeWithMs() {
+  const d = new Date();
+  return (
+    pad(d.getHours()) + "-" +
+    pad(d.getMinutes()) + "-" +
+    pad(d.getSeconds()) + "-" +
+    d.getMilliseconds()
+  );
+}
 
-			<span id="rowSpan" style="left: 10mm; top: 20mm;"></span>
-			<span id="seatSpan" style="left: 30mm; top: 20mm;"></span>
+function download(name, content) {
+  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name + ".txt";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
 
-			<!-- 当前时间 -->
-			<span id="nowTime" style="left: 10mm; top: 26mm;"></span>
+function downloadNext() {
+  dateDiv.value = getCurrentDate();
+  timeDiv.value = getCurrentTimeWithMs();
 
-			<!-- ✅ 新增来源显示 -->
-			<span id="sourceSpan" style="left: 10mm; top: 30mm;"></span>
+  // ⭐ 序号放在日期后面
+  const currentFileName =
+    dateDiv.value + "_[" + index + "]_" +
+    timeDiv.value + "_" +
+    hallDiv.value;
 
-			<div id="qrcode"></div>
-		</div>
+  let currentContent;
+  if (index === 1) {
+    // 第一个文件：内容为空
+    currentContent = "";
+  } else {
+    // 链式规则（换行）
+    currentContent = lastFileName + "\n" + lastContent;
+  }
 
-		<button onclick="printDiv2()">打印</button>
+  download(currentFileName, currentContent);
 
-		<script>
-			const parseBtn = document.getElementById('parseBtn');
-			const jsonInput = document.getElementById('json-input');
-			const resultSelect = document.getElementById('resultSelect');
-			const hallDiv = document.getElementById('hall');
-			const hallDiv2 = document.getElementById('hall2');
-			const nameDiv = document.getElementById('name');
-			const dateDiv = document.getElementById('date');
-			const dateDiv2 = document.getElementById('date2');
-			const timeDiv = document.getElementById('time');
-			const timeDiv2 = document.getElementById('time2');
-			const qrcodeDiv = document.getElementById('qrcode');
-			const rowInput = document.getElementById('rowInput');
-			const seatInput = document.getElementById('seatInput');
-			const rowSpan = document.getElementById('rowSpan');
-			const seatSpan = document.getElementById('seatSpan');
-			const nowTimeSpan = document.getElementById('nowTime');
-			const sourceSelect = document.getElementById('sourceSelect');
-			const sourceSpan = document.getElementById('sourceSpan');
+  lastFileName = currentFileName;
+  lastContent = currentContent;
+  index++;
+}
 
-			let currentData = [];
-			let currentIndex = 0;
+// 初始化
+dateDiv.value = getCurrentDate();
+timeDiv.value = getCurrentTimeWithMs();
+</script>
 
-			// === 实时时间 ===
-			function updateCurrentTime() {
-				const now = new Date();
-				const Y = now.getFullYear();
-				const M = String(now.getMonth() + 1).padStart(2, '0');
-				const D = String(now.getDate()).padStart(2, '0');
-				const h = String(now.getHours()).padStart(2, '0');
-				const m = String(now.getMinutes()).padStart(2, '0');
-				const s = String(now.getSeconds()).padStart(2, '0');
-				nowTimeSpan.textContent = `${Y}.${M}.${D} ${h}:${m}:${s}`;
-			}
-			setInterval(updateCurrentTime, 1000);
-			updateCurrentTime();
-
-			// === 解析JSON ===
-			parseBtn.addEventListener('click', () => {
-				resultSelect.innerHTML = '';
-				clearDisplay();
-
-				try {
-					const obj = JSON.parse(jsonInput.value.trim());
-					const arr = obj?.data?.arr_date_plan;
-
-					if (!Array.isArray(arr)) {
-						alert('未找到 data.arr_date_plan 数组！');
-						return;
-					}
-
-					currentData = arr;
-					arr.forEach((item, index) => {
-						const hall = item.hall_name || '(无影厅)';
-						const name = item.display_name || '(无片名)';
-						const time = item.show_time_start || '(无时间)';
-						const option = document.createElement('option');
-						option.value = index;
-						option.textContent = `${time.slice(11, 16)} - ${hall} - ${name}`;
-						resultSelect.appendChild(option);
-					});
-
-					if (arr.length > 0) {
-						resultSelect.selectedIndex = 0;
-						displayInfo(0);
-					}
-				} catch (e) {
-					alert('JSON 格式错误，请检查输入！\n\n错误信息：' + e.message);
-				}
-			});
-
-			resultSelect.addEventListener('change', (e) => {
-				const index = e.target.value;
-				currentIndex = index;
-				displayInfo(index);
-			});
-
-			rowInput.addEventListener('input', updateDynamicInfo);
-			seatInput.addEventListener('input', updateDynamicInfo);
-			sourceSelect.addEventListener('change', updateDynamicInfo);
-
-			function updateDynamicInfo() {
-				rowSpan.textContent = rowInput.value ? `排号: ${rowInput.value}` : '';
-				seatSpan.textContent = seatInput.value ? `座位号: ${seatInput.value}` : '';
-				sourceSpan.textContent = sourceSelect.value ? `来源: ${sourceSelect.value}` : '';
-				generateQRCode();
-			}
-
-			function displayInfo(index) {
-				const item = currentData[index];
-				if (!item) return;
-
-				hallDiv.textContent = item.hall_name || '(无影厅)';
-				hallDiv2.textContent = hallDiv.textContent;
-				nameDiv.textContent = item.display_name || '(无片名)';
-
-				if (item.show_time_start) {
-					const [datePart, timePart] = item.show_time_start.split('T');
-					dateDiv.textContent = datePart.replace(/-/g, '.');
-					dateDiv2.textContent = dateDiv.textContent;
-					timeDiv.textContent = timePart.slice(0, 5);
-					timeDiv2.textContent = timeDiv.textContent;
-				}
-
-				generateQRCode();
-			}
-
-			function generateQRCode() {
-				const variablePart =
-					`${hallDiv.textContent}${nameDiv.textContent}${dateDiv.textContent}${timeDiv.textContent}` +
-					`${rowInput.value}${seatInput.value}${sourceSelect.value}${nowTimeSpan.textContent}`;
-				const encodedPart = btoa(unescape(encodeURIComponent(variablePart)));
-				const qrText = `41018401${encodedPart}`;
-
-				qrcodeDiv.innerHTML = '';
-				new QRCode(qrcodeDiv, {
-					text: qrText,
-					width: 100,
-					height: 100,
-					colorDark: "#000000",
-					colorLight: "#ffffff"
-				});
-			}
-
-			function clearDisplay() {
-				hallDiv.textContent = hallDiv2.textContent = '';
-				nameDiv.textContent = '';
-				dateDiv.textContent = dateDiv2.textContent = '';
-				timeDiv.textContent = timeDiv2.textContent = '';
-				rowSpan.textContent = seatSpan.textContent = sourceSpan.textContent = '';
-				qrcodeDiv.innerHTML = '';
-			}
-
-			// === 打印并自动关闭 ===
-			function printDiv2() {
-				var content = document.getElementById("NO3").outerHTML;
-				var printWindow = window.open('', '_blank', 'width=800,height=600');
-				printWindow.document.open();
-				printWindow.document.write(`
-        <html>
-        <head>
-            <title>打印</title>
-            <style>
-                html, body { margin: 0; padding: 0; }
-                #NO3 {
-                    position: relative;
-                    height: 84mm;
-                    width: 79mm;
-                }
-                #NO3 span, #NO3 div {
-                    position: absolute;
-                    font-size: 12px;
-                    display: block;
-                }
-                @media print {
-                    @page { size: auto; margin: 0; }
-                    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-                }
-            </style>
-        </head>
-        <body>
-            ${content}
-        </body>
-        </html>
-    `);
-				printWindow.document.close();
-
-				printWindow.onload = function() {
-					printWindow.focus();
-					printWindow.print();
-					setTimeout(() => printWindow.close(), 200);
-				};
-			}
-		</script>
-	</body>
+</body>
 </html>
