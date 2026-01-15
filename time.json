@@ -2104,8 +2104,8 @@
 	},
 	{
 		"name": "半夜叫你别回头2",
-		"lightOnTime": "",
-		"posterTime": "",
+		"lightOnTime": "01:27:32",
+		"posterTime": "00:00:00",
 		"nickname": ""
 	},
 	{
@@ -2124,6 +2124,24 @@
 		"name": "马腾你别走",
 		"lightOnTime": "02:02:00",
 		"posterTime": "00:02:42",
+		"nickname": ""
+	},
+	{
+		"name": "飞行家",
+		"lightOnTime": "",
+		"posterTime": "00:02:49",
+		"nickname": ""
+	},
+	{
+		"name": "时空奇旅",
+		"lightOnTime": "",
+		"posterTime": "",
+		"nickname": ""
+	},
+	{
+		"name": "我的朋友安德烈",
+		"lightOnTime": "",
+		"posterTime": "",
 		"nickname": ""
 	}
 ]
