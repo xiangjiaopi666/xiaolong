@@ -2158,7 +2158,7 @@
 	},
 	{
 		"name": "重返寂静岭",
-		"lightOnTime": "",
+		"lightOnTime": "01:33:54",
 		"posterTime": "00:00:00",
 		"nickname": ""
 	},
@@ -2178,6 +2178,12 @@
 		"name": "舒克贝塔之微缩人类",
 		"lightOnTime": "",
 		"posterTime": "00:00:00",
+		"nickname": ""
+	},
+	{
+		"name": "翠湖",
+		"lightOnTime": "",
+		"posterTime": "",
 		"nickname": ""
 	}
 ]
