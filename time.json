@@ -2206,13 +2206,19 @@
 	},
 	{
 		"name": "非传统浪漫关系",
-		"lightOnTime": "",
-		"posterTime": "",
+		"lightOnTime": "01:44:40",
+		"posterTime": "00:02:49",
 		"nickname": ""
 	},
 	{
 		"name": "太空异种",
 		"lightOnTime": "01:28:32",
+		"posterTime": "00:00:00",
+		"nickname": ""
+	},
+	{
+		"name": "末日逃生2：迁移",
+		"lightOnTime": "01:32:36",
 		"posterTime": "00:00:00",
 		"nickname": ""
 	}
