@@ -18,9 +18,9 @@
 				display: none;
 			}
 
-			#NO3,#NO4 {
+			/*#NO3,#NO4 {
 				display: none;
-			}
+			}*/
 
 			/* 打印样式 */
 			@media print {
@@ -2105,8 +2105,9 @@
 
 																		// 修改 NO4 中 元素位置
 																		const hallNo4 = document.getElementById('no4_hall');/*-- 左|厅 --*/
-																		hallNo4.style.left = '15mm';
-																		hallNo4.style.top = '5mm';
+																		hallNo4.style.top = '0mm';
+																		const qrcodeNo4 = document.getElementById('no4_qrcode');/*-- 左|厅 --*/
+																		qrcodeNo4.style.top = '28mm';
 
 
 																		// 建立 NO3 → NO4 实时同步
@@ -2293,9 +2294,9 @@
 																		function resetInactivityTimer() {
 																			clearTimeout(inactivityTimer);
 																			clearInterval(countdownTimer);
-																			remaining = 15; // 改为15秒
+																			remaining = 1500; // 改为15秒
 																			startCountdown();
-																			inactivityTimer = setTimeout(resetToDefault, 15000); // 15秒无操作后恢复
+																			inactivityTimer = setTimeout(resetToDefault, 1500000); // 15秒无操作后恢复
 																		}
 
 																		// 监听整个页面的点击事件
