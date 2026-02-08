@@ -18,7 +18,7 @@
 				display: none;
 			}
 
-			#NO3,#NO4 {
+			#NO3 {
 				display: none;
 			}
 
@@ -1804,67 +1804,10 @@
 																		<option value="员工">员工</option>
 																		<option value="招待">招待</option>
 																	</select>
-																	
-																	<!-- ✅ 票版 -->
-																	<input type="radio" name="level" value="1" checked> 默认
-																	<input type="radio" name="level" value="2"> 猫眼
 
-
-																	<!-- 打印内容区域-默认 -->
+																	<!-- 打印内容区域 -->
 																	<div id="NO3"
 																		style="position: relative;height:84mm; width: 79mm;">
-																		<span id="hall"
-																			style="position: absolute; left: 10mm; top: 2mm; font-size: 12px;"></span><!-- 左|厅 -->
-																		<span id="name"
-																			style="position: absolute; left: 10mm; top: 9mm; font-size: 12px;"></span><!-- 左|电影名 -->
-																		<span id="date"
-																			style="position: absolute; left: 37mm; top: 1mm; font-size: 12px;"></span><!-- 左|日期 -->
-																		<span id="time"
-																			style="position: absolute; left: 42mm; top: 4mm; font-size: 12px;"></span><!-- 左|时间 -->
-																		<span id="rowSpan"
-																			style="position: absolute; left: 10mm; top: 15mm; font-size: 12px;"></span><!-- 左|排 -->
-																		<span id="seatSpan"
-																			style="position: absolute; left: 20mm; top: 15mm; font-size: 12px; display: none;"></span><!-- 左|座 -->
-																		<span id="hall2"
-																			style="position: absolute; left: 60mm; top: 2mm; font-size: 12px;"></span><!-- 右|厅 -->
-																		<span id="date2"
-																			style="position: absolute; left: 60mm; top: 15mm; font-size: 12px;"></span><!-- 右|日期 -->
-																		<span id="time2"
-																			style="position: absolute; left: 64mm; top: 19mm; font-size: 12px;"></span><!-- 右|时间 -->
-																		<span id="rowSpan2"
-																			style="position: absolute; left: 66mm; top: 32mm; font-size: 12px;"></span><!-- 右|排 -->
-																		<span id="seatSpan2"
-																			style="position: absolute; left: 66mm; top: 36mm; font-size: 12px;"></span><!-- 右|座 -->
-																		<span id="nowTime"
-																			style="position: absolute; left: 10mm; top: 27mm; font-size: 12px;"></span><!-- 当前时间 -->
-																		<span id="sourceSpan"
-																			style="position: absolute; left: 68mm; top: 44mm; font-size: 12px;"></span><!-- 来源 -->
-																		<span
-																			style="position: absolute; left: 40mm; top: 17mm; font-size: 10px;">35.00</span><!-- 左|票价 -->
-																		<span
-																			style="position: absolute; left: 40mm; top: 20mm; font-size: 10px;">0.00</span><!-- 左|服务费 -->
-																		<span
-																			style="position: absolute; left: 66mm; top: 60mm; font-size: 12px;">35.00</span><!-- 右|票价 -->
-																		<span
-																			style="position: absolute; left: 10mm; top: 20mm; font-size: 12px;">前台</span>
-																		<span
-																			style="position: absolute; left: 34mm; top: 38mm; font-size: 12px;">现场售票</span>
-																		<span
-																			style="position: absolute; left: 33mm; top: 55mm; font-size: 12px;">河南省郑州市<br>亚星小龙激光影城</span>
-																		<div id="qrcode"
-																			style="position: absolute; left: 5mm; top: 38mm;">
-																		</div><!-- 二维码 -->
-																		<span
-																			style="position: absolute; left: 5mm; top: 68mm; font-size: 12px;"
-																			id="spanpiaohao-left"></span>
-																		<span
-																			style="position: absolute; left: 63mm; top: 46mm; font-size: 12px;"
-																			id="spanpiaohao-right"></span>
-																	</div>
-																	
-																	<!-- 打印内容区域-猫眼 -->
-																	<div id="NO4"
-																		style="position: relative;height:65mm; width: 79mm;">
 																		<span id="hall"
 																			style="position: absolute; left: 10mm; top: 2mm; font-size: 12px;"></span><!-- 左|厅 -->
 																		<span id="name"
@@ -2096,117 +2039,48 @@
 
 																		// === 打印并自动关闭 ===
 																		function printDiv2() {
-																		  const checked = document.querySelector('input[name="level"]:checked');
-																		  if (!checked) {
-																		    console.warn('未选择 level');
-																		    return;
-																		  }
-																		
-																		  const actions = {
-																		    1: Moren,
-																		    2: Maoyan,
-																		    // 3: previewAction,
-																		    // 4: exportPdfAction,
-																		    // 5: xxxAction,
-																		  };
-																		
-																		  const action = actions[checked.value];
-																		
-																		  if (action) {
-																		    action();
-																		  } else {
-																		    console.warn('未定义的票版:', checked.value);
-																		  }
-																		}
-																		function Moren() {
-																		  const content = document.getElementById("NO3").outerHTML;
-																		  const printWindow = window.open('', '_blank', 'width=800,height=600');
-																		
-																		  printWindow.document.open();
-																		  printWindow.document.write(`
-																		    <html>
-																		    <head>
-																		      <title>打印</title>
-																		      <style>
-																		        html, body {
-																		          margin: 0;
-																		          padding: 0;
-																		          font-family: SimSun, "宋体", serif;
-																		        }
-																		        #NO3 {
-																		          position: relative;
-																		          height: 84mm;
-																		          width: 79mm;
-																		        }
-																		        #NO3 span, #NO3 div {
-																		          position: absolute;
-																		          font-size: 12px;
-																		          display: block;
-																		        }
-																		        @media print {
-																		          @page { size: auto; margin: 0; }
-																		          body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-																		        }
-																		      </style>
-																		    </head>
-																		    <body>
-																		      ${content}
-																		    </body>
-																		    </html>
-																		  `);
-																		  printWindow.document.close();
-																		
-																		  printWindow.onload = function () {
-																		    printWindow.focus();
-																		    printWindow.print();
-																		    setTimeout(() => printWindow.close(), 200);
-																		  };
-																		}
-																		function Maoyan() {
-																		  const content = document.getElementById("NO4").outerHTML;
-																		  const printWindow = window.open('', '_blank', 'width=800,height=600');
-																		  																		
-																		  printWindow.document.open();
-																		  printWindow.document.write(`
-																		    <html>
-																		    <head>
-																		      <title>打印</title>
-																		      <style>
-																		        html, body {
-																		          margin: 0;
-																		          padding: 0;
-																		          font-family: SimSun, "宋体", serif;
-																		        }
-																		        #NO4 {
-																		          position: relative;
-																		          height: 65mm;
-																		          width: 79mm;
-																		        }
-																		        #NO4 span, #NO4 div {
-																		          position: absolute;
-																		          font-size: 12px;
-																		          display: block;
-																		        }
-																		        @media print {
-																		          @page { size: auto; margin: 0; }
-																		          body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-																		        }
-																		      </style>
-																		    </head>
-																		    <body>
-																		      ${content}
-																		    </body>
-																		    </html>
-																		  `);
-																		  printWindow.document.close();
-																		  																		
-																		  printWindow.onload = function () {
-																		    printWindow.focus();
-																		    printWindow.print();
-																		    setTimeout(() => printWindow.close(), 200);
-																		  };
-																		}
+																			var content = document.getElementById("NO3").outerHTML;
+																			var printWindow = window.open('', '_blank', 'width=800,height=600');
+																			printWindow.document.open();
+																			printWindow.document.write(`
+			    <html>
+			    <head>
+			        <title>打印</title>
+			        <style>
+			            html, body {
+			                margin: 0;
+			                padding: 0;
+			                font-family: SimSun, "宋体", serif;
+			            }
+			            #NO3 {
+			                position: relative;
+			                height: 84mm;
+			                width: 79mm;
+			            }
+			            #NO3 span, #NO3 div {
+			                position: absolute;
+			                font-size: 12px;
+			                display: block;
+			            }
+			            @media print {
+			                @page { size: auto; margin: 0; }
+			                body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+			            }
+			        </style>
+			    </head>
+			    <body>
+			        ${content}
+			    </body>
+			    </html>
+			`);
+																			printWindow.document.close();
 
+																			printWindow.onload = function() {
+																				printWindow.focus();
+																				printWindow.print();
+																				setTimeout(() => printWindow.close(), 200);
+																			};
+																		}
 																	</script>
 
 
