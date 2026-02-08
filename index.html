@@ -1845,13 +1845,13 @@
 																			style="position: absolute; left: 40mm; top: 17mm; font-size: 10px;">35.00</span><!-- 左|票价 -->
 																		<span
 																			style="position: absolute; left: 40mm; top: 20mm; font-size: 10px;">0.00</span><!-- 左|服务费 -->
-																		<span
+																		<span id="money_right"
 																			style="position: absolute; left: 66mm; top: 60mm; font-size: 12px;">35.00</span><!-- 右|票价 -->
 																		<span
 																			style="position: absolute; left: 10mm; top: 20mm; font-size: 12px;">前台</span>
 																		<span
 																			style="position: absolute; left: 34mm; top: 38mm; font-size: 12px;">现场售票</span>
-																		<span
+																		<span id= "cinema_name_left"
 																			style="position: absolute; left: 33mm; top: 55mm; font-size: 12px;">河南省郑州市<br>亚星小龙激光影城</span>
 																		<div id="qrcode"
 																			style="position: absolute; left: 5mm; top: 38mm;">
@@ -2108,16 +2108,23 @@
 																		hallNo4.style.top = '0mm';
 																		const qrcodeNo4 = document.getElementById('no4_qrcode');/*-- 二维码 --*/
 																		qrcodeNo4.style.top = '28mm';
-																		const no4_spanpiaohao_leftNO4 = document.getElementById('no4_spanpiaohao_left');/*-- 左|影院名 --*/
+																		const no4_spanpiaohao_leftNO4 = document.getElementById('no4_spanpiaohao_left');/*-- 左|票号 --*/
 																		no4_spanpiaohao_leftNO4.style.top = '53mm';
-																		const no4_rowSpan2NO4 = document.getElementById('no4_rowSpan2');/*-- 左|影院名 --*/
+																		const no4_rowSpan2NO4 = document.getElementById('no4_rowSpan2');/*-- 右|排 --*/
 																		no4_rowSpan2NO4.style.top = '25mm';
-																		const no4_seatSpan2NO4 = document.getElementById('no4_seatSpan2');/*-- 左|影院名 --*/
+																		const no4_seatSpan2NO4 = document.getElementById('no4_seatSpan2');/*-- 右|座 --*/
 																		no4_seatSpan2NO4.style.top = '29mm';
-																		const no4_sourceSpanNO4 = document.getElementById('no4_sourceSpan');/*-- 左|影院名 --*/
+																		const no4_sourceSpanNO4 = document.getElementById('no4_sourceSpan');/*-- 左|渠道 --*/
 																		no4_sourceSpanNO4.style.top = '29mm';
-																		const no4_spanpiaohao_rightNO4 = document.getElementById('no4_spanpiaohao_right');/*-- 左|影院名 --*/
+																		const no4_spanpiaohao_rightNO4 = document.getElementById('no4_spanpiaohao_right');/*-- 右|票号 --*/
 																		no4_spanpiaohao_rightNO4.style.top = '40mm';
+																		const cinema_name_leftNO4 = document.getElementById('cinema_name_left');/*-- 左|影院名 --*/
+																		cinema_name_leftNO4.style.top = '45mm';
+																		const money_rightNO4 = document.getElementById('money_right');/*-- 右|价格 --*/
+																		money_rightNO4.style.top = '52mm';
+																		const no4_nowTimeNO4 = document.getElementById('no4_nowTime');/*-- 左|当前时间 --*/
+																		no4_nowTimeNO4.style.top = '24mm';
+																		
 																		
 																		
 
