@@ -18,7 +18,7 @@
 				display: none;
 			}
 
-			#NO3 {
+			#NO3,#NO4 {
 				display: none;
 			}
 
@@ -153,7 +153,7 @@
 				// 尝试解析JSON字符串
 				try {
 					var jsonData = JSON.parse(jsonInput);
-					console.log(jsonData.data.arr_date_plan); //全部场次
+					//console.log(jsonData.data.arr_date_plan); //全部场次
 					//删除虚拟场次
 					//let indicesToDelete = [4,3,2,1,0];//虚拟场次的序号
 					//console.log('删除了 ' + indicesToDelete + '场');
@@ -258,25 +258,25 @@
 							['（普通 3D/国语）', '👓'],
 							['（普通 3D/英语）', '（英语🌏）👓'],
 						];*/
-						
+
 						const replaceMap = [
-						  // 普通立体
-						  ['普通立体', '普通'],
-						
-						  // 普通 / 国语（含 2D）
-						  [/（普通 ?2D?\/国语）/g, ''],
-						
-						  // 普通 / 外语（含 2D）
-						  [/（普通 ?2D?\/(.+?)）/g, '（$1🌏）'],
-						
-						  // 数字 3D
-						  ['（数字3D）', ''],
-						
-						  // 普通 3D / 国语
-						  [/（普通 3D\/国语）/g, '👓'],
-						
-						  // 普通 3D / 外语
-						  [/（普通 3D\/(.+?)）/g, '（$1🌏）👓'],
+							// 普通立体
+							['普通立体', '普通'],
+
+							// 普通 / 国语（含 2D）
+							[/（普通 ?2D?\/国语）/g, ''],
+
+							// 普通 / 外语（含 2D）
+							[/（普通 ?2D?\/(.+?)）/g, '（$1🌏）'],
+
+							// 数字 3D
+							['（数字3D）', ''],
+
+							// 普通 3D / 国语
+							[/（普通 3D\/国语）/g, '👓'],
+
+							// 普通 3D / 外语
+							[/（普通 3D\/(.+?)）/g, '（$1🌏）👓'],
 						];
 
 
@@ -825,15 +825,15 @@
 				return result;
 			}*/
 			function replaceSpecifiedString(inputString, targetSubstring, tihuancheng) {
-			  // ✅ 如果是正则，直接用
-			  if (targetSubstring instanceof RegExp) {
-			    return inputString.replace(targetSubstring, tihuancheng);
-			  }
-			
-			  // ✅ 原有字符串逻辑（完全保留）
-			  const escapedTarget = targetSubstring.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-			  const regex = new RegExp(escapedTarget, 'g');
-			  return inputString.replace(regex, tihuancheng);
+				// ✅ 如果是正则，直接用
+				if (targetSubstring instanceof RegExp) {
+					return inputString.replace(targetSubstring, tihuancheng);
+				}
+
+				// ✅ 原有字符串逻辑（完全保留）
+				const escapedTarget = targetSubstring.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+				const regex = new RegExp(escapedTarget, 'g');
+				return inputString.replace(regex, tihuancheng);
 			}
 
 
@@ -1010,7 +1010,8 @@
 						var firstContent = firstCell.textContent || firstCell.innerText;
 						var secondContent = secondCell.textContent || secondCell.innerText;
 						var thiredContent = thirdCell.textContent || thirdCell.innerText;
-						var stringsToReplace = ['🌏', ' 3D👓', '（英语）👓', '👓', '（日语）', '（英语）', '（粤语）','（其他）', '（印度语）', '（印尼语）', '（法语）', '（意大利语）', '（韩语）',
+						var stringsToReplace = ['🌏', ' 3D👓', '（英语）👓', '👓', '（日语）', '（英语）', '（粤语）', '（其他）', '（印度语）',
+							'（印尼语）', '（法语）', '（意大利语）', '（韩语）',
 							'（俄语）'
 						];
 						var originalString = thiredContent;
@@ -1287,43 +1288,43 @@
 				document.getElementById('readFile_sucess').innerHTML = "😁👉"
 			}
 
-			
+
 			// ✅ 检测是否为 Edge，并进行拦截提示
 			function checkIfEdgeOnly() {
-			    var ua = navigator.userAgent;
-			
-			    // Edge 的 UA 一定包含 "Edg/"
-			    var isEdge = ua.includes("Edg/");
-			
-			    if (!isEdge) {
-			        alert("请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n");
-			        return true; 
-			    }
-			
-			    return false; 
+				var ua = navigator.userAgent;
+
+				// Edge 的 UA 一定包含 "Edg/"
+				var isEdge = ua.includes("Edg/");
+
+				if (!isEdge) {
+					alert("请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n请使用 Edge 浏览器打印 \n");
+					return true;
+				}
+
+				return false;
 			}
 			// ✅ 检测是否为 Google Chrome，并进行拦截提示
 			function checkIfChromeOnly() {
-			    var ua = navigator.userAgent;
+				var ua = navigator.userAgent;
 				//console.log(ua);
-			    // Edge: 包含 "Edg/"
-			    var isEdge = ua.includes("Edg/");
-			
-			    // Opera: 包含 "OPR/"
-			    var isOpera = ua.includes("OPR/");
-				
+				// Edge: 包含 "Edg/"
+				var isEdge = ua.includes("Edg/");
+
+				// Opera: 包含 "OPR/"
+				var isOpera = ua.includes("OPR/");
+
 				// QuarkPC: 包含 "QuarkPC/"
 				var isQuarkPC = ua.includes("QuarkPC/");
-			
-			    // Chrome（但排除 Edge 和 Opera）
-			    var isChrome = ua.includes("Chrome/") && !isEdge && !isOpera && !isQuarkPC;
-			
-			    if (!isChrome) {
-			        //alert("请使用 Google Chrome 浏览器");
-			        return true; 
-			    }
-			
-			    return false; 
+
+				// Chrome（但排除 Edge 和 Opera）
+				var isChrome = ua.includes("Chrome/") && !isEdge && !isOpera && !isQuarkPC;
+
+				if (!isChrome) {
+					//alert("请使用 Google Chrome 浏览器");
+					return true;
+				}
+
+				return false;
 			}
 
 			// ✅ 打印方法示例
@@ -1342,14 +1343,14 @@
 				// 将div的内容写入iframe的document中
 				printWindow.document.open();
 				printWindow.document.write(
-				    '<html><head><title>打印内容</title><style>' +
-				    'body, div, span, p, table, td, th {' +
-				    '   font-family: "Microsoft YaHei", sans-serif;' +
-				    '   font-weight: bold;' +
-				    '}' +
-				    '</style></head><body>' +
-				    printArea.innerHTML +
-				    '</body></html>'
+					'<html><head><title>打印内容</title><style>' +
+					'body, div, span, p, table, td, th {' +
+					'   font-family: "Microsoft YaHei", sans-serif;' +
+					'   font-weight: bold;' +
+					'}' +
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
 				);
 				printWindow.document.close();
 
@@ -1372,14 +1373,14 @@
 				// 将div的内容写入iframe的document中
 				printWindow.document.open();
 				printWindow.document.write(
-				    '<html><head><title>打印内容</title><style>' +
-				    'body, div, span, p, table, td, th {' +
-				    '   font-family: "Microsoft YaHei", sans-serif;' +
-				    '   font-weight: bold;' +
-				    '}' +
-				    '</style></head><body>' +
-				    printArea.innerHTML +
-				    '</body></html>'
+					'<html><head><title>打印内容</title><style>' +
+					'body, div, span, p, table, td, th {' +
+					'   font-family: "Microsoft YaHei", sans-serif;' +
+					'   font-weight: bold;' +
+					'}' +
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
 				);
 				printWindow.document.close();
 				// 打印iframe的内容
@@ -1400,14 +1401,14 @@
 				// 将div的内容写入iframe的document中
 				printWindow.document.open();
 				printWindow.document.write(
-				    '<html><head><title>打印内容</title><style>' +
-				    'body, div, span, p, table, td, th {' +
-				    '   font-family: "Microsoft YaHei", sans-serif;' +
-				    '   font-weight: bold;' +
-				    '}' +
-				    '</style></head><body>' +
-				    printArea.innerHTML +
-				    '</body></html>'
+					'<html><head><title>打印内容</title><style>' +
+					'body, div, span, p, table, td, th {' +
+					'   font-family: "Microsoft YaHei", sans-serif;' +
+					'   font-weight: bold;' +
+					'}' +
+					'</style></head><body>' +
+					printArea.innerHTML +
+					'</body></html>'
 				);
 				printWindow.document.close();
 				// 打印iframe的内容
@@ -1805,7 +1806,13 @@
 																		<option value="招待">招待</option>
 																	</select>
 
-																	<!-- 打印内容区域 -->
+																	<!-- ✅ 票版 -->
+																	<input type="radio" name="level" value="1" checked>
+																	默认
+																	<input type="radio" name="level" value="2"> 猫眼
+
+
+																	<!-- 打印内容区域-默认 -->
 																	<div id="NO3"
 																		style="position: relative;height:84mm; width: 79mm;">
 																		<span id="hall"
@@ -1856,6 +1863,8 @@
 																			style="position: absolute; left: 63mm; top: 46mm; font-size: 12px;"
 																			id="spanpiaohao-right"></span>
 																	</div>
+
+
 
 																	<button onclick="printDiv2()">打印</button>
 																	<script>
@@ -1987,6 +1996,7 @@
 																			sourceSpan.textContent = sourceSelect.value ? `${sourceSelect.value}` : '';
 
 																			generateQRCode();
+																			generateN4QRCode();
 																		}
 
 
@@ -2007,6 +2017,7 @@
 																			}
 
 																			generateQRCode();
+																			generateN4QRCode();
 																		}
 
 																		function generateQRCode() {
@@ -2016,6 +2027,7 @@
 																				`${rowInput.value}${seatInput.value}${nowTimeSpan.textContent}`;
 																			const encodedPart = btoa(unescape(encodeURIComponent(variablePart)));
 																			const qrText = `41018401${encodedPart}`;
+																			console.log(qrText);
 
 																			qrcodeDiv.innerHTML = '';
 																			new QRCode(qrcodeDiv, {
@@ -2037,42 +2049,192 @@
 																			qrcodeDiv.innerHTML = '';
 																		}
 
+
+
+																		// 克隆票据并修复 ID 冲突
+																		function cloneTicket(templateId, newId, prefix) {
+																			const template = document.getElementById(templateId);
+																			const clone = template.cloneNode(true);
+
+																			clone.id = newId;
+
+																			clone.querySelectorAll('[id]').forEach(el => {
+																				el.id = prefix + '_' + el.id;
+																			});
+
+																			template.after(clone);
+																			return clone;
+																		}
+
+																		// 同步 textContent
+																		function syncText(from, to, prefix) {
+																			from.querySelectorAll('[id]').forEach(src => {
+																				const target = to.querySelector('#' + prefix + '_' + src.id);
+																				if (target && target.textContent !== src.textContent) {
+																					target.textContent = src.textContent;
+																				}
+																			});
+																		}
+
+																		// 建立实时监听
+																		function observeTicket(source, mirror, prefix) {
+																			// 初始同步一次
+																			syncText(source, mirror, prefix);
+
+																			const observer = new MutationObserver(() => {
+																				syncText(source, mirror, prefix);
+																			});
+
+																			observer.observe(source, {
+																				subtree: true,
+																				characterData: true,
+																				childList: true
+																			});
+
+																			return observer;
+																		}
+
+
+
+																		/* ================= 初始化 ================= */
+
+																		const no3 = document.getElementById('NO3');
+
+																		// 创建 NO4（此时 NO3 还是空的，也没问题）
+																		const no4 = cloneTicket('NO3', 'NO4', 'no4');
+
+																		// 修改 NO4 中 元素位置
+																		const hallNo4 = document.getElementById('no4_hall');/*-- 左|厅 --*/
+																		hallNo4.style.left = '15mm';
+																		hallNo4.style.top = '5mm';
+
+
+																		// 建立 NO3 → NO4 实时同步
+																		observeTicket(no3, no4, 'no4');
+																		const no4_qrcodeDiv = document.getElementById('no4_qrcode');
+																		function generateN4QRCode() {
+																			fillSpans(); //生成序列号
+																			const variablePart =
+																				`${hallDiv.textContent}${nameDiv.textContent}` +
+																				`${rowInput.value}${seatInput.value}${nowTimeSpan.textContent}`;
+																			const encodedPart = btoa(unescape(encodeURIComponent(variablePart)));
+																			const qrText = `41018401${encodedPart}`;
+																			no4_qrcodeDiv.innerHTML = '';
+																			new QRCode(no4_qrcodeDiv, {
+																				text: qrText,
+																				width: 100,
+																				height: 100,
+																				colorDark: "#000000",
+																				colorLight: "#ffffff"
+																			});
+																		}
+
 																		// === 打印并自动关闭 ===
 																		function printDiv2() {
-																			var content = document.getElementById("NO3").outerHTML;
-																			var printWindow = window.open('', '_blank', 'width=800,height=600');
+																			const checked = document.querySelector('input[name="level"]:checked');
+																			if (!checked) {
+																				console.warn('未选择 level');
+																				return;
+																			}
+
+																			const actions = {
+																				1: Moren,
+																				2: Maoyan,
+																				// 3: previewAction,
+																				// 4: exportPdfAction,
+																				// 5: xxxAction,
+																			};
+
+																			const action = actions[checked.value];
+
+																			if (action) {
+																				action();
+																			} else {
+																				console.warn('未定义的票版:', checked.value);
+																			}
+																		}
+
+																		function Moren() {
+																			const content = document.getElementById("NO3").outerHTML;
+																			const printWindow = window.open('', '_blank', 'width=800,height=600');
+
 																			printWindow.document.open();
 																			printWindow.document.write(`
-			    <html>
-			    <head>
-			        <title>打印</title>
-			        <style>
-			            html, body {
-			                margin: 0;
-			                padding: 0;
-			                font-family: SimSun, "宋体", serif;
-			            }
-			            #NO3 {
-			                position: relative;
-			                height: 84mm;
-			                width: 79mm;
-			            }
-			            #NO3 span, #NO3 div {
-			                position: absolute;
-			                font-size: 12px;
-			                display: block;
-			            }
-			            @media print {
-			                @page { size: auto; margin: 0; }
-			                body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-			            }
-			        </style>
-			    </head>
-			    <body>
-			        ${content}
-			    </body>
-			    </html>
-			`);
+																		    <html>
+																		    <head>
+																		      <title>打印</title>
+																		      <style>
+																		        html, body {
+																		          margin: 0;
+																		          padding: 0;
+																		          font-family: SimSun, "宋体", serif;
+																		        }
+																		        #NO3 {
+																		          position: relative;
+																		          height: 84mm;
+																		          width: 79mm;
+																		        }
+																		        #NO3 span, #NO3 div {
+																		          position: absolute;
+																		          font-size: 12px;
+																		          display: block;
+																		        }
+																		        @media print {
+																		          @page { size: auto; margin: 0; }
+																		          body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+																		        }
+																		      </style>
+																		    </head>
+																		    <body>
+																		      ${content}
+																		    </body>
+																		    </html>
+																		  `);
+																			printWindow.document.close();
+
+																			printWindow.onload = function() {
+																				printWindow.focus();
+																				printWindow.print();
+																				setTimeout(() => printWindow.close(), 200);
+																			};
+																		}
+
+																		function Maoyan() {
+																			const content = document.getElementById("NO4").outerHTML;
+																			const printWindow = window.open('', '_blank', 'width=800,height=600');
+
+																			printWindow.document.open();
+																			printWindow.document.write(`
+																		    <html>
+																		    <head>
+																		      <title>打印</title>
+																		      <style>
+																		        html, body {
+																		          margin: 0;
+																		          padding: 0;
+																		          font-family: SimSun, "宋体", serif;
+																		        }
+																		        #NO4 {
+																		          position: relative;
+																		          height: 65mm;
+																		          width: 79mm;
+																		        }
+																		        #NO4 span, #NO4 div {
+																		          position: absolute;
+																		          font-size: 12px;
+																		          display: block;
+																		        }
+																		        @media print {
+																		          @page { size: auto; margin: 0; }
+																		          body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+																		        }
+																		      </style>
+																		    </head>
+																		    <body>
+																		      ${content}
+																		    </body>
+																		    </html>
+																		  `);
 																			printWindow.document.close();
 
 																			printWindow.onload = function() {
