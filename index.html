@@ -18,9 +18,9 @@
 				display: none;
 			}
 
-			/*#NO3,#NO4 {
+			#NO3,#NO4 {
 				display: none;
-			}*/
+			}
 
 			/* 打印样式 */
 			@media print {
@@ -2313,9 +2313,9 @@
 																		function resetInactivityTimer() {
 																			clearTimeout(inactivityTimer);
 																			clearInterval(countdownTimer);
-																			remaining = 1500; // 改为15秒
+																			remaining = 15; // 改为15秒
 																			startCountdown();
-																			inactivityTimer = setTimeout(resetToDefault, 1500000); // 15秒无操作后恢复
+																			inactivityTimer = setTimeout(resetToDefault, 15000); // 15秒无操作后恢复
 																		}
 
 																		// 监听整个页面的点击事件
