@@ -272,6 +272,9 @@
 
 							// 数字 3D
 							['（数字3D）', ''],
+							
+							// 数字 3D
+							['（3D）', ''],
 
 							// 普通 3D
 							['（普通3D）', ''],
@@ -350,6 +353,7 @@
 						//替换掉电影名中可能出问题的字符
 						name_min = replaceSpecifiedString(name_min, '（数字）', '');
 						name_min = replaceSpecifiedString(name_min, '（舞台纪录电影）', '');
+						name_min = replaceSpecifiedString(name_min, '（3D）', '');
 
 						var date = jsonData.data.arr_date_plan[i].plan_date; //2023-01-01
 						var time = jsonData.data.arr_date_plan[i].show_time_start; //2023-01-01T00:00:00
